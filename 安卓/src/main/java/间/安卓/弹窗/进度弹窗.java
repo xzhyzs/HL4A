@@ -24,17 +24,11 @@ public class 进度弹窗 extends 基本弹窗 {
     }
     
     public void 更新(int $进度) {
-        布局.进度.置进度($进度);
+        处理.主线程(布局.进度,"置进度",$进度);
     }
     
-    public void 更新(final String $内容) {
-        处理.主线程(new 方法() {
-                @Override
-                public Object 调用(Object[] $参数) {
-                    文本.置文本($内容);
-                    return null;
-                }
-            });
+    public void 更新(String $内容) {
+        处理.主线程(文本,"置文本",$内容);
     }
   
     

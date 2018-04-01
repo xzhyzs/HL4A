@@ -477,7 +477,7 @@ public class AVUtils {
   public static void copyPropertiesFromJsonStringToAVObject(String content, AVObject object) {
     if (isBlankString(content)) return;
     try {
-      Map<String, Object> map = JSONHelper.mapFromString(content);
+      Map<String, Object> map = JSON.parseObject(content);
       copyPropertiesFromMapToAVObject(map, object);
     } catch (Exception exception) {
       exception.printStackTrace();

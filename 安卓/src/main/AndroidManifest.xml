@@ -20,7 +20,7 @@
         <activity android:name=".ProxyActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="hl4a.fileprovider.${applicationId}"
+            android:authorities="hl4a.${applicationId}.fpv"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

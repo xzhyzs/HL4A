@@ -27,6 +27,10 @@ public class 标签视图 extends SlidingTabLayout implements 基本视图 {
         setViewPager($滑动);
     }
     
+    public void 标签滚动(boolean $状态) {
+        setTabSpaceEqual(!$状态);
+    }
+    
     @Override
     public void 置布局重力(String $重力) {
         视图实现.置布局重力(this,$重力);

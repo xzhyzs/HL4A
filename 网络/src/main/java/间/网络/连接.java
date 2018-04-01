@@ -35,6 +35,8 @@ import 间.接口.方法;
 import 间.收集.哈希表;
 import 间.收集.集合;
 import 间.网络.连接;
+import org.json.JSONObject;
+import android.util.Log;
 
 public class 连接 {
 
@@ -56,7 +58,7 @@ public class 连接 {
             $构建.sslSocketFactory(new 连接工厂());
             $构建.hostnameVerifier(new 信任域名());
         } catch (Exception $错误) {}
-        $构建.connectTimeout(2333, TimeUnit.MILLISECONDS);
+        $构建.connectTimeout(6666, TimeUnit.MILLISECONDS);
         网络实例 = $构建.build();
     }
 
@@ -71,7 +73,7 @@ public class 连接 {
     public 连接(String $地址) {
         this($地址, "GET");
     }
-    
+
     public 连接(String $地址,String $模式) {
         模式($模式);
         地址($地址);
@@ -97,7 +99,7 @@ public class 连接 {
         }
         return this;
     }
-    
+
     public 连接 断点(long $开始) {
         请求头("RANGE", BigInteger.valueOf($开始).toString() + "-");
         return this;
@@ -140,10 +142,16 @@ public class 连接 {
 
     }
 
+    private boolean JSON输出 = false;
+
+    public void JSON输出(boolean $状态) {
+        JSON输出 = $状态;
+    }
+
     public 资源 同步() {
 
         if (不可用) {
-            return new 资源(null);
+            //return new 资源(null);
         }
 
         try {
@@ -157,40 +165,48 @@ public class 连接 {
             请求.cacheControl(new CacheControl.Builder().noCache().build());
 
             ByteArrayOutputStream $输出 = 流.输出.字节();
-            byte[] $分隔 = ("--" + 标识).getBytes();
-            byte[] $换行 = "\r\n".getBytes();
-            if (!参数表.isEmpty()) {
-                for (Map.Entry<String,String> $单个: 参数表.entrySet()) {
-                    $输出.write($换行);
-                    $输出.write($分隔);
-                    $输出.write($换行);
-                    $输出.write("Content-Disposition: form-data;".getBytes());
-                    $输出.write(("name=\"" + 编码($单个.getKey()) + "\"").getBytes());
-                    $输出.write($换行);
-                    $输出.write(编码($单个.getValue()).getBytes());
+            if (JSON输出) {
+                $输出.write(new JSONObject(参数表).toString().getBytes());
+            } else {
+                byte[] $分隔 = ("--" + 标识).getBytes();
+                byte[] $换行 = "\r\n".getBytes();
+                if (!参数表.isEmpty()) {
+
+                    for (Map.Entry<String,String> $单个: 参数表.entrySet()) {
+                        $输出.write($换行);
+                        $输出.write($分隔);
+                        $输出.write($换行);
+                        $输出.write("Content-Disposition: form-data;".getBytes());
+                        $输出.write(("name=\"" + 编码($单个.getKey()) + "\"").getBytes());
+                        $输出.write($换行);
+                        $输出.write(编码($单个.getValue()).getBytes());
+                    }
                 }
-            }
-            if (!文件表.isEmpty()) {
-                for (Map.Entry<String,File> $单个: 文件表.entrySet()) {
-                    File $文件 = $单个.getValue();
-                    $输出.write($换行);
-                    $输出.write($分隔);
-                    $输出.write($换行);
-                    $输出.write("Content-Disposition: form-data;".getBytes());
-                    $输出.write(("name=\"" + 编码($单个.getKey()) + "\";").getBytes());
-                    $输出.write(("filename=\"" + 编码($文件.getName()) + "\";").getBytes());
-                    $输出.write($换行);
-                    流.保存($输出, 流.输入.文件($文件.getPath()));
+                if (!文件表.isEmpty()) {
+                    for (Map.Entry<String,File> $单个: 文件表.entrySet()) {
+                        File $文件 = $单个.getValue();
+                        $输出.write($换行);
+                        $输出.write($分隔);
+                        $输出.write($换行);
+                        $输出.write("Content-Disposition: form-data;".getBytes());
+                        $输出.write(("name=\"" + 编码($单个.getKey()) + "\";").getBytes());
+                        $输出.write(("filename=\"" + 编码($文件.getName()) + "\";").getBytes());
+                        $输出.write($换行);
+                        流.保存($输出, 流.输入.文件($文件.getPath()));
+                    }
                 }
+                $输出.write($换行);
+                $输出.write($分隔);
+                $输出.write("--".getBytes());
             }
-            $输出.write($换行);
-            $输出.write($分隔);
-            $输出.write("--".getBytes());
             $输出.flush();
+            Log.e("kdjdjjejeje",$输出.toString());
             请求.method(模式, ("GET".equals(模式) || "HEAD".equals(模式)) ? null : RequestBody.create(类型, $输出.toByteArray()));
             Request $请求 = 请求.build();
             return new 资源(网络实例.newCall($请求).execute());
-        } catch (Exception $错误) {}
+        } catch (Exception $错误) {
+            Log.e("ejejjee",错误.取整个错误($错误));
+        }
 
         return new 资源(null);
 
@@ -259,7 +275,7 @@ public class 连接 {
         public static String TLSv11 = "TLSv1.1";
         public static String TLSv12 = "TLSv1.2";
 
-        private static String[] 开启策略 = {SSLv23,SSLv3,TLSv1,TLSv11,TLSv12};
+        private static String[] 开启策略 = {SSLv3,TLSv1,TLSv11,TLSv12};
         // Android低版本不重置的话某些SSL访问就会失败
 
         private SSLSocketFactory 工厂;

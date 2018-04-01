@@ -12,7 +12,6 @@ import 间.接口.方法;
 
 public class 图片视图 extends ImageView implements 基本图片 {
 
-
     public 图片视图(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);

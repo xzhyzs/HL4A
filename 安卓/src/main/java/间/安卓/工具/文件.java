@@ -56,10 +56,10 @@ public class 文件 extends 间.工具.文件 {
     }
 
     public static Uri 取Uri(String $地址) {
-        if (设备.取SDK() < 23 || 设备.取目标SDK() < 23) {
+        if (设备.取SDK() < 24 || 设备.取目标SDK() < 24) {
             return Uri.fromFile(文件.取文件对象($地址));
         } else {
-            return FileProvider.getUriForFile(环境.取应用(), "hl4a.fileprovider." + 应用.取信息().包名, 文件.取文件对象($地址));
+            return FileProvider.getUriForFile(环境.取应用(), "hl4a." + 应用.取信息().包名 + ".fpv", 文件.取文件对象($地址));
         }
     }
 
@@ -102,8 +102,22 @@ public class 文件 extends 间.工具.文件 {
         Intent $意图 = new Intent(Intent.ACTION_VIEW);
         $意图.setDataAndType(取Uri($地址), 取MIME($地址));
         $意图.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (设备.取SDK() > 23 && 设备.取目标SDK() > 23) {
+            $意图.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
         环境.取应用().startActivity($意图);
     }
+    
+    public static void 分享(String $地址) {
+        Intent $意图 = new Intent(Intent.ACTION_SEND);
+        $意图.setDataAndType(取Uri($地址), 取MIME($地址));
+        $意图.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (设备.取SDK() > 23 && 设备.取目标SDK() > 23) {
+            $意图.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+        环境.取应用().startActivity($意图);
+    }
+    
 
     public static String 取MIME(String $地址) {
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(取后缀($地址));

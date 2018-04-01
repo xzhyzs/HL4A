@@ -12,6 +12,8 @@ import 间.接口.返回值;
 import 间.接口.调用;
 import com.avos.avoscloud.SaveCallback;
 import java.io.InputStream;
+import com.avos.avoscloud.GetCallback;
+import com.avos.avoscloud.GetDataStreamCallback;
 
 public class 数据 extends AVObject {
 
@@ -31,24 +33,31 @@ public class 数据 extends AVObject {
         setACL($权限);
     }
 
-    public void 置文件(String $键值,String $地址) {
-        put($键值, new AVFile(文件.取名称($地址), 字节.读取($地址)));
+    public AVFile 置文件(String $键值,String $地址) {
+        AVFile $文件 = null;
+        put($键值, ($文件 = new AVFile(文件.取名称($地址), 字节.读取($地址))));
+        return $文件;
     }
 
-    public void 置文件(String $键值,byte[] $内容) {
-        put($键值, new AVFile($内容));
+    public AVFile 置文件(String $键值,byte[] $内容) {
+        AVFile $文件 = null;
+        put($键值, ($文件 = new AVFile($内容)));
+        return $文件;
     }
 
     public 用户 取用户(String $键值) {
         return getAVUser($键值, 用户.class);
     }
+    
+    public AVFile 取文件对象(String $键值) {
+        return getAVFile($键值);
+    }
 
     public 返回值<InputStream> 取文件(String $键值) {
-        AVFile $文件 = getAVFile($键值);
+        AVFile $文件 = 取文件对象($键值);
         if ($文件 == null) {
-            return 返回值.创建(null,new 后端错误(105));
+            return 返回值.创建(null, new 后端错误(105));
         }
-        
         try {
             return 返回值.创建($文件.getDataStream());
         } catch (后端错误 $错误) {
@@ -57,13 +66,18 @@ public class 数据 extends AVObject {
     }
 
     public void 取文件(final String $键值,final 方法 $回调) {
-        new 线程(new 方法(){
+        AVFile $文件 = 取文件对象($键值);
+        if ($文件 == null) {
+            调用.事件($回调,返回值.创建(null, new 后端错误(105)));
+            return;
+        }
+        $文件.getDataStreamInBackground(new GetDataStreamCallback() {
                 @Override
-                public Object 调用(Object[] $参数) {
-                    调用.事件($回调, 取文件($键值));
-                    return null;
+                public void done(InputStream $流,后端错误 $错误) {
+                    调用.事件($回调,返回值.创建($流,$错误));
                 }
-            }).启动();
+            });
+
     }
 
     public 返回值<Void> 同步保存() {

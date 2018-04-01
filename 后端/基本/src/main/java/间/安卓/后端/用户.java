@@ -21,13 +21,16 @@ import android.widget.ImageView;
 import 间.安卓.视图.图片视图;
 import 间.安卓.视图.实现.图片实现;
 import 间.安卓.工具.处理;
+import 间.安卓.工具.设置;
+import 间.安卓.工具.提示;
+import com.avos.avoscloud.AVFile;
 
 public class 用户 extends AVUser {
 
     static {
         AVUser.alwaysUseSubUserClass(用户.class);
     }
-    
+
     public 用户() {
         super();
     }
@@ -52,6 +55,14 @@ public class 用户 extends AVUser {
         return getEmail();
     }
 
+    public void 置签名(String $签名) {
+        设置("sign", $签名);
+    }
+
+    public String 取签名() {
+        return 读取("sign");
+    }
+
     public void 置头像(Bitmap $头像) {
         置文件("icon", 图片.转换($头像));
     }
@@ -64,7 +75,7 @@ public class 用户 extends AVUser {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    调用.事件($回调, 同步取头像());
+                    调用.事件($回调, 取头像());
                     return null;
                 }
             }).启动();
@@ -78,12 +89,16 @@ public class 用户 extends AVUser {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    final 返回值<Bitmap> $头像 = 同步取头像();
+                    Bitmap $图片 = 取头像().取内容();
+                    if ($图片 == null) {
+                        $图片 = 取头像缓存();
+                    }
+                    final Bitmap $头像 = $图片;
                     处理.主线程(new 方法() {
                             @Override
                             public Object 调用(Object[] $参数) {
-                                if ($头像.成功()) {
-                                    图片实现.置图片($图片视图, $头像.取内容());
+                                if ($头像 != null) {
+                                    图片实现.置图片($图片视图, $头像);
                                 } else if ($默认 != null) {
                                     图片实现.置图片($图片视图, $默认);
                                 }
@@ -95,11 +110,18 @@ public class 用户 extends AVUser {
             }).启动();
     }
 
+    private static String 头像缓存 = "$头像缓存";
 
-    public 返回值<Bitmap> 同步取头像() {
+    public Bitmap 取头像缓存() {
+        return 图片.读取(头像缓存 + "/" + getObjectId());
+    }
+
+    public 返回值<Bitmap> 取头像() {
         返回值<InputStream> $返回 = 取文件("icon");
         if ($返回.成功()) {
-            return 返回值.创建(图片.读取($返回.取内容()));
+            byte[] $图片 = 字节.读取($返回.取内容());
+            字节.保存(头像缓存 + "/" + getObjectId(), $图片);
+            return 返回值.创建(图片.读取($图片));
         } else {
             return 返回值.创建(null, $返回.取错误());
         }
@@ -145,7 +167,12 @@ public class 用户 extends AVUser {
     }
 
     public void 检查(final 方法 $回调) {
-        登录(getSessionToken(), $回调);
+        isAuthenticated(new AVCallback<Boolean>() {
+                @Override
+                protected void internalDone0(Boolean $返回,后端错误 avException) {
+                    调用.事件($回调,返回值.创建(null,$返回 == null ? false : $返回,avException));
+                }
+            });
     }
 
     public static void 登出() {
@@ -162,7 +189,11 @@ public class 用户 extends AVUser {
 
     public static 返回值<用户> 同步登录(String $Token) {
         try {
-            return 返回值.创建((用户)becomeWithSessionToken($Token, 用户.class));
+            返回值<用户> $返回 = 返回值.创建((用户)becomeWithSessionToken($Token, 用户.class));
+            if ($返回.成功()) {
+                设置.保存("用户Token", $返回.取内容().getSessionToken());
+            }
+            return $返回;
         } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }

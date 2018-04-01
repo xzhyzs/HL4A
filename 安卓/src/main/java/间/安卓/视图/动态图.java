@@ -67,6 +67,7 @@ public class 动态图 extends View implements 基本视图 {
             图片地址 = 文件.检查地址($地址);
             movie = Movie.decodeFile(图片地址);
             requestLayout();
+            播放();
         }
     }
 
@@ -360,9 +361,7 @@ public class 动态图 extends View implements 基本视图 {
      * Draw current GIF frame
      */
     private void drawMovieFrame(Canvas canvas) {
-
         movie.setTime(mCurrentAnimationTime);
-
         canvas.save(Canvas.MATRIX_SAVE_FLAG);
         canvas.scale(mScale, mScale);
         movie.draw(canvas, mLeft / mScale, mTop / mScale);

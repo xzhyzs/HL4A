@@ -60,9 +60,9 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
     private static final int STYLE_BLOCK = 2;
     private int mIndicatorStyle = STYLE_NORMAL;
 
-    private float mTabPadding;
+    private int mTabPadding;
     private boolean mTabSpaceEqual;
-    private float mTabWidth;
+    private int mTabWidth;
 
     /** indicator */
     private int mIndicatorColor;
@@ -120,21 +120,21 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         addView(mTabsContainer);
 
         obtainAttributes(context, attrs);
-       /*
-            //get layout_height
-            String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
+        /*
+         //get layout_height
+         String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
 
-            if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {
-            } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {
-            } else {
-                int[] systemAttrs = {android.R.attr.layout_height};
-                TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);
-                mHeight = a.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-                a.recycle();
-            }
+         if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {
+         } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {
+         } else {
+         int[] systemAttrs = {android.R.attr.layout_height};
+         TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);
+         mHeight = a.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+         a.recycle();
+         }
 
-        }
-        */
+         }
+         */
     }
 
     private void obtainAttributes(Context context,AttributeSet attrs) {
@@ -168,8 +168,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         mTextAllCaps = ta.getBoolean(R.styleable.SlidingTabLayout_tl_textAllCaps, false);
 
         mTabSpaceEqual = ta.getBoolean(R.styleable.SlidingTabLayout_tl_tab_space_equal, true);
-        mTabWidth = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_width, dp2px(-1));
-        mTabPadding = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
+        mTabWidth = (int)ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_width, dp2px(-1));
+        mTabPadding = (int)ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
 
         ta.recycle();
     }
@@ -244,7 +244,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
     public void addNewTab(String title) {
         View tabView = View.inflate(mContext, R.layout.layout_tab, null);
-        tabView.setBackground(绘画.生成背景(主题.取颜色().取基本色(),主题.取颜色().取基本深色(),0));
+        tabView.setBackground(绘画.生成背景(主题.取颜色().取基本色(), 主题.取颜色().取基本深色(), 0));
         if (mTitles != null) {
             mTitles.add(title);
         }
@@ -305,7 +305,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
             if (tv_tab_title != null) {
                 tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);
                 tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);
-                tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
+                视图实现.置填充(tv_tab_title, "8dp", "8dp", "16dp", "16dp");
                 if (mTextAllCaps) {
                     tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
                 }
@@ -546,8 +546,8 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         invalidate();
     }
 
-    public void setTabPadding(float tabPadding) {
-        this.mTabPadding = dp2px(tabPadding);
+    public void setTabPadding(Object tabPadding) {
+        this.mTabPadding = 视图.检查大小(tabPadding);
         updateTabStyles();
     }
 

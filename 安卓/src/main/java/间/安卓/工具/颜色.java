@@ -6,7 +6,6 @@ import android.graphics.*;
 
 public class 颜色 {
 
-
     public static final int 白色 = 转换("#FFFFFF");
     public static final int 白烟 = 转换("#EBEBEB");
     public static final int 黑色 = 转换("#de000000");

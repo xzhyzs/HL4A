@@ -34,6 +34,10 @@ public class 高级滑动 extends 线性布局 {
         this($父视图.getContext());
         加入到($父视图);
     }
+    
+    public void 标签平分() {
+       
+    }
 
     public void 添加(String $名称,View $视图) {
         界面.添加($名称,$视图);
