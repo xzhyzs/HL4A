@@ -64,7 +64,7 @@ public class 布局 {
         return 解析($上下文, $表);
     }
 
-    public static View 解析(Context $上下文,哈希表<String,Object> $表) {
+    public static View 解析(Context $上下文,哈希表 $表) {
         if ($表 == null || $表.长度() == 0) {
             return new 线性布局($上下文);
         } else if ($表.长度() > 1) {

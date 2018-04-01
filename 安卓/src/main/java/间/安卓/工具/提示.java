@@ -32,7 +32,7 @@ public class 提示 {
 
     private static Boolean 调试 = 反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
 
-    public static void 日志(String $日志) {
+    public static void 日志(Object $日志) {
         if ($日志 == null) $日志 = "null";
         if (调试) {
             Log.e(字符.截取结束(new Exception().getStackTrace()[1].getClassName(), ".", null), $日志 == null ? "null": $日志.toString());

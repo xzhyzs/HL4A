@@ -26,7 +26,7 @@ public class 数组适配器 extends 基本适配器 {
 
     public void 添加(String... $项目) {
         for (String $单个 : $项目) {
-            哈希表<String,Object> $参数 = new 哈希表<>();
+            哈希表 $参数 = new 哈希表<>();
             $参数.设置("内容", $单个);
             数据.添加($参数);
         }

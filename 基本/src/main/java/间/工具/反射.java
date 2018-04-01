@@ -17,11 +17,11 @@ import java.lang.reflect.Modifier;
 
 public class 反射 {
     
-    private static 哈希表<Class,集合<String>> 转换缓存 = new 哈希表<>();
+    private static 哈希表 转换缓存 = new 哈希表<>();
     
     public static <类型> 集合<String> 取可缓存参数(Class $类) {
         if ($类 == null) return null;
-        if (!转换缓存.检查键值($类)){
+        if (!转换缓存.检查($类)){
             集合<String> $返回 = new 集合<>();
             Field[] $变量 = $类.getDeclaredFields();
             for (Field $单个 : $变量) {
@@ -395,7 +395,7 @@ public class 反射 {
         return $参数类组;
     }
     
-    private static 哈希表<Class,Class> 对应表 = new 哈希表<>();
+    private static 哈希表 对应表 = new 哈希表<>();
     
     static {
         对应表.设置(int.class,Integer.class);
@@ -411,7 +411,9 @@ public class 反射 {
     public static boolean 是子类(Class<?> $类,Class<?> $子类) {
         if ($类.isAssignableFrom($子类)) {  
             return true;
-        } else if(对应表.双查键值对($类,$子类)) {
+        } else if(对应表.检查($类) && 对应表.检查内容($子类)) {
+            return true;
+        } else if(对应表.检查($子类) && 对应表.检查内容($类)) {
             return true;
         }
         return false;

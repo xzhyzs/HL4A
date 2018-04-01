@@ -33,7 +33,7 @@ public class 适配器 extends 基本适配器 {
     }
 
     @Override
-    public View 处理(View $视图,哈希表<String, Object> $参数) {
+    public View 处理(View $视图,哈希表 $参数) {
         return (View)调用.事件(处理, $视图, $参数);
     }
 

@@ -4,7 +4,7 @@ import 间.工具.反射;
 
 public class 检查 {
     
-    public void 禁用Xposed() {
+    public static void 禁用Xposed() {
         Class $类 = 反射.取系统类("de.robv.android.xposed.XposedBridge");
         if ($类 != null) {
             反射.置变量($类,"disableHooks",true);

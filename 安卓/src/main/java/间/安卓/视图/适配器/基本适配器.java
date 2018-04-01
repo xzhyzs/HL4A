@@ -10,7 +10,7 @@ import 间.工具.错误;
 
 public abstract class 基本适配器 extends BaseAdapter {
 
-    public 集合<哈希表<String,Object>> 数据;
+    public 集合<哈希表> 数据;
 
     public 基本适配器() {
         数据 = new 集合<>();
@@ -61,17 +61,17 @@ public abstract class 基本适配器 extends BaseAdapter {
         notifyDataSetInvalidated();
     }
 
-    public void 添加(哈希表<String,Object> $参数) {
+    public void 添加(哈希表 $参数) {
         数据.添加($参数);
     }
 
-    public void 添加(哈希表<String,Object>[] $参数) {
+    public void 添加(哈希表[] $参数) {
         数据.添加所有($参数);
     }
 
     public abstract View 创建();
 
-    public abstract View 处理(View $视图,哈希表<String,Object> $参数);
+    public abstract View 处理(View $视图,哈希表 $参数);
 
 
 

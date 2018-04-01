@@ -34,7 +34,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
     public Object[] 传入参数;
 
-    public 无序表<String,界面插件> 所有插件 = new 无序表<>();
+    public 无序表 所有插件 = new 无序表<>();
 
     public void 注册插件(界面插件 $插件) {
         注册插件("插件-" + 所有插件.长度(), $插件);

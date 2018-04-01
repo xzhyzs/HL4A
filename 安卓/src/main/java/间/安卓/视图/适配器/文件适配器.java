@@ -54,7 +54,7 @@ public class 文件适配器 extends 基本适配器 {
     方法 项目长按 = new 方法() {
         @Override
         public Object 调用(Object[] $参数) {
-            哈希表<String,String> $数据 = (哈希表<String,String>)((View)$参数[1]).getTag();
+            哈希表 $数据 = (哈希表)((View)$参数[1]).getTag();
             String $地址 = $数据.读取("地址");
             String $名称 = $数据.读取("内容");
             if (文件.存在($地址)) {
@@ -74,13 +74,13 @@ public class 文件适配器 extends 基本适配器 {
         File $文件 = 文件.取文件对象(顶端 + "/" + 附加);
         File[] $所有 = 文件.取文件列表($文件.getPath());
         if (!("/".equals(附加))) {
-            哈希表<String,Object> $数据 = new 哈希表<>();
+            哈希表 $数据 = new 哈希表();
             $数据.设置("内容", "返回上级 ~");
             $数据.设置("地址", "/-返回上级-/");
             数据.添加($数据);
         }
         for (File $单个 : $所有) {
-            哈希表<String,Object> $数据 = new 哈希表<>();
+            哈希表 $数据 = new 哈希表();
             $数据.设置("内容", $单个.getName());
             $数据.设置("地址", $单个.getPath());
             数据.添加($数据);
@@ -89,7 +89,7 @@ public class 文件适配器 extends 基本适配器 {
     }
 
     @Override
-    public View 处理(View $视图,哈希表<String,Object> $参数) {
+    public View 处理(View $视图,哈希表 $参数) {
         $视图.setTag($参数);
         ((布局_适配器_数组)$视图).文本.置文本((String)$参数.读取("内容"));
         return $视图;

@@ -67,7 +67,7 @@ public class 基本弹窗 extends AlertDialog {
     }
 
     public void 显示() {
-        处理.主线程(this,"直接显示");
+        处理.主线程调用(this,"直接显示");
     }
     
     public void 直接显示() {
@@ -86,7 +86,7 @@ public class 基本弹窗 extends AlertDialog {
     }
 
     public void 隐藏() {
-        处理.主线程(this,"dismiss");
+        处理.主线程调用(this,"dismiss");
     }
     
     public static class 弹窗按钮单击 implements 方法 {

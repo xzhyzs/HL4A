@@ -16,10 +16,9 @@ public class 处理 {
         指定(主处理,$方法,$参数);
     }
     
-    public static void 主线程(Object $对象,String $方法名,Object... $参数) {
+    public static void 主线程调用(Object $对象,String $方法名,Object... $参数) {
         主线程(配置($对象,$方法名,$参数),$参数);
     }
-    
     
     public static void 指定(Looper $处理,方法 $方法,Object... $参数) {
         new Handler($处理).post(new 可运行类($方法, $参数));

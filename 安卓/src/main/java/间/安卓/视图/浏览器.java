@@ -61,7 +61,7 @@ public class 浏览器 extends WebView implements 基本视图 {
 
         @Override
         public void onDownloadStart(String $链接,String $UA,String $描述,String $类型,long $长度) {
-            if (禁止表.检查键值($链接)) return;
+            if (禁止表.检查($链接)) return;
             基本弹窗 $弹窗 = new 基本弹窗(getContext());
             $弹窗.置标题("文件下载");
             $弹窗.置内容(文件.取名称($链接) + "\n大小: " + 转换.mb($长度));
@@ -71,7 +71,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             $弹窗.显示();
         }
 
-        private 哈希表<String,Boolean> 禁止表 = new 哈希表<>();
+        private 哈希表 禁止表 = new 哈希表<>();
 
         public void 下载(基本弹窗 $弹窗,String $地址) {
             链接.打开($地址);
@@ -204,7 +204,7 @@ public class 浏览器 extends WebView implements 基本视图 {
 
         @Override
         public boolean onJsAlert(WebView $视图,String $链接,String $信息,final JsResult $返回) {
-            if (不再显示表.检查键值($链接)) {
+            if (不再显示表.检查($链接)) {
                 $返回.cancel();
                 return true;
             }
@@ -223,7 +223,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             return true;
         }
 
-        private 哈希表<String,Boolean>不再显示表 = new 哈希表<>();
+        private 哈希表 不再显示表 = new 哈希表<>();
 
         public void 不再显示(基本弹窗 $弹窗,String $链接) {
             不再显示表.设置($链接, true);

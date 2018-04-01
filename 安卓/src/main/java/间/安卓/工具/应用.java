@@ -122,6 +122,7 @@ public class 应用 {
         主题.置颜色(颜色.靛蓝);
         提示.初始化($应用);
         图片.初始化($应用);
+        检查.禁用Xposed();
     }
     
     public static void 启动(String $包名) {
@@ -140,14 +141,14 @@ public class 应用 {
         return new String[0];
     }
 
-    private static 哈希表<String,信息> 信息缓存 = new 哈希表<>();
+    private static 哈希表 信息缓存 = new 哈希表<>();
 
     public static 信息 取信息() {
         return 取信息(环境.取应用().getPackageName());
     }
 
     public static 信息 取信息(String $包名) {
-        if (信息缓存.检查键值($包名)) {
+        if (信息缓存.检查($包名)) {
             return 信息缓存.读取($包名);
         }
         try {

@@ -12,7 +12,7 @@ import 间.收集.集合;
 
 public class 权限组 {
 
-    private static 无序表<String,权限组> 所有权限组 = new 无序表<>();
+    private static 无序表 所有权限组 = new 无序表<>();
     private static volatile Boolean 已准备 = false;
     private static void 准备() {
         synchronized (已准备) {
@@ -61,13 +61,13 @@ public class 权限组 {
         return this;
     }
 
-    private 无序表<String,Boolean> 存在缓存 = new 无序表<>();
+    private 无序表 存在缓存 = new 无序表<>();
 
     public boolean 存在(String $用户) {
         try {
-            if (!存在缓存.检查键值($用户))
+            if (!存在缓存.检查($用户))
                 存在缓存.设置($用户, !权限组.getUsers().getQuery().whereEqualTo("username", $用户).find().isEmpty());
-            return 存在缓存.读取($用户);
+            return 存在缓存.读取对象($用户);
         } catch (后端错误 $错误) {}
         return false;
     }

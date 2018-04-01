@@ -175,7 +175,7 @@ public class 文件 {
         return $目录;
     }
 
-    private static 哈希表<String,String> 前缀替换 = new 哈希表<>();
+    private static 哈希表 前缀替换 = new 哈希表();
 
     public static void 替换地址(String $前缀,String $目标) {
         前缀替换.设置($前缀,$目标);
@@ -295,7 +295,7 @@ public class 文件 {
     public static void 删除关键字(String $地址,哈希表 $关键字) {
         File $对象 = 取文件对象($地址);
         if ($对象.exists())
-            if ($对象.isFile() && $关键字.检查键值($对象.getName().toLowerCase())) {
+            if ($对象.isFile() && $关键字.检查($对象.getName().toLowerCase())) {
                 $对象.delete();
             } else if ($对象.isDirectory()) {
                 File[] $列表 = $对象.listFiles();

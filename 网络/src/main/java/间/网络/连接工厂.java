@@ -6,16 +6,18 @@ import 间.工具.错误;
 import 间.收集.哈希表;
 import java.util.Map;
 import android.util.Log;
+import org.json.JSONObject;
 
 public class 连接工厂 {
 
     private String 地址;
     private String 后缀;
     private String 模式;
-    private 哈希表<String,String> 请求头表 = new 哈希表<>();
-    private 哈希表<String,String> Cookie表 = new 哈希表<>();
-    private 哈希表<String,String> 参数表 = new 哈希表<>();
-    private 哈希表<String,String> 文件表 = new 哈希表<>();
+    private 哈希表 请求头表 = new 哈希表<>();
+    private 哈希表 Cookie表 = new 哈希表<>();
+    private 哈希表 参数表 = new 哈希表<>();
+    private 哈希表 文件表 = new 哈希表<>();
+    private String JSON;
     private boolean JSON输出 = false;
     
     public void 地址(String $地址) {
@@ -28,6 +30,14 @@ public class 连接工厂 {
 
     public void 模式(String $模式) {
         模式 = $模式;
+    }
+    
+    public void JSON(String $内容) {
+        JSON = $内容;
+    }
+    
+    public void JSON(Map $内容) {
+        JSON(new JSONObject($内容).toString());
     }
     
     public void JSON输出(boolean $状态) {
@@ -54,8 +64,9 @@ public class 连接工厂 {
     public 连接 新建() {
         连接 $新建 = new 连接();
         $新建.JSON输出(JSON输出);
+        $新建.JSON(JSON);
         if (地址 != null) {
-            $新建.地址(地址 + 后缀);
+            $新建.地址(地址 + (后缀 == null ? "" : 后缀));
         }
         if (模式 != null) {
             $新建.模式(模式);
@@ -84,7 +95,6 @@ public class 连接工厂 {
         if (后缀 != null) {
             $地址 = $地址 + 后缀;
         }
-        Log.e("连接工厂",$地址);
         return 新建().地址($地址);
     }
 

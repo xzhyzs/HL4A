@@ -44,13 +44,11 @@ public class 连接 {
     private Headers.Builder 请求头 = new Headers.Builder();
     private Request.Builder 请求 = new Request.Builder();
 
-    private 哈希表<String,String> Cookie表 = new 哈希表<>();
-    private 哈希表<String,String> 参数表 = new 哈希表<>();
-    private 哈希表<String,File> 文件表 = new 哈希表<>();
+    private 哈希表 Cookie表 = new 哈希表<>();
+    private 哈希表 参数表 = new 哈希表<>();
+    private 哈希表 文件表 = new 哈希表<>();
 
     private MediaType 类型;
-
-    private boolean 不可用 = false;
 
     static {
         OkHttpClient.Builder $构建 = new OkHttpClient.Builder();
@@ -82,9 +80,7 @@ public class 连接 {
     }
 
     public 连接 地址(String $地址) {
-        if ($地址 == null || (!$地址.startsWith("http://") && !$地址.startsWith("https://"))) {
-            不可用 = true;
-        } else {
+        if ($地址 != null && ($地址.startsWith("http://") || $地址.startsWith("https://"))) {
             请求.url($地址);
         }
         return this;
@@ -92,9 +88,7 @@ public class 连接 {
 
     public 连接 模式(String $模式) {
         $模式 = $模式.toUpperCase();
-        if (!所有模式.检查($模式)) {
-            不可用 = true;
-        } else {
+        if (所有模式.检查($模式)) {
             模式 = $模式;
         }
         return this;
@@ -143,16 +137,21 @@ public class 连接 {
     }
 
     private boolean JSON输出 = false;
+    private String JSON;
+
+    public void JSON(Map $表) {
+        JSON(new JSONObject($表).toString());
+    }
+
+    public void JSON(String $内容) {
+        JSON = $内容;
+    }
 
     public void JSON输出(boolean $状态) {
         JSON输出 = $状态;
     }
 
     public 资源 同步() {
-
-        if (不可用) {
-            //return new 资源(null);
-        }
 
         try {
 
@@ -166,7 +165,12 @@ public class 连接 {
 
             ByteArrayOutputStream $输出 = 流.输出.字节();
             if (JSON输出) {
-                $输出.write(new JSONObject(参数表).toString().getBytes());
+                if (JSON == null && 参数表.长度() > 0) {
+                    JSON(参数表);
+                }
+                if (JSON != null) {
+                    $输出.write(JSON.getBytes());
+                }
             } else {
                 byte[] $分隔 = ("--" + 标识).getBytes();
                 byte[] $换行 = "\r\n".getBytes();
@@ -200,23 +204,20 @@ public class 连接 {
                 $输出.write("--".getBytes());
             }
             $输出.flush();
-            Log.e("kdjdjjejeje",$输出.toString());
             请求.method(模式, ("GET".equals(模式) || "HEAD".equals(模式)) ? null : RequestBody.create(类型, $输出.toByteArray()));
             Request $请求 = 请求.build();
             return new 资源(网络实例.newCall($请求).execute());
-        } catch (Exception $错误) {
-            Log.e("ejejjee",错误.取整个错误($错误));
-        }
+        } catch (Exception $错误) {}
 
         return new 资源(null);
 
     }
 
-    private String 转换Cookie(哈希表<String,String> $内容) {
+    private String 转换Cookie(哈希表 $内容) {
         switch ($内容.长度()) {
             case 0:return "";
             case 1:
-                Map.Entry<String,String> $一个 = $内容.entrySet().iterator().next();
+                Map.Entry<String,String> $一个 = (Map.Entry)$内容.entrySet().iterator().next();
                 return $一个.getKey() + "=" + $内容;
             default:
                 StringBuffer $返回 = new StringBuffer("");
