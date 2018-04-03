@@ -15,7 +15,7 @@ public class 锁屏 {
     private static PowerManager 管理;
     private static PowerManager.WakeLock 锁;
 
-    protected static void 初始化() {
+    static {
         管理 = (PowerManager) 环境.取应用().getSystemService(Context.POWER_SERVICE);
         锁 = 管理.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.FULL_WAKE_LOCK, "锁屏");
     }

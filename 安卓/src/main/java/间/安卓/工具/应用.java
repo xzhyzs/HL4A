@@ -40,7 +40,7 @@ public class 应用 {
     private static 集合<Activity> 所有界面 = new 集合<Activity>();
     public static PackageManager 包管理;
     public static 信息 当前;
-   
+
     public static class 信息 {
 
         public String 应用名;
@@ -77,25 +77,31 @@ public class 应用 {
 
     public static void 结束脚本() {
         for (Activity $单个 : 所有界面) {
-            if ($单个 != null)
-                if ($单个.getClass().getSimpleName().equals("ScriptActivity"))
-                    $单个.finish();
+            if ($单个 != null && $单个.getClass().getSimpleName().equals("ScriptActivity"))
+                $单个.finish();
         }
     }
 
     public static void 错误处理(Thread $线程,Exception $错误) {
-        应用.结束脚本();
+        提示.日志($错误, "HL4A 错误处理");
         跳转错误($线程, $错误);
-        if (!($线程 instanceof 间.工具.线程))
+        if (!($线程 instanceof 间.工具.线程)) {
             System.exit(0);
+        }
     }
 
     public static void 跳转错误(Thread $线程,Exception $错误) {
-        字符.保存("%HL4A/错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
+        字符.保存("$错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
         if (环境.取应用() instanceof 基本应用)
-        for (应用插件 $单个 : ((基本应用)环境.取应用()).所有插件) {
-            $单个.应用出错($线程, $错误);
-        }
+            for (应用插件 $单个 : ((基本应用)环境.取应用()).所有插件) {
+                if ($单个 != null) {
+                    try {
+                        $单个.应用出错($线程, $错误);
+                    } catch (Exception $插件错误) {
+                        提示.日志($插件错误, "界面插件错误");
+                    }
+                }
+            }
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
         $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + 错误.取整个错误($错误));
@@ -107,8 +113,6 @@ public class 应用 {
         //System.setOut(new 打印处理(调用.代理(提示.class,"普通")));
         环境.置应用($应用);
         当前 = 取信息();
-        文件.初始化();
-        锁屏.初始化();
         线程.置错误处理(调用.代理(应用.class, "错误处理"));
         主题.置圆角大小("3dp");
         主题.置大文本大小("24sp");
@@ -124,7 +128,7 @@ public class 应用 {
         图片.初始化($应用);
         检查.禁用Xposed();
     }
-    
+
     public static void 启动(String $包名) {
         环境.取应用().startActivity(包管理.getLaunchIntentForPackage($包名));
     }

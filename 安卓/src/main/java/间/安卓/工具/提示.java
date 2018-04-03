@@ -31,11 +31,30 @@ public class 提示 {
     }
 
     private static Boolean 调试 = 反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
-
+    private static 方法 日志处理;
+    
+    public static void 置日志处理(方法 $处理) {
+        日志处理 = $处理;
+    }
+    
+    private static String 日志处理(Object $日志) {
+        if ($日志 instanceof Throwable) {
+            return 错误.取整个错误((Throwable)$日志);
+        }
+        return $日志 == null ? "null": $日志.toString();
+    }
+    
     public static void 日志(Object $日志) {
-        if ($日志 == null) $日志 = "null";
+        日志($日志, 1);
+    }
+
+    public static void 日志(Object $日志,int $位数) {
+        日志($日志,字符.截取结束(线程.取调用栈(1)[0].getClassName(),".",null));
+    }
+
+    public static void 日志(Object $日志,String $名称) {
         if (调试) {
-            Log.e(字符.截取结束(new Exception().getStackTrace()[1].getClassName(), ".", null), $日志 == null ? "null": $日志.toString());
+            Log.e($名称, 日志处理 == null ? 日志处理($日志) : ($日志 = 调用.事件(日志处理,$日志)) == null ? "null" : $日志.toString());
         }
     }
 

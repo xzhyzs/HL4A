@@ -51,6 +51,22 @@ public class 线程 extends Thread {
     public static Thread 取当前线程() {
         return Thread.currentThread();
     }
+    
+    public static StackTraceElement[] 取调用栈() {
+        return 取调用栈(1);
+    }
+    
+    public static StackTraceElement[] 取调用栈(int $结束) {
+        return 取调用栈(取当前线程(),$结束 + 1);
+    }
+    
+    public static StackTraceElement[] 取调用栈(Thread $线程,int $结束) {
+        $结束 ++;
+        StackTraceElement[] $调用栈 =  $线程.getStackTrace();
+        StackTraceElement[] $返回 = new StackTraceElement[$调用栈.length - $结束];
+        System.arraycopy($调用栈,0,$返回,0,$返回.length);
+        return $返回;
+    }
 
     public static boolean 是线程() {
         return 取当前线程() instanceof 线程;

@@ -24,7 +24,7 @@ import 间.接口.返回值;
 
 public class 文件 extends 间.工具.文件 {
 
-    protected static void 初始化() {
+    static {
         文件.替换地址("%", 取存储目录(""));
         文件.替换地址("$", 取数据目录(""));
         文件.替换地址("#", 取自身目录(""));

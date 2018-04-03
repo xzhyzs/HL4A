@@ -7,10 +7,12 @@ import 间.安卓.弹窗.*;
 import 间.安卓.视图.*;
 import 间.安卓.视图.扩展.*;
 import 间.安卓.资源.*;
+import 间.工具.字符;
+import 间.工具.时间;
 
 public class 错误界面 extends 基本界面 {
 
-    String 错误内容;
+    private String 错误内容;
 
     @Override
     public void onCreate(Bundle $数据) {
@@ -63,6 +65,12 @@ public class 错误界面 extends 基本界面 {
         滚动文本 $文本 = new 滚动文本(this);
         $文本.置文本(错误内容);
         $文本.加入到($布局);
+        
+        
+        
+        字符.保存("%HL4A/错误日志/" + 应用.取信息().应用名 + "/" + 时间.格式() + ".log", 错误内容);
+        
+        应用.结束脚本();
         
     }
 
