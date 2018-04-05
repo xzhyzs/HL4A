@@ -16,7 +16,7 @@ public class 茉莉 {
     private static String Key;
     private static String Secret;
     private static String 用户名称 = "恶臭的用户";
-    private static String 机器人名称 = "奈间机器人";
+    private static String 机器人名称 = "膜蛤机器人";
 
     static {
         工厂.地址("http://i.itpk.cn/api.php?");

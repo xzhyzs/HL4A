@@ -24,27 +24,35 @@ public class 图灵 {
         工厂.JSON输出(true);
     }
 
-    public static void 用户(String apiKey) {
+    public static void 添加用户(String apiKey) {
         所有用户.添加(apiKey);
     }
 
-    public static void 请求(String $内容,方法 $回调) {
-        new 线程(图灵.class, "异步请求").启动($内容, $回调);
+    public static void 请求(final String $内容,final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                   处理.主线程($回调,请求($内容));
+                    return null;
+                }
+            }).启动();
     }
 
-    protected static void 异步请求(String $内容,方法 $回调) {
+    public  static 返回值<String> 请求(String $内容) {
         for (String $单个 : 所有用户) {
             连接 $连接 = 工厂.新建();
             $连接.JSON(取参数表($单个, $内容));
             资源 $资源 = $连接.同步();
             if ($资源.成功()) {
                 String $返回 = 解析返回($单个, $资源.文本());
-                if ($返回 != null) 处理.主线程($回调, 返回值.创建($返回));
+                if ($返回 != null) {
+                    return 返回值.创建($返回);
+                }
             } else {
-                return;
+                return 返回值.创建("网络不给力 ~",false);
             }
         }
-        处理.主线程($回调, 返回值.失败);
+        return 返回值.创建("Key错误 ~",false);
     }
 
     private static String 解析返回(String $用户,String $内容) {
@@ -53,21 +61,21 @@ public class 图灵 {
         哈希表 $表 = JSON.解析($内容);
         if ($表 == null) return null;
         if (!$表.检查("intent"))return null;
-        哈希表 $意图 = $表.读取("intent");
+        哈希表 $意图 = (哈希表)$表.读取("intent");
         if ($意图 == null) return null;
-        Integer $状态 = $意图.读取("code");
+        Integer $状态 = (Integer)$意图.读取("code");
         if ($状态 == null) return null;
         if (应移除($状态)) {
             所有用户.删除对象($用户);
             return null;
         }
         if (转换异常($状态) != null) return null;
-        集合<哈希表> $结果 = $表.读取("results");
+        集合<哈希表> $结果 = (集合<哈希表>)$表.读取("results");
         if ($结果 == null) return null;
         for (哈希表 $单个 : $结果) {
             提示.日志($单个);
             if ("text".equals($单个.读取("resultType"))) {
-                return ((哈希表)$单个.读取("values")).读取("text");
+                return (String)((哈希表)$单个.读取("values")).读取("text");
             }
         }
         return null;
