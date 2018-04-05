@@ -55,7 +55,6 @@ public class 应用 {
         public int 版本号;
         public String 版本名;
         public String 地址;
-        public Drawable 图标;
         public long 更新时间;
 
     }
@@ -168,7 +167,6 @@ public class 应用 {
             $返回.应用名 = $信息.applicationInfo.loadLabel(包管理).toString();
             $返回.版本号 = $信息.versionCode;
             $返回.版本名 = $信息.versionName;
-            $返回.图标 = $信息.applicationInfo.loadIcon(包管理);
             $返回.更新时间 = $信息.lastUpdateTime;
             信息缓存.设置($包名, $返回);
             return $返回;
@@ -187,7 +185,7 @@ public class 应用 {
         $返回.应用名 = $信息.applicationInfo.loadLabel(包管理).toString();
         $返回.版本号 = $信息.versionCode;
         $返回.版本名 = $信息.versionName;
-        $返回.图标 = $信息.applicationInfo.loadIcon(包管理);
+        //$返回.图标 = $信息.applicationInfo.loadIcon(包管理);
         $返回.更新时间 = $信息.lastUpdateTime;
         return $返回;
     }

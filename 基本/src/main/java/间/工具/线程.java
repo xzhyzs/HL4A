@@ -1,6 +1,7 @@
 package 间.工具;
 
 import 间.接口.*;
+import java.io.IOException;
 
 public class 线程 extends Thread {
     
@@ -63,9 +64,7 @@ public class 线程 extends Thread {
     public static StackTraceElement[] 取调用栈(Thread $线程,int $结束) {
         $结束 ++;
         StackTraceElement[] $调用栈 =  $线程.getStackTrace();
-        StackTraceElement[] $返回 = new StackTraceElement[$调用栈.length - $结束];
-        System.arraycopy($调用栈,0,$返回,0,$返回.length);
-        return $返回;
+        return 数组.截取($调用栈,null,$调用栈.length - 1 - $结束);
     }
 
     public static boolean 是线程() {
