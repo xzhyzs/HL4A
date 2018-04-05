@@ -1,17 +1,16 @@
 package 间.安卓.工具;
 
-import 间.收集.集合;
 import 间.工具.字符;
-import 间.网络.连接工厂;
-import 间.网络.连接;
-import 间.收集.哈希表;
-import 间.收集.无序表;
-import 间.网络.资源;
-import 间.数据.JSON;
-import org.json.JSONObject;
-import org.json.JSONException;
+import 间.工具.线程;
 import 间.接口.方法;
 import 间.接口.返回值;
+import 间.收集.哈希表;
+import 间.收集.无序表;
+import 间.收集.集合;
+import 间.数据.JSON;
+import 间.网络.资源;
+import 间.网络.连接;
+import 间.网络.连接工厂;
 
 public class 图灵 {
 
@@ -38,9 +37,7 @@ public class 图灵 {
             连接 $连接 = 工厂.新建();
             $连接.JSON(取参数表($单个, $内容));
             资源 $资源 = $连接.同步();
-            提示.日志($内容);
             if ($资源.成功()) {
-                提示.日志("成功");
                 String $返回 = 解析返回($单个, $资源.文本());
                 if ($返回 != null) 处理.主线程($回调, 返回值.创建($返回));
             } else {
@@ -52,15 +49,11 @@ public class 图灵 {
 
     private static String 解析返回(String $用户,String $内容) {
 
-        提示.日志($内容);
         if ($内容 == null) return null;
-        提示.日志("解析");
         哈希表 $表 = JSON.解析($内容);
-        提示.日志("表:" + $表);
         if ($表 == null) return null;
         if (!$表.检查("intent"))return null;
         哈希表 $意图 = $表.读取("intent");
-        提示.日志("意图");
         if ($意图 == null) return null;
         Integer $状态 = $意图.读取("code");
         if ($状态 == null) return null;

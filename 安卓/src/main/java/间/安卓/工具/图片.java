@@ -38,7 +38,7 @@ import 间.接口.返回值;
 
 public class 图片 {
 
-    protected static void 初始化(Application $应用) {
+    protected static void 初始化() {
         new 图片插件().注册();
     }
 

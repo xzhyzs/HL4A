@@ -16,8 +16,17 @@ import android.util.DisplayMetrics;
 import java.util.UUID;
 import java.io.IOException;
 import android.app.AppOpsManager;
+import 间.接口.调用;
+import android.content.Intent;
+import android.os.BatteryManager;
 
 public class 设备 {
+    
+    private static BatteryManager 电量管理 = (BatteryManager)环境.取应用().getSystemService(Context.BATTERY_SERVICE);;
+    
+    public static int 取电量() {
+        return 电量管理.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+    }
     
     public static int 取SDK() {
         return Build.VERSION.SDK_INT;

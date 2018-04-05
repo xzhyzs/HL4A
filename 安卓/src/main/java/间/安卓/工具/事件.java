@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import 间.接口.方法;
 import 间.接口.调用;
 
-public abstract class 事件 extends BroadcastReceiver {
+public class 事件 extends BroadcastReceiver {
 
     private 方法 方法;
     private IntentFilter 选择器 = new IntentFilter();
@@ -41,8 +41,22 @@ public abstract class 事件 extends BroadcastReceiver {
         return this;
     }
     
+    public 事件 当电量改变() {
+        选择器.addAction(Intent.ACTION_BATTERY_CHANGED);
+        return this;
+    }
+    
+    public 事件 当电量过低() {
+        选择器.addAction(Intent.ACTION_BATTERY_LOW);
+        return this;
+    }
+    
+    public 事件 当电量恢复() {
+        选择器.addAction(Intent.ACTION_BATTERY_LOW);
+        return this;
+    }
+    
     public 事件 注册() {
-        反注册();
         环境.取应用().registerReceiver(this,选择器);
         return this;
     }

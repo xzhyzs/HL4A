@@ -22,9 +22,9 @@ public class 提示 {
     private static 文本视图 文本对象;
     private static long 上次提示;
 
-    protected static void 初始化(Context $环境) {
-        提示对象 = Toast.makeText($环境, "", Toast.LENGTH_SHORT);
-        布局_提示 $视图 = new 布局_提示($环境);
+    protected static void 初始化() {
+        提示对象 = Toast.makeText(环境.取应用(), "", Toast.LENGTH_SHORT);
+        布局_提示 $视图 = new 布局_提示(环境.取应用());
         文本对象 = $视图.文本;
         提示对象.setView($视图);
         上次提示 = 时间.时间戳();
@@ -77,7 +77,7 @@ public class 提示 {
             if ((上次提示 = 时间.时间戳()) - 上次 < 233) {
                 文本对象.置文本(文本对象.取文本() + "\n" + $文本);
             } else {
-                初始化(环境.取应用()); 
+                初始化(); 
                 文本对象.置文本($文本.toString());
             }
             文本对象.置文本颜色($颜色);
