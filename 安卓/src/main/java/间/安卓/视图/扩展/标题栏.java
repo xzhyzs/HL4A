@@ -15,24 +15,35 @@ import android.app.Activity;
 import 间.安卓.视图.侧滑布局;
 import android.support.v4.view.ViewPager;
 import 间.安卓.组件.基本界面;
+import android.widget.ListPopupWindow;
+import android.app.ActionBar;
+import android.widget.SpinnerAdapter;
+import android.app.ActionBar.LayoutParams;
+import android.view.View;
+import android.graphics.drawable.Drawable;
+import android.app.ActionBar.OnMenuVisibilityListener;
+import android.app.ActionBar.OnNavigationListener;
+import android.app.ActionBar.Tab;
+import 间.工具.反射;
+import 间.安卓.工具.视图;
 
 public class 标题栏 extends 线性布局 {
 
     public 文本视图 标题对象;
     public 线性布局 左按钮栏;
     public 线性布局 右按钮栏;
-    
+
     public 线性布局 菜单视图;
     public 弹出菜单 菜单对象;
-    
+
     Context 上下文;
 
     public 标题栏(Context $上下文) {
         super($上下文);
         上下文 = $上下文;
-        
+
         置阴影("4dp");
-        
+
         置标签("标题");
         置方向("水平");
         置高度(主题.取中等填充());
@@ -52,14 +63,16 @@ public class 标题栏 extends 线性布局 {
         右按钮栏 = new 线性布局(this);
         右按钮栏.置方向("水平");
         右按钮栏.置重力("右边");
-        
-        菜单视图 = 右按钮(图标.更多,null);
+
+        菜单视图 = 右按钮(图标.更多, null);
         菜单对象 = new 弹出菜单(菜单视图);
-        菜单视图.置单击事件(调用.配置(菜单对象,"显示"));
+        菜单视图.置单击事件(调用.配置(菜单对象, "显示"));
         菜单视图.隐藏();
+        
+        置标题(应用.取信息().应用名);
 
     }
-    
+
     public 标题栏(ViewGroup $父视图) {
         this($父视图.getContext());
         加入到($父视图);
@@ -77,6 +90,10 @@ public class 标题栏 extends 线性布局 {
 
     public void 置标题(String $内容) {
         标题对象.置文本($内容);
+        Context $上下文 = getContext();
+        if ($上下文 instanceof Activity) {
+            ((Activity)$上下文).setTitle($内容);
+        }
     }
 
     public 线性按钮 左按钮(Object $图片,方法 $事件) {
@@ -92,19 +109,18 @@ public class 标题栏 extends 线性布局 {
         $按钮.置单击事件($事件);
         return $按钮;
     }
-    
+
     public 弹出菜单 取菜单() {
         菜单视图.显示();
         return 菜单对象;
     }
-    
+
     public void 返回按钮(基本界面 $界面) {
-        左按钮(图标.返回,调用.配置($界面,"结束界面"));
-    }
-    
-    public void 菜单按钮 (侧滑布局 $侧滑) {
-        左按钮(图标.菜单,调用.配置($侧滑,"打开侧滑"));
+        左按钮(图标.返回, 调用.配置($界面, "结束界面"));
     }
 
+    public void 菜单按钮(侧滑布局 $侧滑) {
+        左按钮(图标.菜单, 调用.配置($侧滑, "打开侧滑"));
+    }
 
 }

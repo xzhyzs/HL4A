@@ -22,6 +22,5 @@ public class 应用插件 {
     public void 界面结束(Activity $结束) {}
     public void 应用出错(Thread $线程,Exception $错误) {}
     public void 应用事件(String $事件,Object[] $参数) {}
-    public void 处理环境(Context $环境) {}
 
 }

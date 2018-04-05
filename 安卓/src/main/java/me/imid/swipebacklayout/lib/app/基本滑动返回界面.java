@@ -4,17 +4,17 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 /**
  * @author Yrom
  */
-public interface SwipeBackActivityBase {
+public interface 基本滑动返回界面 {
     /**
      * @return the SwipeBackLayout associated with this activity.
      */
-    public abstract SwipeBackLayout getSwipeBackLayout();
+    public abstract SwipeBackLayout 取滑动返回布局();
 
-    public abstract void setSwipeBackEnable(boolean enable);
+    public abstract void 置滑动返回(boolean enable);
 
     /**
      * Scroll out contentView and finish the activity
      */
-    public abstract void scrollToFinishActivity();
+    public abstract void 滑动结束界面();
 
 }

@@ -8,7 +8,7 @@ import 间.收集.*;
 
 public class 基本服务 extends Service {
 
-    public 哈希表 所有事件 = new 哈希表();
+    public 哈希表<String,方法> 所有事件 = new 哈希表<>();
 
     public void 注册事件(String $事件,方法 $方法) {
         所有事件.设置($事件, $方法);

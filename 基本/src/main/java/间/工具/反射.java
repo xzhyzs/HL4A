@@ -17,7 +17,7 @@ import java.lang.reflect.Modifier;
 
 public class 反射 {
     
-    private static 哈希表 转换缓存 = new 哈希表<>();
+    private static 哈希表<Class,集合<String>> 转换缓存 = new 哈希表<>();
     
     public static <类型> 集合<String> 取可缓存参数(Class $类) {
         if ($类 == null) return null;
@@ -198,8 +198,13 @@ public class 反射 {
         $所有.添加所有($类.getDeclaredConstructors());
         return $所有.到数组(Constructor.class);
     }
+    
+    public static <类型> 类型 实例化(Class<类型> $类) {
+        return 实例化($类,new Object[0]);
+    }
 
     public static <类型> 类型 实例化(Class<类型> $类,Object... $参数) {
+        if ($类 == null) return null;
         if ($类.isEnum()) {
             throw new RuntimeException("不能实例化Enum！(没有初始化方法)");
         }

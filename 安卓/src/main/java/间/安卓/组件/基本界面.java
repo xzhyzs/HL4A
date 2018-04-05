@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import hl4a.runtime.ProxyActivity;
 import java.io.Serializable;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+import me.imid.swipebacklayout.lib.app.基本滑动返回界面;
+import 间.安卓.工具.主题;
 import 间.安卓.工具.布局;
 import 间.安卓.工具.应用;
-import 间.安卓.工具.提示;
 import 间.安卓.工具.权限;
 import 间.安卓.工具.环境;
 import 间.安卓.工具.线程;
@@ -21,16 +20,12 @@ import 间.安卓.工具.设备;
 import 间.安卓.插件.应用插件;
 import 间.安卓.插件.界面插件;
 import 间.工具.反射;
-import 间.工具.时间;
 import 间.工具.错误;
 import 间.接口.方法;
 import 间.收集.哈希表;
-import 间.收集.集合;
 import 间.收集.无序表;
-import android.content.res.Resources;
-import 间.安卓.工具.主题;
 
-public class 基本界面 extends Activity implements SwipeBackActivityBase {
+public class 基本界面 extends Activity implements 基本滑动返回界面 {
 
     public Object[] 传入参数;
 
@@ -47,12 +42,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             $插件.当前界面 = this;
         }
     }
-
-    @Override
-    public Resources getResources() {
-        return 环境.取应用().getResources();
-    }
-
+    
     @Override
     public void onCreate(Bundle $恢复) {
         super.onCreate($恢复);
@@ -77,7 +67,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             结束界面();
         }
     }
-
+    
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -88,27 +78,20 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
 
     @Override
-    public SwipeBackLayout getSwipeBackLayout() {
+    public SwipeBackLayout 取滑动返回布局() {
         return mHelper.getSwipeBackLayout();
     }
 
     @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
+    public void 置滑动返回(boolean enable) {
+        取滑动返回布局().setEnableGesture(enable);
+
     }
 
     @Override
-    public void scrollToFinishActivity() {
+    public void 滑动结束界面() {
         Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
-    }
-
-    public void 置滑动返回(boolean $是否) {
-        setSwipeBackEnable($是否);
-    }
-
-    public String 读字符串(String $内容) {
-        return getIntent().getStringExtra($内容);
+        取滑动返回布局().scrollToFinishActivity();
     }
 
     @Override
@@ -258,7 +241,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     }
 
     private View 当前视图;
-
+    
     public void 打开布局(View $视图) {
         if ($视图 == null) return;
         for (界面插件 $单个 : 所有插件.values()) {
@@ -281,14 +264,6 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         打开布局(布局.解析(this, $内容));
     }
 
-    public <类型 extends View> 类型 取视图() {
-        return (类型)当前视图;
-    }
-
-    public <类型 extends View> 类型 取视图(Object $标签) {
-        return (类型)当前视图.findViewWithTag($标签);
-    }
-
     public void 跳转界面(Class<?> $类) {
         跳转界面(null, $类, null);
     }
@@ -300,8 +275,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     public void 跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
 
         if (反射.是子类(界面.class, $类)) {
-            Intent $意图 = new Intent(this, ProxyActivity.class);
-            $意图.putExtra("类", (Serializable)$类);
+            Intent $意图 = new Intent(this, 界面管理.分配((Class<? extends 界面>)$类));
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);
             if ($请求码 == null)

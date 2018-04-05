@@ -7,7 +7,7 @@ import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import hl4a.runtime.ProxyActivity;
+import hl4a.runtime.StubActivity;
 import hl4a.runtime.R;
 import java.io.Serializable;
 import 间.安卓.工具.主题;
@@ -19,10 +19,18 @@ import 间.工具.错误;
 import 间.收集.集合;
 import android.content.res.Resources.Theme;
 import android.util.TypedValue;
+import 间.安卓.工具.检查;
+import 间.安卓.工具.提示;
 
 public class 基本应用 extends Application {
 
     public final 集合<应用插件> 所有插件 = new 集合<>();
+
+    static {
+
+        //检查.禁用Xposed();
+
+    }
 
     @Override
     public void onCreate() {
@@ -32,7 +40,7 @@ public class 基本应用 extends Application {
         for (应用插件 $单个 : 所有插件) {
             $单个.初始化();
         }
-       
+
     }
 
     public void 注册插件(应用插件 $插件) {
@@ -41,17 +49,9 @@ public class 基本应用 extends Application {
             所有插件.添加($插件);
             $插件.应用 = this;
         }
-    }
 
-    @Override
-    public void attachBaseContext(Context $上下文) {
-        super.attachBaseContext($上下文);
-        处理环境事件($上下文);
-        for (应用插件 $单个 : 所有插件) {
-            $单个.处理环境($上下文);
-        }
     }
-
+   
     @Override
     public void onConfigurationChanged(Configuration $新设置) {
         super.onConfigurationChanged($新设置);
@@ -71,9 +71,8 @@ public class 基本应用 extends Application {
     public void 跳转界面(Class<?> $类,Object... $数据) {
 
         if (反射.是子类(界面.class, $类)) {
-            Intent $意图 = new Intent(this, ProxyActivity.class);
+            Intent $意图 = new Intent(this, 界面管理.分配((Class<? extends 界面>)$类));
             $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            $意图.putExtra("类", (Serializable)$类);
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);
             startActivity($意图);

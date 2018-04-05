@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.View;
 
-public class SwipeBackPreferenceActivity extends PreferenceActivity implements SwipeBackActivityBase {
+public class SwipeBackPreferenceActivity extends PreferenceActivity implements 基本滑动返回界面 {
     private SwipeBackActivityHelper mHelper;
 
     @Override
@@ -31,16 +31,17 @@ public class SwipeBackPreferenceActivity extends PreferenceActivity implements S
     }
     
     @Override
-    public SwipeBackLayout getSwipeBackLayout() {
+    public SwipeBackLayout 取滑动返回布局() {
         return mHelper.getSwipeBackLayout();
     }
+    
     @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
+    public void 置滑动返回(boolean $打开) {
+        取滑动返回布局().setEnableGesture($打开);
     }
 
     @Override
-    public void scrollToFinishActivity() {
-        getSwipeBackLayout().scrollToFinishActivity();
+    public void 滑动结束界面() {
+        取滑动返回布局().scrollToFinishActivity();
     }
 }

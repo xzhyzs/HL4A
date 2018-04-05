@@ -48,7 +48,7 @@ public final class 视图实现 {
 
     public static void 加入到(View $视图,ViewGroup $布局) {
         if ($布局 instanceof 基本布局) {
-            ((基本布局)$布局).加入子元素($视图);
+            ((基本布局)$布局).加入子视图($视图);
         } else {
             $布局.addView($视图);
         }

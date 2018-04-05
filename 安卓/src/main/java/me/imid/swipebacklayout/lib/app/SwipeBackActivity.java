@@ -7,7 +7,7 @@ import android.view.View;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 
-public class SwipeBackActivity extends Activity implements SwipeBackActivityBase {
+public class SwipeBackActivity extends Activity implements 基本滑动返回界面 {
     private SwipeBackActivityHelper mHelper;
 
     @Override
@@ -32,18 +32,18 @@ public class SwipeBackActivity extends Activity implements SwipeBackActivityBase
     }
 
     @Override
-    public SwipeBackLayout getSwipeBackLayout() {
+    public SwipeBackLayout 取滑动返回布局() {
         return mHelper.getSwipeBackLayout();
     }
 
     @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
+    public void 置滑动返回(boolean enable) {
+        取滑动返回布局().setEnableGesture(enable);
     }
 
     @Override
-    public void scrollToFinishActivity() {
+    public void 滑动结束界面() {
         Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
+        取滑动返回布局().scrollToFinishActivity();
     }
 }

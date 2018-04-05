@@ -17,7 +17,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.Window;
 import android.view.WindowManager;
-import hl4a.runtime.ErrorActivity;
 import java.util.List;
 import 间.安卓.工具.应用;
 import 间.安卓.插件.应用插件;
@@ -34,12 +33,20 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import 间.收集.哈希表;
 import org.json.JSONArray;
 import hl4a.runtime.R;
+import 间.安卓.组件.界面管理;
+import 间.安卓.组件.错误界面;
+import 间.工具.反射;
 
 public class 应用 {
 
     private static 集合<Activity> 所有界面 = new 集合<Activity>();
     public static PackageManager 包管理;
     public static 信息 当前;
+    private static boolean 调试 = true;//反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
+
+    public static boolean 是调试() {
+        return 调试;
+    }
 
     public static class 信息 {
 
@@ -75,13 +82,6 @@ public class 应用 {
         }
     }
 
-    public static void 结束脚本() {
-        for (Activity $单个 : 所有界面) {
-            if ($单个 != null && $单个.getClass().getSimpleName().equals("ScriptActivity"))
-                $单个.finish();
-        }
-    }
-
     public static void 错误处理(Thread $线程,Exception $错误) {
         提示.日志($错误, "HL4A 错误处理");
         跳转错误($线程, $错误);
@@ -91,7 +91,10 @@ public class 应用 {
     }
 
     public static void 跳转错误(Thread $线程,Exception $错误) {
-        字符.保存("$错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
+        String $错误内容 = 错误.取整个错误($错误);
+        if (是调试()) {
+            字符.保存("%HL4A/错误日志/" + 应用.取信息().应用名 + "/" + 时间.格式() + ".log", $错误内容);
+        }
         if (环境.取应用() instanceof 基本应用)
             for (应用插件 $单个 : ((基本应用)环境.取应用()).所有插件) {
                 if ($单个 != null) {
@@ -102,9 +105,9 @@ public class 应用 {
                     }
                 }
             }
-        Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
+        Intent $意图 = new Intent(环境.取应用(), 界面管理.分配(错误界面.class));
         $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + 错误.取整个错误($错误));
+        $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + $错误内容);
         环境.取应用().startActivity($意图);
     }
 
@@ -127,7 +130,6 @@ public class 应用 {
         主题.置颜色(颜色.靛蓝);
         提示.初始化($应用);
         图片.初始化($应用);
-        检查.禁用Xposed();
     }
 
     public static void 启动(String $包名) {
@@ -146,7 +148,7 @@ public class 应用 {
         return new String[0];
     }
 
-    private static 哈希表 信息缓存 = new 哈希表<>();
+    private static 哈希表<String,信息> 信息缓存 = new 哈希表<>();
 
     public static 信息 取信息() {
         return 取信息(环境.取应用().getPackageName());

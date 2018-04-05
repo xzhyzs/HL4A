@@ -54,7 +54,7 @@ public class 文件适配器 extends 基本适配器 {
     方法 项目长按 = new 方法() {
         @Override
         public Object 调用(Object[] $参数) {
-            哈希表 $数据 = (哈希表)((View)$参数[1]).getTag();
+            哈希表<String,String> $数据 = (哈希表)((View)$参数[1]).getTag();
             String $地址 = $数据.读取("地址");
             String $名称 = $数据.读取("内容");
             if (文件.存在($地址)) {

@@ -10,21 +10,19 @@ import 间.安卓.资源.*;
 import 间.工具.字符;
 import 间.工具.时间;
 
-public class 错误界面 extends 基本界面 {
+public class 错误界面 extends 界面 {
 
     private String 错误内容;
 
     @Override
-    public void onCreate(Bundle $数据) {
-        super.onCreate($数据);
+    public void 界面创建事件(Bundle $恢复) {
+        super.界面创建事件($恢复);
+        
         置滑动返回(true);
-        线性布局 $底层 = new 线性布局(this);
-        $底层.打开(this);
-        标题栏 $标题 = new 标题栏(this);
-        $标题.置标题("崩溃了(ノДＴ)");
-        $标题.加入到($底层);
-
-        $标题.左按钮(图标.返回, new 方法() {
+        
+        置标题("崩溃了(ノДＴ)");
+        
+        取标题栏().左按钮(图标.返回, new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
                     错误界面.this.结束界面();
@@ -32,7 +30,7 @@ public class 错误界面 extends 基本界面 {
                 }
             });
 
-        $标题.右按钮(图标.复制, new 方法() {
+        取标题栏().右按钮(图标.复制, new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
                     设备.置剪切板(错误内容);
@@ -52,25 +50,17 @@ public class 错误界面 extends 基本界面 {
          */
 
 
-        错误内容 = getIntent().getStringExtra("错误");
+        错误内容 = 此.getIntent().getStringExtra("错误");
 
         if (错误内容 == null) 错误内容 = "未知错误";
 
-        线性布局 $布局 = new 线性布局(this);
-        $布局.置宽度("最大");
-        $布局.置高度("最大");
+        线性布局 $布局 = new 线性布局(此);
         $布局.置填充("16dp");
-        $布局.加入到($底层);
 
-        滚动文本 $文本 = new 滚动文本(this);
+        滚动文本 $文本 = new 滚动文本($布局);
         $文本.置文本(错误内容);
-        $文本.加入到($布局);
         
-        
-        
-        字符.保存("%HL4A/错误日志/" + 应用.取信息().应用名 + "/" + 时间.格式() + ".log", 错误内容);
-        
-        应用.结束脚本();
+        打开布局($布局);
         
     }
 

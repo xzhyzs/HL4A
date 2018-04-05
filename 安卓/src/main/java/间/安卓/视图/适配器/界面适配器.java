@@ -8,7 +8,7 @@ import 间.安卓.视图.实现.*;
 public class 界面适配器 extends PagerAdapter {
 
     private 集合<View> 视图集合 = new 集合<>();
-    private 哈希表 名称 = new 哈希表<>();
+    private 哈希表<Integer,String> 名称 = new 哈希表<>();
 
     @Override
     public CharSequence getPageTitle(int $键值) {
@@ -43,7 +43,7 @@ public class 界面适配器 extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup $视图组,int $键值) {
         View $视图 = 视图集合.读取($键值);
-        布局实现.加入子元素($视图组,$视图);
+        布局实现.加入子视图($视图组,$视图);
         return $视图;
     }
     

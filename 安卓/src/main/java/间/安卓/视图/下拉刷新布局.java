@@ -11,16 +11,6 @@ import 间.安卓.视图.实现.*;
 
 public class 下拉刷新布局 extends SwipeRefreshLayout implements 基本布局 {
 
-    @Override
-    public View 取子元素(Object $标签) {
-        return 布局实现.取子元素(this,$标签);
-    }
-
-    @Override
-    public View 取子元素(int $键值) {
-        return 布局实现.取子元素(this,$键值);
-    }
-
     public 下拉刷新布局(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
@@ -54,12 +44,39 @@ public class 下拉刷新布局 extends SwipeRefreshLayout implements 基本布�
         视图实现.置布局权重(this, $权重);
     }
 
-    public void 加入子元素(View $子元素) {
-        布局实现.加入子元素(this, $子元素);
+    @Override
+    public void 加入子视图(View $视图) {
+        布局实现.加入子视图(this,$视图);
     }
 
-    public View[] 取所有子元素() {
-        return 布局实现.取所有子元素(this);
+    @Override
+    public <类型 extends View> 类型 找子视图(Object $标签) {
+        return 布局实现.找子视图(this,$标签);
+    }
+
+    @Override
+    public <类型 extends View> 类型 取子视图(int $键值) {
+        return 布局实现.取子视图(this,$键值);
+    }
+
+    @Override
+    public View[] 取子视图() {
+        return 布局实现.取子视图(this);
+    }
+
+    @Override
+    public void 删子视图(View $子视图) {
+        布局实现.删子视图(this,$子视图);
+    }
+
+    @Override
+    public void 删子视图(int $子视图) {
+        布局实现.删子视图(this,$子视图);
+    }
+
+    @Override
+    public void 删子视图() {
+        布局实现.删子视图(this);
     }
 
     @Override

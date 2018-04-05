@@ -61,8 +61,8 @@ public class 设置视图 extends 线性布局 {
     }
 
     @Override
-    public void 加入子元素(View $子元素) {
-        super.加入子元素($子元素);
+    public void 加入子视图(View $子元素) {
+        super.加入子视图($子元素);
         addView(分隔());
     }
 

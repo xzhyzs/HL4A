@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import 间.安卓.插件.界面插件;
+import 间.安卓.视图.弹出菜单;
+import 间.安卓.视图.扩展.标题栏;
 import 间.收集.哈希表;
+import 间.安卓.视图.线性布局;
+import 间.安卓.工具.布局;
+import 间.安卓.资源.布局.布局_基本界面;
+import 间.工具.反射;
 
 public class 界面 {
 
@@ -19,10 +25,13 @@ public class 界面 {
     public static final int 返回码_成功 = Activity.RESULT_OK;
     public static final int 返回码_失败 = Activity.RESULT_CANCELED;
 
-
     public 基本界面 此;
     public Object[] 传入参数;
 
+    public 基本界面 取界面() {
+        return 此;
+    }
+    
     public void 结束界面() {
         此.结束界面();
     }
@@ -55,24 +64,32 @@ public class 界面 {
         此.结束界面($延时);
     }
 
-    public void 打开布局(View $视图) {
-        此.打开布局($视图);
+    public <视图 extends View> 视图 打开布局(View $视图) {
+        内容.removeAllViews();
+        内容.加入子视图($视图);
+        return (视图)$视图;
     }
 
-    public void 打开布局(哈希表 $内容) {
-        此.打开布局($内容);
+    public <视图 extends View> 视图 打开布局(哈希表 $内容) {
+        return 打开布局(布局.解析(此,$内容));
+    }
+    
+    public <视图 extends View> 视图 打开布局(Class<? extends View> $类) {
+        return 打开布局((视图)反射.实例化($类,this));
     }
 
-    public void 解析布局(String $内容) {
-        此.解析布局($内容);
+    public <视图 extends View> 视图 解析布局(String $内容) {
+        return 打开布局(布局.解析(此,$内容));
     }
+    
+    private View 当前视图;
 
     public <类型 extends View> 类型 取视图() {
-        return 此.取视图();
+        return (类型)当前视图;
     }
 
     public <类型 extends View> 类型 取视图(Object $标签) {
-        return 此.取视图($标签);
+        return 内容.取子视图($标签);
     }
 
     public void 跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
@@ -98,8 +115,34 @@ public class 界面 {
     public void 跳转界面(Class<?> $类,Object... $数据) {
         此.跳转界面($类, $数据);
     }
+    
+    private 线性布局 底层;
+    private 标题栏 标题;
+    private 线性布局 内容;
+    
+    public 标题栏 取标题栏() {
+        return 标题;
+    }
 
-    public void 界面创建事件(Bundle $恢复) {}
+    public void 置标题(String $标题) {
+        标题.置标题($标题);
+    }
+
+    public String 取标题() {
+        return 标题.取标题();
+    }
+
+    public 弹出菜单 取菜单() {
+        return 标题.取菜单();
+    }
+
+    public void 界面创建事件(Bundle $恢复) {
+        底层 = new 线性布局(此);
+        此.打开布局(底层);
+        标题 = new 标题栏(底层);
+        内容 = new 线性布局(底层);
+    }
+
     public void 界面启动事件() {}
     public void 界面刷新事件() {}
     public void 界面遮挡事件() {}

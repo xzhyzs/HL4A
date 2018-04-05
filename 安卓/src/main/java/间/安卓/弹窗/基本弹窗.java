@@ -38,7 +38,7 @@ public class 基本弹窗 extends AlertDialog {
     
     public void 置内容(View $视图) {
         布局.底层.removeAllViews();
-        布局.底层.加入子元素($视图);
+        布局.底层.加入子视图($视图);
     }
     
     public void 置左按钮(String $文本,方法 $单击) {
