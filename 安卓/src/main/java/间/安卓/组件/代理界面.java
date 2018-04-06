@@ -35,7 +35,6 @@ public class 代理界面 extends 基本界面 {
     public void 界面销毁事件() {
         if (内容 != null)
             内容.界面销毁事件();
-        界面管理.界面销毁(this);
     }
 
     @Override

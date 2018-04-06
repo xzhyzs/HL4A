@@ -234,11 +234,6 @@ public class AVUser extends 数据 {
             user = newAVUser(userClass, null);
             AVUser.changeCurrentUser(user, false);
         }
-        if (user != null) {
-            if (user.getSessionToken() != null) {
-                提示.日志(user.getSessionToken());
-            }
-        }
         return user;
     }
 
