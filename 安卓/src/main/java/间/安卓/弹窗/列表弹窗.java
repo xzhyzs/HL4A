@@ -7,7 +7,7 @@ import 间.工具.*;
 import 间.接口.*;
 import 间.安卓.视图.实现.*;
 
-public class 列表弹窗 extends 基本弹窗 {
+public class 列表弹窗 extends 弹窗 {
     
     private 列表视图 列表;
     private 数组适配器 适配器;

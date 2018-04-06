@@ -443,7 +443,7 @@ public class 反射 {
         return $参数类组;
     }
     
-    private static 哈希表 对应表 = new 哈希表<>();
+    private static 哈希表<Class,Class> 对应表 = new 哈希表<>();
     
     static {
         对应表.设置(int.class,Integer.class);

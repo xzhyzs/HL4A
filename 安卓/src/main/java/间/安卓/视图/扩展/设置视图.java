@@ -14,9 +14,12 @@ import java.io.Serializable;
 import 间.工具.反射;
 import 间.工具.字符;
 import 间.工具.字节;
-import 间.安卓.弹窗.基本弹窗;
+import 间.安卓.弹窗.弹窗;
 import 间.安卓.视图.编辑框;
 import 间.安卓.工具.颜色;
+import 间.安卓.视图.复选框;
+import 间.安卓.弹窗.询问弹窗;
+import 间.安卓.组件.代理界面;
 
 public class 设置视图 extends 线性布局 {
 
@@ -25,6 +28,7 @@ public class 设置视图 extends 线性布局 {
 
     public 设置视图(Context $上下文) {
         super($上下文);
+        置高度("自动");
         置背景颜色("白色");
         标题布局 = new 线性布局(this);
         标题布局.置高度("自动");
@@ -45,6 +49,20 @@ public class 设置视图 extends 线性布局 {
         标题文本.置文本($标题);
     }
 
+    public 文本设置项 文本设置(String $标题,String $弹窗标题,String $默认,方法 $回调) {
+        文本设置项 $项目 = new 文本设置项($弹窗标题 , $回调, $默认);
+        $项目.置标题($标题);
+        return $项目;
+    }
+
+    public 复选设置项 复选设置(String $标题,String $副标题,boolean $默认,方法 $回调) {
+        复选设置项 $项目 = new 复选设置项($回调, $默认);
+        $项目.置标题($标题);
+        $项目.置副标题($副标题);
+        return $项目;
+    }
+
+
     public 开关设置项 开关设置(String $标题,String $副标题,boolean $默认,方法 $回调) {
         开关设置项 $项目 = new 开关设置项($回调, $默认);
         $项目.置标题($标题);
@@ -52,7 +70,7 @@ public class 设置视图 extends 线性布局 {
         return $项目;
     }
 
-    public 设置项 跳转设置(String $标题,String $副标题,方法 $回调) {
+    public 设置项 普通设置(String $标题,String $副标题,方法 $回调) {
         设置项 $项目 = new 设置项();
         $项目.置标题($标题);
         $项目.置副标题($副标题);
@@ -71,6 +89,58 @@ public class 设置视图 extends 线性布局 {
         $分隔.置高度(1);
         $分隔.置背景颜色(颜色.白烟);
         return $分隔;
+    }
+
+    public class 文本设置项 extends 设置项 {
+
+        public 方法 事件;
+        public 弹窗 询问;
+        public 线性布局 底层;
+        public 编辑框 输入;
+
+        public 文本设置项(String $弹窗标题,方法 $事件,String $默认) {
+            置副标题($默认);
+            事件 = $事件;
+            询问 = new 弹窗(设置视图.this.getContext());
+            询问.置标题($弹窗标题);
+            底层 = new 线性布局(设置视图.this.getContext());
+            底层.置填充("填充");
+            输入 = new 编辑框(底层);
+            输入.置默认文本($默认);
+            输入.置文本($默认);
+            询问.置内容(底层);
+            置单击事件(调用.配置(询问, "显示"));
+            询问.置中按钮("取消", 调用.配置(询问, "隐藏"));
+            询问.置右按钮("确定", 调用.配置(this, "设置回调"));
+        }
+
+        public void 设置回调() {
+            if (!new Boolean(true).equals(调用.事件(事件, 输入.取文本()))) {
+                置副标题(输入.取文本());
+            }
+        }
+
+    }
+
+    public class 复选设置项 extends 设置项 {
+
+        public 复选框 开关;
+        public 方法 事件;
+
+        public 复选设置项(方法 $事件,boolean $默认) {
+            super();
+            事件 = $事件;
+            开关 = new 复选框(右布局);
+            开关.置打开状态($默认);
+            开关.setClickable(false);
+            开关.置切换事件(调用.代理(this, "切换事件"));
+            置单击事件(调用.配置(开关, "performClick"));
+        }
+
+        public void 切换事件(开关视图 $开关,boolean $状态) {
+            调用.事件(事件, $状态);
+        }
+
     }
 
     public class 开关设置项 extends 设置项 {

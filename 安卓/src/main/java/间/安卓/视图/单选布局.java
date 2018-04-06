@@ -1,11 +1,14 @@
 package 间.安卓.视图;
 
-import android.app.*;
-import android.content.*;
-import android.view.*;
-import android.widget.*;
-import 间.接口.*;
-import 间.安卓.视图.实现.*;
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioGroup;
+import 间.安卓.视图.实现.基本布局;
+import 间.安卓.视图.实现.布局实现;
+import 间.安卓.视图.实现.视图实现;
+import 间.接口.方法;
 
 public class 单选布局 extends RadioGroup implements 基本布局 {
     

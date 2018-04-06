@@ -7,7 +7,7 @@ import 间.安卓.资源.布局.布局_提示;
 import 间.工具.字符;
 import 间.工具.时间;
 import 间.接口.方法;
-import 间.安卓.弹窗.基本弹窗;
+import 间.安卓.弹窗.弹窗;
 import 间.接口.调用;
 import 间.工具.回调;
 import android.view.View;
@@ -93,28 +93,28 @@ public class 提示 {
         指定($内容, 颜色.红色.取基本色());
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容) {
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容) {
         return 弹窗($上下文, $标题, $内容, null, null);
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $右按钮,方法 $右方法) {
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $右按钮,方法 $右方法) {
         return 弹窗($上下文, $标题, $内容, null, null, $右按钮, $右方法);
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
         return 弹窗($上下文, $标题, $内容, null, null, $中按钮, $中方法, $右按钮, $右方法);
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
         return 弹窗($上下文, $标题, $内容, $左按钮, $左方法, $中按钮, $中方法, $右按钮, $右方法, true);
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭) {
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭) {
         return 弹窗($上下文, $标题, $内容, $左按钮, $左方法, $中按钮, $中方法, $右按钮, $右方法, $可关闭, null);
     }
 
-    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭,方法 $关闭事件) {
-        基本弹窗 $弹窗 = new 基本弹窗($上下文);
+    public static 弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭,方法 $关闭事件) {
+        弹窗 $弹窗 = new 弹窗($上下文);
         $弹窗.置标题($标题);
         if ($内容 instanceof View) {
             $弹窗.置内容((View)$内容);

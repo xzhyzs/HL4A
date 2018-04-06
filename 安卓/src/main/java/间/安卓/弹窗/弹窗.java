@@ -11,14 +11,14 @@ import 间.安卓.资源.布局.*;
 import 间.工具.*;
 import 间.安卓.工具.处理;
 
-public class 基本弹窗 extends AlertDialog {
+public class 弹窗 extends AlertDialog {
     
     public Context 上下文;
     public 布局_基本弹窗 布局;
     public 方法 隐藏 = 调用.配置(this,"隐藏");
     public 方法 显示 = 调用.配置(this,"显示");
     
-    public 基本弹窗(Context $上下文) {
+    public 弹窗(Context $上下文) {
         super($上下文);
         布局 = new 布局_基本弹窗($上下文);
         setView(布局);
@@ -91,10 +91,10 @@ public class 基本弹窗 extends AlertDialog {
     
     public static class 弹窗按钮单击 implements 方法 {
         
-        基本弹窗 弹窗;
+        弹窗 弹窗;
         方法 单击;
         
-        public 弹窗按钮单击(基本弹窗 $弹窗,方法 $单击) {
+        public 弹窗按钮单击(弹窗 $弹窗,方法 $单击) {
             弹窗 = $弹窗;
             单击 = $单击;
         }
