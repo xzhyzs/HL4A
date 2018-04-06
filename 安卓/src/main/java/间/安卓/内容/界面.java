@@ -1,18 +1,18 @@
-package 间.安卓.组件;
+package 间.安卓.内容;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import 间.安卓.工具.布局;
 import 间.安卓.插件.界面插件;
+import 间.安卓.组件.基本界面;
 import 间.安卓.视图.弹出菜单;
 import 间.安卓.视图.扩展.标题栏;
-import 间.收集.哈希表;
 import 间.安卓.视图.线性布局;
-import 间.安卓.工具.布局;
-import 间.安卓.资源.布局.布局_基本界面;
 import 间.工具.反射;
+import 间.收集.哈希表;
 
 public class 界面 {
 
@@ -65,8 +65,9 @@ public class 界面 {
     }
 
     public <视图 extends View> 视图 打开布局(View $视图) {
-        内容.removeAllViews();
+        内容.删子视图();
         内容.加入子视图($视图);
+        置当前视图($视图);
         return (视图)$视图;
     }
 
@@ -84,6 +85,10 @@ public class 界面 {
     
     private View 当前视图;
 
+    public void 置当前视图(View $视图) {
+        当前视图 = $视图;
+    }
+    
     public <类型 extends View> 类型 取视图() {
         return (类型)当前视图;
     }

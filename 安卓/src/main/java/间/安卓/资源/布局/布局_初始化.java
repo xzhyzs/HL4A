@@ -1,14 +1,8 @@
 package 间.安卓.资源.布局;
 
-import android.content.Context;
-import 间.安卓.工具.主题;
-import 间.安卓.工具.应用;
-import 间.安卓.视图.文本视图;
-import 间.安卓.视图.线性布局;
-import 间.安卓.视图.进度圈;
-import 间.安卓.视图.进度条;
 import 间.安卓.组件.基本界面;
-import 间.安卓.组件.界面;
+import 间.安卓.视图.线性布局;
+import 间.安卓.视图.进度条;
 
 public class 布局_初始化 extends 线性布局 {
 

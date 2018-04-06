@@ -23,13 +23,8 @@ public class 调用 {
         };
     }
     
-    public static 方法 配置(final Object $对象,final String $方法名,final Object... $配置参数) {
-        return new 方法() {
-            @Override
-            public Object 调用(Object[] $参数) {
-                return 反射.调用($对象, $方法名, $配置参数);
-            }
-        };
+    public static 方法 配置(Object $对象,String $方法名,Object... $配置参数) {
+        return 反射.取方法方法($对象,$方法名,$配置参数);
     }
     
     public static 方法 异步代理(final Object $对象,final String $方法名) {

@@ -1,6 +1,5 @@
-package 间.安卓.组件;
+package 间.安卓.内容;
 
-import android.os.Bundle;
 import 间.安卓.视图.扩展.标题栏;
 
 public class 侧滑界面 extends 界面 {

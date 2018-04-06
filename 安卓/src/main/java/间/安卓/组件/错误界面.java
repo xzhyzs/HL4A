@@ -1,14 +1,13 @@
 package 间.安卓.组件;
 
-import android.os.*;
-import 间.接口.*;
-import 间.安卓.工具.*;
-import 间.安卓.弹窗.*;
-import 间.安卓.视图.*;
-import 间.安卓.视图.扩展.*;
-import 间.安卓.资源.*;
-import 间.工具.字符;
-import 间.工具.时间;
+import android.os.Bundle;
+import 间.安卓.内容.界面;
+import 间.安卓.工具.提示;
+import 间.安卓.工具.设备;
+import 间.安卓.视图.扩展.滚动文本;
+import 间.安卓.视图.线性布局;
+import 间.安卓.资源.图标;
+import 间.接口.方法;
 
 public class 错误界面 extends 界面 {
 

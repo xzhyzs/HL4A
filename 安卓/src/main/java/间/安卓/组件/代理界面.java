@@ -1,12 +1,11 @@
 package 间.安卓.组件;
 
-import android.os.Bundle;
-import 间.工具.反射;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import 间.工具.错误;
+import 间.安卓.内容.界面;
 import 间.安卓.工具.提示;
+import 间.工具.反射;
 
 public class 代理界面 extends 基本界面 {
 

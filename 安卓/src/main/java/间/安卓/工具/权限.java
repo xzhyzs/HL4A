@@ -6,7 +6,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.PermissionChecker;
-import 间.安卓.组件.界面;
+import 间.安卓.内容.界面;
 
 public class 权限 {
 

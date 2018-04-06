@@ -1,7 +1,6 @@
 package 间.安卓.工具;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,11 +25,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import 间.安卓.内容.界面;
 import 间.安卓.工具.图片;
 import 间.安卓.工具.文件;
 import 间.安卓.插件.应用插件;
 import 间.安卓.插件.界面插件;
-import 间.安卓.组件.界面;
 import 间.工具.流;
 import 间.接口.方法;
 import 间.接口.调用;

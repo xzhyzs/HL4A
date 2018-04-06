@@ -3,24 +3,15 @@ package 间.安卓.组件;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-import hl4a.runtime.StubActivity;
-import hl4a.runtime.R;
 import java.io.Serializable;
-import 间.安卓.工具.主题;
+import 间.安卓.内容.界面;
 import 间.安卓.工具.应用;
 import 间.安卓.工具.线程;
 import 间.安卓.插件.应用插件;
 import 间.工具.反射;
 import 间.工具.错误;
 import 间.收集.集合;
-import android.content.res.Resources.Theme;
-import android.util.TypedValue;
-import 间.安卓.工具.检查;
-import 间.安卓.工具.提示;
 
 public class 基本应用 extends Application {
 

@@ -10,6 +10,7 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 import me.imid.swipebacklayout.lib.app.基本滑动返回界面;
+import 间.安卓.内容.界面;
 import 间.安卓.工具.主题;
 import 间.安卓.工具.布局;
 import 间.安卓.工具.应用;
@@ -265,7 +266,7 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
     }
 
     public void 跳转界面(Class<?> $类) {
-        跳转界面(null, $类, null);
+        跳转界面($类, new Object[0]);
     }
 
     public void 跳转界面(Class<?> $类,Object... $数据) {

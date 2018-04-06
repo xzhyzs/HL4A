@@ -1,16 +1,16 @@
 package 间.安卓.后端.界面;
 
 import android.os.Bundle;
+import com.avos.avoscloud.后端错误;
+import 间.安卓.内容.界面;
 import 间.安卓.后端.布局.布局_注册界面;
+import 间.安卓.后端.用户;
 import 间.安卓.工具.提示;
-import 间.安卓.组件.界面;
+import 间.安卓.工具.线程;
+import 间.安卓.弹窗.进度弹窗;
 import 间.工具.字符;
 import 间.接口.调用;
-import 间.安卓.弹窗.进度弹窗;
-import 间.安卓.工具.线程;
-import 间.安卓.后端.用户;
 import 间.接口.返回值;
-import com.avos.avoscloud.后端错误;
 
 public class 注册界面 extends 界面 {
 
@@ -19,11 +19,12 @@ public class 注册界面 extends 界面 {
 
     @Override
     public void 界面创建事件(Bundle $恢复) {
+        super.界面创建事件($恢复);
         置滑动返回(true);
         置返回值(返回码_失败);
-        打开布局(new 布局_注册界面(此));
+        打开布局(new 布局_注册界面(this));
         布局 = 取视图();
-        布局.标题.返回按钮(此);
+        取标题栏().返回按钮(此);
         布局.注册.置单击事件(调用.配置(this,"注册"));
         进度 = new 进度弹窗(此);
         进度.置可关闭(false);
