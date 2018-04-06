@@ -26,7 +26,6 @@ public class 茉莉 {
         if ($次数 > 1 && $次数 < 9) {
             分析次数 = $次数;
         }
-        System.gc();
     }
 
     public static int 取分析次数() {
