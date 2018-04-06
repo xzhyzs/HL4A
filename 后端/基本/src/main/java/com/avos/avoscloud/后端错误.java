@@ -299,7 +299,11 @@ public class 后端错误 extends Exception {
   public String 取错误信息() {
       return LeanCloud.转换错误(code);
   }
-  
-  
+
+  @Override
+  public String toString() {
+      // TODO: Implement this method
+      return 取错误信息();
+  }
   
 }

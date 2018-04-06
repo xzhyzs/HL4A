@@ -49,8 +49,8 @@ public class 设置视图 extends 线性布局 {
         标题文本.置文本($标题);
     }
 
-    public 文本设置项 文本设置(String $标题,String $弹窗标题,String $默认,方法 $回调) {
-        文本设置项 $项目 = new 文本设置项($弹窗标题 , $回调, $默认);
+    public 文本设置项 文本设置(String $标题,boolean $副标题显示,String $弹窗标题,String $默认,方法 $回调) {
+        文本设置项 $项目 = new 文本设置项($弹窗标题 , $副标题显示, $回调, $默认);
         $项目.置标题($标题);
         return $项目;
     }
@@ -97,9 +97,13 @@ public class 设置视图 extends 线性布局 {
         public 弹窗 询问;
         public 线性布局 底层;
         public 编辑框 输入;
+        public boolean 副标题显示 = false;
 
-        public 文本设置项(String $弹窗标题,方法 $事件,String $默认) {
-            置副标题($默认);
+        public 文本设置项(String $弹窗标题,boolean $副标题显示,方法 $事件,String $默认) {
+            if ($副标题显示) {
+                置副标题($默认);
+                副标题显示 = true;
+            }
             事件 = $事件;
             询问 = new 弹窗(设置视图.this.getContext());
             询问.置标题($弹窗标题);
@@ -116,7 +120,9 @@ public class 设置视图 extends 线性布局 {
 
         public void 设置回调() {
             if (!new Boolean(true).equals(调用.事件(事件, 输入.取文本()))) {
-                置副标题(输入.取文本());
+                if (副标题显示)
+                    置副标题(输入.取文本());
+                询问.隐藏();
             }
         }
 

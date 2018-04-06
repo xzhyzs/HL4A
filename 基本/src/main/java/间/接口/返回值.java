@@ -53,6 +53,10 @@ public class 返回值<内容> {
         return (错误)错误;
     }
     
+    public String 取错误信息() {
+        return 错误 == null ? "null" :错误.toString();
+    }
+    
     public boolean 成功() {
         return 状态 == null ? 错误 == null : 状态;
     }
