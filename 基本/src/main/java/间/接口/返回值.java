@@ -5,7 +5,7 @@ public class 返回值<内容> {
     public static 返回值<Void> 成功 = new 返回值<Void>().置状态(true);
     public static 返回值<Void> 失败 = new 返回值<Void>().置状态(false);
     
-    public static <内容> 返回值<内容> 创建(内容 $内容,Exception $错误) {
+    public static <内容> 返回值<内容> 创建(内容 $内容,Throwable $错误) {
         return new 返回值<内容>().置错误($错误);
     }
     
@@ -13,7 +13,7 @@ public class 返回值<内容> {
         return new 返回值<内容>().置状态($状态);
     }
     
-    public static <内容> 返回值<内容> 创建(内容 $内容,boolean $状态,Exception $错误) {
+    public static <内容> 返回值<内容> 创建(内容 $内容,boolean $状态,Throwable $错误) {
         return new 返回值<内容>().置状态($状态).置错误($错误);
     }
     
@@ -23,7 +23,7 @@ public class 返回值<内容> {
     
     private 内容 内容;
     private Boolean 状态;
-    private Exception 错误;
+    private Throwable 错误;
     
     public 返回值<内容> 置内容(内容 $内容) {
         内容 = $内容;
@@ -35,7 +35,7 @@ public class 返回值<内容> {
         return this;
     }
     
-    public 返回值<内容> 置错误(Exception $错误) {
+    public 返回值<内容> 置错误(Throwable $错误) {
         错误 = $错误;
         return this;
     }
@@ -49,7 +49,7 @@ public class 返回值<内容> {
         return 内容;
     }
     
-    public <错误 extends Exception> 错误 取错误() {
+    public <错误 extends Throwable> 错误 取错误() {
         return (错误)错误;
     }
     

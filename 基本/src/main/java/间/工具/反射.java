@@ -14,6 +14,7 @@ import 间.接口.方法;
 import java.io.ObjectInput;
 import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
+import java.util.logging.Logger;
 
 public class 反射 {
     
@@ -280,7 +281,7 @@ public class 反射 {
         return $参数;
     }
     
-    public static 方法 取方法方法(Object $对象,String $名称,Object... $参数) {
+    public static Object[] 取方法对象(Object $对象,String $名称,Object... $参数) {
         if ($参数 == null) $参数 = new Object[0];
         Method[] $所有 = 取所有方法($对象 instanceof Class ? (Class)$对象 : $对象.getClass(), $名称);
         Method $方法 = null;
@@ -307,9 +308,14 @@ public class 反射 {
         if ($对象 instanceof Class) {
             $对象 = null;
         }
-        final Method $方法对象 = $方法;
+        return new Object[] {$方法,$参数组};
+    }
+    
+    public static 方法 取方法方法(Object $对象,String $名称,Object... $参数) {
+        Object[] $返回 = 取方法对象($对象,$名称,$参数);
+        final Method $方法对象 = (Method)$返回[0];
         final Object $实例对象 = $对象;
-        final Object[] $传入参数 = $参数组;
+        final Object[] $传入参数 = (Object[])$返回[1];
         return new 方法() {
             @Override
             public Object 调用(Object[] $参数) {
@@ -323,46 +329,13 @@ public class 反射 {
         };
     }
     
-    public static Object 调用方法(Object $对象,String $名称,Object... $参数) {
-        return 调用($对象,$名称,$参数);
-    }
-    
-    public static <类型> 类型 调用(Object $对象,String $名称) {
-        return 调用($对象,$名称,new Object[0]);
-    }
-    
-    public static <类型> 类型 调用(Object $对象,String $名称,Object[] $参数) {
-        断言.不为空($对象,"参数1 [对象] 为空");
-        断言.不为空($对象,"参数2 [名称] 为空");
-        if ($参数 == null) $参数 = new Object[0];
-        Method[] $所有 = 取所有方法($对象 instanceof Class ? (Class)$对象 : $对象.getClass(), $名称);
-        Method $方法 = null;
-        Object[] $参数组 = null;
-        for (int $键值 = 0;$键值 < $所有.length;$键值 ++) {
-            Method $单个 = $所有[$键值];
-            Object[] $适配参数 = 适配参数($单个, $参数);
-            if ($适配参数 != null) {
-                $方法 = $单个;
-                $参数组 = $适配参数;
-            }
-        }
-        if ($方法 == null) {
-            String $同名 = "\n同名的方法:" + $所有.length;
-            if ($所有.length == 0) {
-                $同名 += "\n没有";
-            } else {
-                for (Method $单个 : $所有) {
-                    $同名 += "\n" + $单个.toGenericString();
-                }
-            }
-            throw new RuntimeException("没有那样的方法:在类" + $对象.getClass().getName() + "\n方法:" + $名称 + "\n参数:" + 字符.分解(取参数类组($参数), ",") + "\n" + $同名);
-        }
-        if ($对象 instanceof Class) {
-            $对象 = null;
-        }
-
+    public static Object 调用(Object $对象,String $名称,Object... $参数) {
+        Object[] $返回 = 取方法对象($对象,$名称,$参数);
+        Method $方法对象 = (Method)$返回[0];
+        Object[] $传入参数 = (Object[])$返回[1];
         try {
-            return (类型)$方法.invoke($对象, $参数组);
+            System.out.print("调用方法 : " + $对象.getClass() + "\n方法名 : " + $名称 + "\n参数 :"+字符.分解($参数,","));
+            return $方法对象.invoke($对象, $传入参数);
         } catch (Exception $错误) {
             错误.抛出($错误);
         }

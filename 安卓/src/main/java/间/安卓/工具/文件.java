@@ -80,8 +80,8 @@ public class 文件 extends 间.工具.文件 {
             $内容.close();
         }
         if ($返回 == null) {
-            Object $工厂 = 反射.调用方法(FileProvider.class, "getPathStrategy", 环境.取应用(), $链接.getAuthority());
-            File $文件 = 反射.调用($工厂, "getFileForUri", 反射.变参($链接));
+            Object $工厂 = 反射.调用(FileProvider.class, "getPathStrategy", 环境.取应用(), $链接.getAuthority());
+            File $文件 = (File)反射.调用($工厂, "getFileForUri", 反射.变参($链接));
             return $文件.getPath();
         }
         return $返回;

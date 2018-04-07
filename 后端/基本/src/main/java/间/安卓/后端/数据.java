@@ -14,9 +14,15 @@ import com.avos.avoscloud.SaveCallback;
 import java.io.InputStream;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.GetDataStreamCallback;
+import com.avos.avoscloud.DeleteCallback;
 
 public class 数据 extends AVObject {
 
+    public 数据() {
+        super();
+        setClassName(getClass().getSimpleName());
+    }
+    
     public 数据(String $表名) {
         super($表名);
     }
@@ -48,7 +54,7 @@ public class 数据 extends AVObject {
     public 用户 取用户(String $键值) {
         return getAVUser($键值, 用户.class);
     }
-    
+
     public AVFile 取文件对象(String $键值) {
         return getAVFile($键值);
     }
@@ -68,13 +74,13 @@ public class 数据 extends AVObject {
     public void 取文件(final String $键值,final 方法 $回调) {
         AVFile $文件 = 取文件对象($键值);
         if ($文件 == null) {
-            调用.事件($回调,返回值.创建(null, new 后端错误(105)));
+            调用.事件($回调, 返回值.创建(null, new 后端错误(105)));
             return;
         }
         $文件.getDataStreamInBackground(new GetDataStreamCallback() {
                 @Override
                 public void done(InputStream $流,后端错误 $错误) {
-                    调用.事件($回调,返回值.创建($流,$错误));
+                    调用.事件($回调, 返回值.创建($流, $错误));
                 }
             });
 
@@ -101,5 +107,29 @@ public class 数据 extends AVObject {
     public void 保存() {
         saveInBackground();
     }
+
+    public 返回值<Void> 同步删除() {
+        try {
+            delete();
+            return 返回值.成功;
+        } catch (后端错误 $错误) {
+            return 返回值.创建(null,$错误);
+        }
+    }
+    
+    public void 删除(final 方法 $回调) {
+        deleteInBackground(new DeleteCallback() {
+                @Override
+                public void done(后端错误 $错误) {
+                    调用.事件($回调, 返回值.创建(null, $错误));
+                }
+            });
+    }
+
+    public void 删除() {
+        deleteInBackground();
+    }
+
+
 
 }

@@ -480,7 +480,7 @@ public class AVObject implements Parcelable {
   }
 
 
-  void setClassName(String className) {
+  public void setClassName(String className) {
     this.className = className;
   }
 

@@ -5,5 +5,5 @@ android {
 }
 
 dependencies {
-    compile project(':../安卓')
+    compile project(':安卓')
 }

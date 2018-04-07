@@ -27,10 +27,6 @@ import com.avos.avoscloud.AVFile;
 
 public class 用户 extends AVUser {
 
-    static {
-        AVUser.alwaysUseSubUserClass(用户.class);
-    }
-
     public 用户() {
         super();
     }

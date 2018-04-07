@@ -36,6 +36,8 @@ import hl4a.runtime.R;
 import 间.安卓.组件.界面管理;
 import 间.安卓.组件.错误界面;
 import 间.工具.反射;
+import 间.接口.打印处理;
+import 间.接口.方法;
 
 public class 应用 {
 
@@ -111,11 +113,19 @@ public class 应用 {
 
     public static void 初始化应用(Application $应用) {
         包管理 = $应用.getPackageManager();
-        //System.setOut(new 打印处理(调用.代理(提示.class,"普通")));
+        System.setOut(new 打印处理(new 方法() {
+                              @Override
+                              public Object 调用(Object[] $参数) {
+                                  Object $内容 = $参数[0];
+                                  提示.日志($内容,"系统输出");
+                                  return null;
+                              }
+                          }));
         环境.置应用($应用);
+        
+        线程.置错误处理(调用.代理(应用.class, "错误处理"));
         当前 = 取信息();
         文件.初始化();
-        线程.置错误处理(调用.代理(应用.class, "错误处理"));
         主题.置圆角大小("3dp");
         主题.置大文本大小("24sp");
         主题.置中文本大小("18sp");
@@ -128,6 +138,7 @@ public class 应用 {
         主题.置颜色(颜色.靛蓝);
         提示.初始化();
         图片.初始化();
+        
         //设备.初始化();
     }
 

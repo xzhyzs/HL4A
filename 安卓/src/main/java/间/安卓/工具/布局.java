@@ -85,7 +85,7 @@ public class 布局 {
 
     private static void 解析参数(View $视图,String $单个,Object $内容) {
         String $方法名 = "置" + $单个;
-        反射.调用方法($视图, $方法名, $内容);
+        反射.调用($视图, $方法名, $内容);
     }
 
     private static Class<?> 取视图(String $视图) {

@@ -12,13 +12,13 @@ public class 打印处理 extends PrintStream {
         事件 = $处理;
     }
 
-    public void onPrint(Object... $参数) {
+    public void onPrint(Object $参数) {
         调用.事件(事件, $参数);
     }
 
     @Override
     public void println() {
-        onPrint();
+        onPrint(null);
     }
 
     @Override

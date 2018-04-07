@@ -2,10 +2,12 @@ package 间.工具;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import 间.收集.集合;
-import java.io.Serializable;
+import java.util.Set;
 
 public class 字符 {
 
@@ -37,6 +39,14 @@ public class 字符 {
         if ($流 == null)
             return null;
         return 转换(字节.读取($流));
+    }
+    
+    public static String[] 去重(String[] $数组) {
+        HashSet<String> $集合 = new HashSet<String>();
+        for (String $单个 : $数组) {
+            $集合.add($单个.trim());
+        }
+        return $集合.toArray(new String[$集合.size()]);
     }
 
     public static void 保存(String $地址,String $内容) {

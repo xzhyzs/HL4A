@@ -36,7 +36,7 @@ public class 环境 {
             try {
                 // android.app.AppGlobals.getInitialApplication
                 // android.app.ActivityThread.currentApplication
-                Application $全局 = 反射.调用(反射.取类("android.app.ActivityThread"), "currentApplication");
+                Application $全局 = (Application)反射.调用(反射.取类("android.app.ActivityThread"), "currentApplication");
                 置应用($全局);
                 return $全局;
             } catch (Exception $错误) {}

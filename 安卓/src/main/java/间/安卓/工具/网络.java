@@ -29,12 +29,12 @@ public class 网络 {
     }
 
     public static boolean 取数据打开状态() {
-        return 反射.调用方法(网络管理, "getMobileDataEnabled");
+        return 反射.调用(网络管理, "getMobileDataEnabled");
     }
 
     public static boolean 置数据打开状态(boolean $状态) {
         try {
-            反射.调用方法(网络管理, "setMobileDataEnabled", $状态);
+            反射.调用(网络管理, "setMobileDataEnabled", $状态);
             return true;
         } catch (Exception $错误) {}
         return false;
