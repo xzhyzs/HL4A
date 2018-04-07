@@ -15,6 +15,7 @@ import java.io.InputStream;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.GetDataStreamCallback;
 import com.avos.avoscloud.DeleteCallback;
+import java.util.Date;
 
 public class 数据 extends AVObject {
 
@@ -27,6 +28,14 @@ public class 数据 extends AVObject {
         super($表名);
     }
 
+    public Date 取创建时间() {
+        return getCreatedAt();
+    }
+    
+    public Date 取更新时间() {
+        return getUpdatedAt();
+    }
+    
     public void 设置(String $键值,Object $内容) {
         put($键值, $内容);
     }
@@ -49,6 +58,10 @@ public class 数据 extends AVObject {
         AVFile $文件 = null;
         put($键值, ($文件 = new AVFile($内容)));
         return $文件;
+    }
+    
+    public Date 取时间(String $键值) {
+        return getDate($键值);
     }
 
     public 用户 取用户(String $键值) {

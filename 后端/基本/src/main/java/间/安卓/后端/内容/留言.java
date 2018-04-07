@@ -3,6 +3,9 @@ package 间.安卓.后端.内容;
 import 间.安卓.后端.数据;
 import 间.安卓.后端.用户;
 import 间.安卓.后端.权限;
+import java.util.Date;
+import 间.工具.时间;
+import 间.收集.集合;
 
 public class 留言 extends 数据 {
     
@@ -40,6 +43,18 @@ public class 留言 extends 数据 {
     
     public String 取发言内容() {
         return 读取("msg");
+    }
+    
+    public 留言 取上级() {
+        return 读取("super");
+    }
+    
+    public void 置上级(留言 $上级) {
+        设置("super",$上级);
+    }
+    
+    public Date 取发言时间() {
+        return 取创建时间();
     }
     
 }

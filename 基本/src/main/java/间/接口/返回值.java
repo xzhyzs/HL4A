@@ -54,7 +54,7 @@ public class 返回值<内容> {
     }
     
     public String 取错误信息() {
-        return 错误 == null ? "null" :错误.toString();
+        return 错误 == null ? "null" :错误.getMessage();
     }
     
     public boolean 成功() {

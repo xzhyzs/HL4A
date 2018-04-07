@@ -32,11 +32,15 @@ public class 哈希表<键值,内容> extends LinkedHashMap<键值,内容> {
     }
 
     public 内容 读取(Object $键值) {
+        return get($键值);
+    }
+    
+    public <内容> 内容 取内容(Object $键值) {
         return (内容)get($键值);
     }
-
+    
     public 内容 删除(Object $键值) {
-        return (内容)remove($键值);
+        return remove($键值);
     }
 
     public void 清空() {

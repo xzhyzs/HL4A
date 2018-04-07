@@ -24,11 +24,90 @@ import 间.安卓.工具.处理;
 import 间.安卓.工具.设置;
 import 间.安卓.工具.提示;
 import com.avos.avoscloud.AVFile;
+import 间.收集.集合;
+import 间.安卓.后端.内容.留言;
+import 间.安卓.后端.内容.关注;
+import 间.接口.回调方法;
 
 public class 用户 extends AVUser {
 
     public 用户() {
         super();
+    }
+    
+    public void 取粉丝(final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    调用.事件($回调,同步取粉丝());
+                    return null;
+                }
+            }).启动();
+    }
+    
+    public 返回值<集合<用户>> 同步取粉丝() {
+
+        查询<关注> $查询 = new 查询<>("Star");
+        $查询.等于("target",this);
+        返回值<集合<关注>> $结果 = $查询.查询();
+        if ($结果.成功()) {
+            集合<关注> $关注 = $结果.取内容();
+            集合<用户> $粉丝 = new 集合<>();
+            for (关注 $单个 : $关注) {
+                $粉丝.添加($单个.取关注用户());
+            }
+            return 返回值.创建($粉丝);
+        } else {
+            return 返回值.创建(null,$结果.取错误());
+        }
+        
+    }
+    
+    public void 取关注(final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    调用.事件($回调,同步取关注());
+                    return null;
+                }
+            }).启动();
+    }
+    
+    
+    public 返回值<集合<用户>> 同步取关注() {
+        
+        查询<关注> $查询 = new 查询<>("Star");
+        $查询.等于("user",this);
+        返回值<集合<关注>> $结果 = $查询.查询();
+        if ($结果.成功()) {
+            集合<关注> $关注 = $结果.取内容();
+            集合<用户> $粉丝 = new 集合<>();
+            for (关注 $单个 : $关注) {
+                $粉丝.添加($单个.取关注目标());
+            }
+            return 返回值.创建($粉丝);
+        } else {
+            return 返回值.创建(null,$结果.取错误());
+        }
+        
+    }
+    
+    public void 取留言(final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    调用.事件($回调,同步取留言());
+                    return null;
+                }
+            }).启动();
+    }
+    
+    public 返回值<集合<留言>> 同步取留言() {
+        
+        查询<留言> $查询 = new 查询<>("Msg");
+        $查询.等于("target",this);
+        return $查询.查询();
+        
     }
 
     public void 置用户名(String $用户名) {
@@ -76,7 +155,7 @@ public class 用户 extends AVUser {
                 }
             }).启动();
     }
-
+    
     public void 显示头像(ImageView $图片视图) {
         显示头像($图片视图, null);
     }

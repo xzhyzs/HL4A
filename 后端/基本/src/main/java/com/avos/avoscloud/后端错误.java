@@ -295,15 +295,15 @@ public class 后端错误 extends Exception {
   public int 取错误码() {
     return code;
   }
+
+  @Override
+  public String getMessage() {
+      return 取错误信息();
+      //return super.getMessage();
+  }
   
   public String 取错误信息() {
       return LeanCloud.转换错误(code);
-  }
-
-  @Override
-  public String toString() {
-      // TODO: Implement this method
-      return 取错误信息();
   }
   
 }

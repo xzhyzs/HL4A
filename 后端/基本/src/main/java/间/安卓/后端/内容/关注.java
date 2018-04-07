@@ -55,9 +55,12 @@ public class 关注 extends 数据 {
     }
     
     public 返回值<Void> 同步关注() {
+        if (取关注用户().equals(取关注目标())) {
+            return 返回值.创建(null,new Exception("不能关注自己 ~"));
+        }
         查询<关注> $查询 = new 查询<>("Star");
         $查询.等于("user",取关注用户());
-        $查询.与($查询.新().等于("target",取关注目标()));
+        $查询.等于("target",取关注目标());
         返回值<集合<关注>> $结果 = $查询.查询();
         if (!$结果.成功()) {
             return 返回值.创建(null,$结果.取错误());
@@ -65,7 +68,7 @@ public class 关注 extends 数据 {
             if ($结果.取内容().isEmpty()) {
                 return 同步保存();
             } else {
-                return 返回值.成功;
+                return 返回值.创建(null,new Exception("已经关注过了 ~"));
             }
         }
     }

@@ -8,7 +8,7 @@ import 间.收集.*;
 import android.view.ViewGroup.MarginLayoutParams;
 import 间.工具.错误;
 
-public abstract class 基本适配器 extends BaseAdapter {
+public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
 
     public 集合<哈希表> 数据;
 
@@ -32,7 +32,7 @@ public abstract class 基本适配器 extends BaseAdapter {
     }
 
     @Override
-    public View getView(int $键值,View $视图,ViewGroup $视图组) {
+    public 视图 getView(int $键值,视图 $视图,ViewGroup $视图组) {
         if ($视图 == null) {
             $视图 = 创建();
         }
@@ -69,9 +69,9 @@ public abstract class 基本适配器 extends BaseAdapter {
         数据.添加所有($参数);
     }
 
-    public abstract View 创建();
+    public abstract 视图 创建();
 
-    public abstract View 处理(View $视图,哈希表 $参数);
+    public abstract 视图 处理(视图 $视图,哈希表 $参数);
 
 
 
