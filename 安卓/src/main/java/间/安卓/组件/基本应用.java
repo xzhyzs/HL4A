@@ -55,49 +55,7 @@ public class 基本应用 extends Application {
         应用销毁事件();
     }
 
-    public void 跳转界面(Class<?> $类) {
-        跳转界面($类, null);
-    }
-
-    public void 跳转界面(Class<?> $类,Object... $数据) {
-
-        if (反射.是子类(界面.class, $类)) {
-            Intent $意图 = new Intent(this, 界面管理.分配((Class<? extends 界面>)$类));
-            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if ($数据 != null) 
-                $意图.putExtra("参数", (Serializable)$数据);
-            startActivity($意图);
-            return;
-        }
-        Intent $意图 = new Intent(this, $类);
-        $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if ($数据 != null)
-            $意图.putExtra("参数", (Serializable)$数据);
-        startActivity($意图);
-    }
-
-    public void 跳转脚本(String $类) {
-        跳转脚本($类, null);
-    }
-
-    public void 跳转脚本(String $类,Object[] $数据) {
-        new 线程(this, "直接跳转脚本").启动($类, $数据);
-    }
-
-    public void 直接跳转脚本(Integer $请求码,String $类,Object[] $数据) {
-        $请求码 = $请求码 == null ? -1 : $请求码;
-        Class<?> $界面 = 反射.取类("hl4a.runtime.ScriptActivity");
-        if ($界面 != null) {
-            Intent $意图 = new Intent(this, $界面);
-            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            $意图.putExtra("脚本", $类);
-            if ($数据 != null)
-                $意图.putExtra("参数", (Serializable)$数据);
-        } else {
-            错误.内容("没有脚本运行时 ~");
-        }
-    }
-
+    
 
     public void 应用创建事件() {}
     public void 应用销毁事件() {}

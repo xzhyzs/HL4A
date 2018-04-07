@@ -33,11 +33,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import 间.收集.哈希表;
 import org.json.JSONArray;
 import hl4a.runtime.R;
-import 间.安卓.组件.界面管理;
+import 间.安卓.组件.组件管理;
 import 间.安卓.组件.错误界面;
 import 间.工具.反射;
 import 间.接口.打印处理;
 import 间.接口.方法;
+import hl4a.runtime.ErrorActivity;
+import 间.接口.错误处理;
 
 public class 应用 {
 
@@ -106,7 +108,7 @@ public class 应用 {
                     }
                 }
             }
-        Intent $意图 = new Intent(环境.取应用(), 界面管理.分配(错误界面.class));
+        Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
         $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + $错误内容);
         $意图.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         环境.取应用().startActivity($意图);
@@ -118,13 +120,12 @@ public class 应用 {
                               @Override
                               public Object 调用(Object[] $参数) {
                                   Object $内容 = $参数[0];
-                                  提示.日志($内容,"系统输出");
+                                  提示.日志($内容, "系统输出");
                                   return null;
                               }
                           }));
         环境.置应用($应用);
-        
-        线程.置错误处理(调用.代理(应用.class, "错误处理"));
+        线程.置错误处理(调用.代理(应用.class,"错误处理"));
         当前 = 取信息();
         文件.初始化();
         主题.置圆角大小("3dp");
@@ -139,7 +140,7 @@ public class 应用 {
         主题.置颜色(颜色.靛蓝);
         提示.初始化();
         图片.初始化();
-        
+
         //设备.初始化();
     }
 
@@ -159,7 +160,7 @@ public class 应用 {
         return new String[0];
     }
 
-    private static 哈希表<String,信息> 信息缓存 = new 哈希表<>();
+    private static 哈希表 信息缓存 = new 哈希表<>();
 
     public static 信息 取信息() {
         return 取信息(环境.取应用().getPackageName());

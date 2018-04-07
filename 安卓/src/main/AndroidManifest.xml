@@ -18,305 +18,416 @@
     <application 
         android:theme="@style/HL4A.Indigo" >
         <activity
+            android:name=".ErrorActivity"
+            android:process=":err"/>
+        <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C0"/>
+            android:name=".StubActivity$C0"
+            android:process=":p0"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C1"/>
+            android:name=".StubActivity$C1"
+            android:process=":p1"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C2"/>
+            android:name=".StubActivity$C2"
+            android:process=":p2"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C3"/>
+            android:name=".StubActivity$C3"
+            android:process=":p3"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C4"/>
+            android:name=".StubActivity$C4"
+            android:process=":p4"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C5"/>
+            android:name=".StubActivity$C5"
+            android:process=":p5"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C6"/>
+            android:name=".StubActivity$C6"
+            android:process=":p6"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C7"/>
+            android:name=".StubActivity$C7"
+            android:process=":p7"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C8"/>
+            android:name=".StubActivity$C8"
+            android:process=":p8"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C9"/>
+            android:name=".StubActivity$C9"
+            android:process=":p9"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C10"/>
+            android:name=".StubActivity$C10"
+            android:process=":p10"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C11"/>
+            android:name=".StubActivity$C11"
+            android:process=":p11"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C12"/>
+            android:name=".StubActivity$C12"
+            android:process=":p12"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C13"/>
+            android:name=".StubActivity$C13"
+            android:process=":p13"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C14"/>
+            android:name=".StubActivity$C14"
+            android:process=":p14"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C15"/>
+            android:name=".StubActivity$C15"
+            android:process=":p15"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C16"/>
+            android:name=".StubActivity$C16"
+            android:process=":p16"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C17"/>
+            android:name=".StubActivity$C17"
+            android:process=":p17"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C18"/>
+            android:name=".StubActivity$C18"
+            android:process=":p18"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C19"/>
+            android:name=".StubActivity$C19"
+            android:process=":p19"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C20"/>
+            android:name=".StubActivity$C20"
+            android:process=":p20"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C21"/>
+            android:name=".StubActivity$C21"
+            android:process=":p21"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C22"/>
+            android:name=".StubActivity$C22"
+            android:process=":p22"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C23"/>
+            android:name=".StubActivity$C23"
+            android:process=":p23"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C24"/>
+            android:name=".StubActivity$C24"
+            android:process=":p24"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C25"/>
+            android:name=".StubActivity$C25"
+            android:process=":p25"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C26"/>
+            android:name=".StubActivity$C26"
+            android:process=":p26"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C27"/>
+            android:name=".StubActivity$C27"
+            android:process=":p27"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C28"/>
+            android:name=".StubActivity$C28"
+            android:process=":p28"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C29"/>
+            android:name=".StubActivity$C29"
+            android:process=":p29"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C30"/>
+            android:name=".StubActivity$C30"
+            android:process=":p30"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C31"/>
+            android:name=".StubActivity$C31"
+            android:process=":p31"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C32"/>
+            android:name=".StubActivity$C32"
+            android:process=":p32"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C33"/>
+            android:name=".StubActivity$C33"
+            android:process=":p33"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C34"/>
+            android:name=".StubActivity$C34"
+            android:process=":p34"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C35"/>
+            android:name=".StubActivity$C35"
+            android:process=":p35"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C36"/>
+            android:name=".StubActivity$C36"
+            android:process=":p36"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C37"/>
+            android:name=".StubActivity$C37"
+            android:process=":p37"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C38"/>
+            android:name=".StubActivity$C38"
+            android:process=":p38"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C39"/>
+            android:name=".StubActivity$C39"
+            android:process=":p39"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C40"/>
+            android:name=".StubActivity$C40"
+            android:process=":p40"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C41"/>
+            android:name=".StubActivity$C41"
+            android:process=":p41"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C42"/>
+            android:name=".StubActivity$C42"
+            android:process=":p42"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C43"/>
+            android:name=".StubActivity$C43"
+            android:process=":p43"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C44"/>
+            android:name=".StubActivity$C44"
+            android:process=":p44"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C45"/>
+            android:name=".StubActivity$C45"
+            android:process=":p45"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C46"/>
+            android:name=".StubActivity$C46"
+            android:process=":p46"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C47"/>
+            android:name=".StubActivity$C47"
+            android:process=":p47"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C48"/>
+            android:name=".StubActivity$C48"
+            android:process=":p48"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C49"/>
+            android:name=".StubActivity$C49"
+            android:process=":p49"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C50"/>
+            android:name=".StubActivity$C50"
+            android:process=":p50"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C51"/>
+            android:name=".StubActivity$C51"
+            android:process=":p51"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C52"/>
+            android:name=".StubActivity$C52"
+            android:process=":p52"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C53"/>
+            android:name=".StubActivity$C53"
+            android:process=":p53"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C54"/>
+            android:name=".StubActivity$C54"
+            android:process=":p54"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C55"/>
+            android:name=".StubActivity$C55"
+            android:process=":p55"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C56"/>
+            android:name=".StubActivity$C56"
+            android:process=":p56"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C57"/>
+            android:name=".StubActivity$C57"
+            android:process=":p57"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C58"/>
+            android:name=".StubActivity$C58"
+            android:process=":p58"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C59"/>
+            android:name=".StubActivity$C59"
+            android:process=":p59"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C60"/>
+            android:name=".StubActivity$C60"
+            android:process=":p60"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C61"/>
+            android:name=".StubActivity$C61"
+            android:process=":p61"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C62"/>
+            android:name=".StubActivity$C62"
+            android:process=":p62"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C63"/>
+            android:name=".StubActivity$C63"
+            android:process=":p63"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C64"/>
+            android:name=".StubActivity$C64"
+            android:process=":p64"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C65"/>
+            android:name=".StubActivity$C65"
+            android:process=":p65"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C66"/>
+            android:name=".StubActivity$C66"
+            android:process=":p66"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C67"/>
+            android:name=".StubActivity$C67"
+            android:process=":p67"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C68"/>
+            android:name=".StubActivity$C68"
+            android:process=":p68"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C69"/>
+            android:name=".StubActivity$C69"
+            android:process=":p69"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C70"/>
+            android:name=".StubActivity$C70"
+            android:process=":p70"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C71"/>
+            android:name=".StubActivity$C71"
+            android:process=":p71"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C72"/>
+            android:name=".StubActivity$C72"
+            android:process=":p72"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C73"/>
+            android:name=".StubActivity$C73"
+            android:process=":p73"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C74"/>
+            android:name=".StubActivity$C74"
+            android:process=":p74"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C75"/>
+            android:name=".StubActivity$C75"
+            android:process=":p75"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C76"/>
+            android:name=".StubActivity$C76"
+            android:process=":p76"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C77"/>
+            android:name=".StubActivity$C77"
+            android:process=":p77"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C78"/>
+            android:name=".StubActivity$C78"
+            android:process=":p78"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C79"/>
+            android:name=".StubActivity$C79"
+            android:process=":p79"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C80"/>
+            android:name=".StubActivity$C80"
+            android:process=":p80"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C81"/>
+            android:name=".StubActivity$C81"
+            android:process=":p81"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C82"/>
+            android:name=".StubActivity$C82"
+            android:process=":p82"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C83"/>
+            android:name=".StubActivity$C83"
+            android:process=":p83"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C84"/>
+            android:name=".StubActivity$C84"
+            android:process=":p84"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C85"/>
+            android:name=".StubActivity$C85"
+            android:process=":p85"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C86"/>
+            android:name=".StubActivity$C86"
+            android:process=":p86"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C87"/>
+            android:name=".StubActivity$C87"
+            android:process=":p87"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C88"/>
+            android:name=".StubActivity$C88"
+            android:process=":p88"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C89"/>
+            android:name=".StubActivity$C89"
+            android:process=":p89"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C90"/>
+            android:name=".StubActivity$C90"
+            android:process=":p90"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C91"/>
+            android:name=".StubActivity$C91"
+            android:process=":p91"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C92"/>
+            android:name=".StubActivity$C92"
+            android:process=":p92"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C93"/>
+            android:name=".StubActivity$C93"
+            android:process=":p93"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C94"/>
+            android:name=".StubActivity$C94"
+            android:process=":p94"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C95"/>
+            android:name=".StubActivity$C95"
+            android:process=":p95"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C96"/>
+            android:name=".StubActivity$C96"
+            android:process=":p96"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C97"/>
+            android:name=".StubActivity$C97"
+            android:process=":p97"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C98"/>
+            android:name=".StubActivity$C98"
+            android:process=":p98"/>
         <activity
             android:launchMode="singleTask"
-            android:name=".StubActivity$C99"/>
+            android:name=".StubActivity$C99"
+            android:process=":p99"/>
+        <service
+            android:name=".ContentManagerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="hl4a.cm"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fpv"

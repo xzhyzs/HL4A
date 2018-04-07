@@ -10,7 +10,7 @@ import 间.接口.调用;
 
 public class 处理 {
 
-    public static Looper 主处理 = Looper.getMainLooper();
+    private static Looper 主处理 = Looper.getMainLooper();
 
     public static void 主线程(方法 $方法,Object... $参数) {
         指定(主处理,$方法,$参数);

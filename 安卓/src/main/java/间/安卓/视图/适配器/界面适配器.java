@@ -8,7 +8,7 @@ import 间.安卓.视图.实现.*;
 public class 界面适配器 extends PagerAdapter {
 
     private 集合<View> 视图集合 = new 集合<>();
-    private 哈希表<Integer,String> 名称 = new 哈希表<>();
+    private 哈希表 名称 = new 哈希表<>();
 
     @Override
     public CharSequence getPageTitle(int $键值) {

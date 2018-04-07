@@ -10,7 +10,7 @@ import 间.工具.错误;
 
 public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
 
-    public 集合<哈希表> 数据;
+    private 集合<哈希表> 数据;
 
     public 基本适配器() {
         数据 = new 集合<>();
@@ -19,6 +19,10 @@ public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
     @Override
     public int getCount() {
         return 数据.数量();
+    }
+    
+    public int 数量() {
+        return getCount();
     }
 
     @Override
@@ -50,7 +54,6 @@ public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
 
     public void 清空() {
         数据 = new 集合<>();
-        发送更新事件();
     }
 
     public void 发送更新事件() {

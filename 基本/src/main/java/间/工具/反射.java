@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 public class 反射 {
     
-    private static 哈希表<Class,集合<String>> 转换缓存 = new 哈希表<>();
+    private static 哈希表 转换缓存 = new 哈希表<>();
     
     public static <类型> 集合<String> 取可缓存参数(Class $类) {
         if ($类 == null) return null;
@@ -95,17 +95,17 @@ public class 反射 {
         return $类.getEnumConstants();
     }
     
-    public static Class<?> 取类(String $类名) {
+    public static <类型> Class<类型> 取类(String $类名) {
         return 取类($类名,反射.class.getClassLoader());
     }
     
-    public static Class<?> 取系统类(String $类名) {
+    public static <类型> Class<类型> 取系统类(String $类名) {
         return 取类($类名,ClassLoader.getSystemClassLoader());
     }
 
-    public static Class<?> 取类(String $类名,ClassLoader $类加载器) {
+    public static <类型> Class<类型> 取类(String $类名,ClassLoader $类加载器) {
         try {
-            Class<?> $类 = Class.forName($类名, false, $类加载器);
+            Class<类型> $类 = (Class<类型>)Class.forName($类名, false, $类加载器);
             return $类;
         } catch (Exception $错误) {
         }
@@ -416,7 +416,7 @@ public class 反射 {
         return $参数类组;
     }
     
-    private static 哈希表<Class,Class> 对应表 = new 哈希表<>();
+    private static 哈希表 对应表 = new 哈希表<>();
     
     static {
         对应表.设置(int.class,Integer.class);

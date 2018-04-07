@@ -12,12 +12,12 @@ import 间.收集.集合;
 
 public class 权限组 {
 
-    private static 无序表<String,权限组> 所有权限组 = new 无序表<>();
+    private static 无序表 所有权限组 = new 无序表<>();
     private static volatile Boolean 已准备 = false;
     private static void 准备() {
         synchronized (已准备) {
             if (已准备) return;
-            查询<AVRole> $所有 = new 查询<>("_Role");
+            查询<AVRole> $所有 = 查询.新建("_Role",AVRole.class);
             返回值 $返回 = $所有.查询();
             if ($返回.成功()) {
                 集合<AVRole> $集合 = $所有.查询().取内容();
@@ -67,7 +67,7 @@ public class 权限组 {
         try {
             if (!存在缓存.检查($用户))
                 存在缓存.设置($用户, !权限组.getUsers().getQuery().whereEqualTo("username", $用户).find().isEmpty());
-            return 存在缓存.读取($用户);
+            return (Boolean)存在缓存.读取($用户);
         } catch (后端错误 $错误) {}
         return false;
     }

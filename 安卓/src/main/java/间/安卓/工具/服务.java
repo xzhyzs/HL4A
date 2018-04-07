@@ -35,6 +35,13 @@ public class 服务 {
         $界面.注册插件(new 服务插件($处理));
         return $处理;
     }
+    
+    public static 连接处理 绑定(基本界面 $界面,Intent $意图,方法 $成功,方法 $断开) {
+        连接处理 $处理 = new 连接处理($成功, $断开);
+        $界面.bindService($意图, $处理, Context.BIND_AUTO_CREATE);
+        $界面.注册插件(new 服务插件($处理));
+        return $处理;
+    }
 
     public static class 服务插件 extends 界面插件 {
 

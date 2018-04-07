@@ -15,12 +15,13 @@ import 间.收集.集合;
 
 public class 查询<类型 extends AVObject> extends AVQuery<类型> {
 
-    public 查询(String $表名) {
+    public 查询(String $表名,Class<类型> $类) {
         super($表名);
+        setClazz($类);
     }
 
-    public static <类型 extends AVObject> 查询<类型> 创建(String $表名) {
-        return new 查询<类型>($表名);
+    public static <类型 extends AVObject> 查询<类型> 新建(String $表名,Class<类型> $类) {
+        return new 查询<类型>($表名,$类);
     }
 
     public 查询<类型> 等于(String $键值,Object $内容) {
@@ -84,8 +85,7 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
     }
 
     public 查询<类型> 新() {
-        查询<类型> $查询 = new 查询<>(getClassName());
-        return $查询;
+        return 新建(getClassName(),super.getClazz());
     }
 
     public 查询<类型> 或(查询<类型>... $查询) {

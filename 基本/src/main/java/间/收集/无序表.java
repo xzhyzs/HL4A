@@ -2,7 +2,7 @@ package 间.收集;
 
 import java.util.*;
 
-public class 无序表<键值,内容> extends HashMap<键值,内容> {
+public class 无序表 extends HashMap {
 
     private static final long serialVersionUID = 3530384865377424460L;
 
@@ -10,7 +10,7 @@ public class 无序表<键值,内容> extends HashMap<键值,内容> {
         super();
     }
 
-    public 无序表(Map<键值,内容> $表) {
+    public 无序表(Map $表) {
         super($表);
     }
 
@@ -18,30 +18,25 @@ public class 无序表<键值,内容> extends HashMap<键值,内容> {
         return size();
     }
 
-    public Boolean 检查(键值 $键值) {
+    public Boolean 检查(Object $键值) {
         return containsKey($键值);
     }
 
-    public Boolean 检查内容(内容 $内容) {
+    public Boolean 检查内容(Object $内容) {
         return containsValue($内容);
     }
 
-    public 无序表 设置(键值 $键值,内容 $内容) {
+    public 无序表 设置(Object $键值,Object $内容) {
         put($键值, $内容);
         return this;
     }
 
-    public 内容 读取(Object $键值) {
-        return get($键值);
-    }
-    
-    public <内容> 内容 取内容(Object $键值) {
+    public <内容> 内容 读取(Object $键值) {
         return (内容)get($键值);
     }
-    
 
-    public 内容 删除(Object $键值) {
-        return remove($键值);
+    public <内容> 内容 删除(Object $键值) {
+        return (内容)remove($键值);
     }
 
     public void 清空() {

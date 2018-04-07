@@ -10,6 +10,7 @@ import 间.接口.方法;
 import 间.接口.回调方法;
 import 间.安卓.工具.线程;
 import 间.接口.调用;
+import 间.安卓.工具.处理;
 
 public class 关注 extends 数据 {
     
@@ -48,7 +49,7 @@ public class 关注 extends 数据 {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    调用.事件($回调,同步关注());
+                    处理.主线程($回调,同步关注());
                     return null;
                 }
             }).启动();
@@ -58,7 +59,7 @@ public class 关注 extends 数据 {
         if (取关注用户().equals(取关注目标())) {
             return 返回值.创建(null,new Exception("不能关注自己 ~"));
         }
-        查询<关注> $查询 = new 查询<>("Star");
+        查询<关注> $查询 = 查询.新建("Star",关注.class);
         $查询.等于("user",取关注用户());
         $查询.等于("target",取关注目标());
         返回值<集合<关注>> $结果 = $查询.查询();

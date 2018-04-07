@@ -23,6 +23,7 @@ import 间.安卓.插件.界面插件;
 import 间.工具.反射;
 import 间.工具.错误;
 import 间.接口.方法;
+import 间.接口.返回值;
 import 间.收集.哈希表;
 import 间.收集.无序表;
 
@@ -43,7 +44,7 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
             $插件.当前界面 = this;
         }
     }
-    
+
     @Override
     public void onCreate(Bundle $恢复) {
         super.onCreate($恢复);
@@ -68,7 +69,7 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
             结束界面();
         }
     }
-    
+
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -241,28 +242,26 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
             }).启动();
     }
 
-    private View 当前视图;
-    
-    public void 打开布局(View $视图) {
-        if ($视图 == null) return;
+    public <视图 extends View> 视图 打开布局(View $视图) {
+        if ($视图 == null) return null;
         for (界面插件 $单个 : 所有插件.values()) {
             $单个.打开布局事件($视图);
         }
         setTheme(主题.取颜色().取主题());
-        当前视图 = $视图;
         间.安卓.工具.布局.打开(this, $视图);
+        return (视图)$视图;
     }
 
-    public void 打开布局(String $地址) {
-        打开布局(布局.读取(this, $地址));
+    public <视图 extends View> 视图 打开布局(String $地址) {
+        return 打开布局(布局.读取(this, $地址));
     }
 
-    public void 打开布局(哈希表 $内容) {
-        打开布局(布局.解析(this, $内容));
+    public <视图 extends View> 视图 打开布局(哈希表 $内容) {
+        return 打开布局(布局.解析(this, $内容));
     }
 
-    public void 解析布局(String $内容) {
-        打开布局(布局.解析(this, $内容));
+    public <视图 extends View> 视图 解析布局(String $内容) {
+        return 打开布局(布局.解析(this, $内容));
     }
 
     public void 跳转界面(Class<?> $类) {
@@ -273,10 +272,27 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
         跳转界面(null, $类 , $数据);
     }
 
-    public void 跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
+    public void 跳转界面(final Integer $请求码,final Class<?> $类,final Object... $数据) {
+
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    异步跳转界面($请求码,$类,$数据);
+                    return null;
+                }
+            }).启动();
+        
+    }
+
+    public void 异步跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
 
         if (反射.是子类(界面.class, $类)) {
-            Intent $意图 = new Intent(this, 界面管理.分配((Class<? extends 界面>)$类));
+            返回值<Class<? extends 代理界面>> $返回 = 组件管理.分配(this,(Class<? extends 界面>)$类);
+            if (!$返回.成功()) {
+                throw new RuntimeException($返回.取错误());
+            }
+            Intent $意图 = new Intent(this, $返回.取内容());
+            $意图.putExtra("类",$类);
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);
             if ($请求码 == null)

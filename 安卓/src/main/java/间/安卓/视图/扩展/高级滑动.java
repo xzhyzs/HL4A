@@ -13,6 +13,7 @@ import 间.安卓.视图.适配器.界面适配器;
 import 间.接口.调用;
 import 间.安卓.工具.转换;
 import 间.安卓.工具.提示;
+import 间.安卓.工具.视图;
 
 public class 高级滑动 extends 线性布局 {
 
@@ -34,9 +35,15 @@ public class 高级滑动 extends 线性布局 {
         this($父视图.getContext());
         加入到($父视图);
     }
+
+    public void 切换() {
+        标签.setTextSelectColor(视图.检查颜色("控件"));
+        标签.setTextUnselectColor(视图.检查颜色("深色"));
+        标签.置背景颜色("白色");
+    }
     
-    public void 标签平分() {
-       
+    public void 标签滚动(boolean $状态) {
+       标签.标签滚动($状态);
     }
 
     public void 添加(String $名称,View $视图) {

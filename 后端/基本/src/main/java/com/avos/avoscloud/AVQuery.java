@@ -106,7 +106,7 @@ public class AVQuery<T extends AVObject> {
     return clazz;
   }
 
-  void setClazz(Class<T> clazz) {
+  public void setClazz(Class<T> clazz) {
     this.clazz = clazz;
   }
 

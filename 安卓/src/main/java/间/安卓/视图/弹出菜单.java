@@ -12,7 +12,7 @@ import 间.工具.反射;
 public class 弹出菜单 extends ListPopupWindow {
 
     private 数组适配器 适配器;
-    private 哈希表<Integer,方法> 单击 = new 哈希表<>();
+    private 哈希表 单击 = new 哈希表<>();
 
     public 弹出菜单(View $视图) {
         super($视图.getContext());
@@ -36,7 +36,7 @@ public class 弹出菜单 extends ListPopupWindow {
         if ($名称.length() > 最大.length()) {
             最大 = $名称;
         }
-        单击.设置(适配器.数据.数量(), $单击);
+        单击.设置(适配器.getCount(), $单击);
         适配器.添加($名称);
         预置宽度();
     }

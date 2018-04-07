@@ -39,7 +39,7 @@ public class 用户 extends AVUser {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    调用.事件($回调,同步取粉丝());
+                    处理.主线程($回调,同步取粉丝());
                     return null;
                 }
             }).启动();
@@ -47,7 +47,7 @@ public class 用户 extends AVUser {
     
     public 返回值<集合<用户>> 同步取粉丝() {
 
-        查询<关注> $查询 = new 查询<>("Star");
+        查询<关注> $查询 = 查询.新建("Star",关注.class);
         $查询.等于("target",this);
         返回值<集合<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
@@ -67,7 +67,7 @@ public class 用户 extends AVUser {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    调用.事件($回调,同步取关注());
+                    处理.主线程($回调,同步取关注());
                     return null;
                 }
             }).启动();
@@ -76,7 +76,7 @@ public class 用户 extends AVUser {
     
     public 返回值<集合<用户>> 同步取关注() {
         
-        查询<关注> $查询 = new 查询<>("Star");
+        查询<关注> $查询 = 查询.新建("Star",关注.class);
         $查询.等于("user",this);
         返回值<集合<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
@@ -96,15 +96,16 @@ public class 用户 extends AVUser {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    调用.事件($回调,同步取留言());
+                    处理.主线程($回调,同步取留言());
                     return null;
-                }
+     
+                    }
             }).启动();
     }
     
     public 返回值<集合<留言>> 同步取留言() {
         
-        查询<留言> $查询 = new 查询<>("Msg");
+        查询<留言> $查询 = 查询.新建("Msg",留言.class);
         $查询.等于("target",this);
         return $查询.查询();
         
