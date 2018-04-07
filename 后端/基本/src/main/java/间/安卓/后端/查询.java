@@ -83,6 +83,10 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         return this;
     }
 
+    public 查询<类型> 新() {
+        查询<类型> $查询 = new 查询<>(getClassName());
+        return $查询;
+    }
 
     public 查询<类型> 或(查询<类型>... $查询) {
         or((List<AVQuery<类型>>)Arrays.asList($查询));

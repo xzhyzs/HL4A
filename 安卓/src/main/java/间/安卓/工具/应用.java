@@ -108,6 +108,7 @@ public class 应用 {
             }
         Intent $意图 = new Intent(环境.取应用(), 界面管理.分配(错误界面.class));
         $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + $错误内容);
+        $意图.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         环境.取应用().startActivity($意图);
     }
 

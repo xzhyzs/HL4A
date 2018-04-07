@@ -1,12 +1,13 @@
-package 间.安卓.后端.留言;
+package 间.安卓.后端.内容;
 
 import 间.安卓.后端.数据;
 import 间.安卓.后端.用户;
+import 间.安卓.后端.权限;
 
 public class 留言 extends 数据 {
     
     public 留言() {
-        super("_Msg");
+        super("Msg");
     }
     
     public 留言(用户 $用户,用户 $目标,String $内容) {
@@ -18,6 +19,7 @@ public class 留言 extends 数据 {
     
     public void 置发言用户(用户 $用户) {
         设置("user",$用户);
+        置权限(new 权限($用户));
     }
     
     public 用户 取发言用户() {
