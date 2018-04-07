@@ -119,11 +119,11 @@ public class 时间 {
         return $时间.getSeconds();
     }
 
-    public static String 比较(long $时间戳) {
+    public static String 比较(Date $时间) {
 
         String $比较 = "";
 
-        long $当前 = 时间戳();
+        Date $当前 = new Date();
 
         Integer $年份 = 年份($当前);
         Integer $月份 = 月份($当前);
@@ -131,11 +131,11 @@ public class 时间 {
         Integer $小时 = 小时($当前);
         Integer $分钟 = 分钟($当前);
 
-        Integer $旧年 = 年份($时间戳);
-        Integer $旧月 = 月份($时间戳);
-        Integer $旧天 = 天数($时间戳);
-        Integer $旧时 = 小时($时间戳);
-        Integer $旧分 = 分钟($时间戳);
+        Integer $旧年 = 年份($时间);
+        Integer $旧月 = 月份($时间);
+        Integer $旧天 = 天数($时间);
+        Integer $旧时 = 小时($时间);
+        Integer $旧分 = 分钟($时间);
 
         Integer $权重 = 1;
 
@@ -158,7 +158,7 @@ public class 时间 {
         if ($分钟 != $旧分)
             $比较 += (($分钟 - $旧分) + "分");
 
-        if ($当前 < $时间戳)
+        if ($当前.before($时间))
             $比较 += "后";
         else
             $比较 += "前";

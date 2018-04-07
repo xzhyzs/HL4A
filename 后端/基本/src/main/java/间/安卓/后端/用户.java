@@ -34,21 +34,21 @@ public class 用户 extends AVUser {
     public 用户() {
         super();
     }
-    
+
     public void 取粉丝(final 方法 $回调) {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    处理.主线程($回调,同步取粉丝());
+                    处理.主线程($回调, 同步取粉丝());
                     return null;
                 }
             }).启动();
     }
-    
+
     public 返回值<集合<用户>> 同步取粉丝() {
 
-        查询<关注> $查询 = 查询.新建("Star",关注.class);
-        $查询.等于("target",this);
+        查询<关注> $查询 = 查询.新建("Star", 关注.class);
+        $查询.等于("target", this);
         返回值<集合<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
             集合<关注> $关注 = $结果.取内容();
@@ -58,26 +58,26 @@ public class 用户 extends AVUser {
             }
             return 返回值.创建($粉丝);
         } else {
-            return 返回值.创建(null,$结果.取错误());
+            return 返回值.创建(null, $结果.取错误());
         }
-        
+
     }
-    
+
     public void 取关注(final 方法 $回调) {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    处理.主线程($回调,同步取关注());
+                    处理.主线程($回调, 同步取关注());
                     return null;
                 }
             }).启动();
     }
-    
-    
+
+
     public 返回值<集合<用户>> 同步取关注() {
-        
-        查询<关注> $查询 = 查询.新建("Star",关注.class);
-        $查询.等于("user",this);
+
+        查询<关注> $查询 = 查询.新建("Star", 关注.class);
+        $查询.等于("user", this);
         返回值<集合<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
             集合<关注> $关注 = $结果.取内容();
@@ -87,28 +87,28 @@ public class 用户 extends AVUser {
             }
             return 返回值.创建($粉丝);
         } else {
-            return 返回值.创建(null,$结果.取错误());
+            return 返回值.创建(null, $结果.取错误());
         }
-        
+
     }
-    
+
     public void 取留言(final 方法 $回调) {
         new 线程(new 方法() {
                 @Override
                 public Object 调用(Object[] $参数) {
-                    处理.主线程($回调,同步取留言());
+                    处理.主线程($回调, 同步取留言());
                     return null;
-     
-                    }
+
+                }
             }).启动();
     }
-    
+
     public 返回值<集合<留言>> 同步取留言() {
-        
-        查询<留言> $查询 = 查询.新建("Msg",留言.class);
-        $查询.等于("target",this);
+
+        查询<留言> $查询 = 查询.新建("Msg", 留言.class);
+        $查询.等于("target", this);
         return $查询.查询();
-        
+
     }
 
     public void 置用户名(String $用户名) {
@@ -139,8 +139,8 @@ public class 用户 extends AVUser {
         return 读取("sign");
     }
 
-    public void 置头像(Bitmap $头像) {
-        置文件("icon", 图片.转换($头像));
+    public void 置头像(byte[] $头像) {
+        置文件("icon", $头像);
     }
 
     public void 置头像(String $头像) {
@@ -156,7 +156,7 @@ public class 用户 extends AVUser {
                 }
             }).启动();
     }
-    
+
     public void 显示头像(ImageView $图片视图) {
         显示头像($图片视图, null);
     }
@@ -246,7 +246,7 @@ public class 用户 extends AVUser {
         isAuthenticated(new AVCallback<Boolean>() {
                 @Override
                 protected void internalDone0(Boolean $返回,后端错误 avException) {
-                    调用.事件($回调,返回值.创建(null,$返回 == null ? false : $返回,avException));
+                    调用.事件($回调, 返回值.创建(null, $返回 == null ? false : $返回, avException));
                 }
             });
     }

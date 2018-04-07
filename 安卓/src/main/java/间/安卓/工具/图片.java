@@ -106,8 +106,30 @@ public class 图片 {
 
     public static Bitmap 读取(String $地址) {
         if (!文件.是文件($地址)) return null;
-        return BitmapFactory.decodeFile(文件.检查地址($地址));
+        $地址 = 文件.检查地址($地址);
+        try {
+            BitmapFactory.Options $设置 = new BitmapFactory.Options();
+            $设置.inSampleSize = getImageScale($地址);
+            return BitmapFactory.decodeFile($地址, $设置);
+        } catch (OutOfMemoryError $错误) {
+            Runtime.getRuntime().gc();
+        }
+        return null;
     }
+    
+    private static int IMAGE_MAX_WIDTH  = 480;
+    private static int IMAGE_MAX_HEIGHT = 960;
+    
+    private static int getImageScale(String $地址) {
+        BitmapFactory.Options $设置 = new BitmapFactory.Options();
+        $设置.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile($地址, $设置);
+        int scale = 1;
+        while ($设置.outWidth / scale >= IMAGE_MAX_WIDTH || $设置.outHeight / scale >= IMAGE_MAX_HEIGHT) {
+            scale *= 2;
+        }
+        return scale;
+   }
 
     public static Bitmap 读取(InputStream $输入流) {
         return BitmapFactory.decodeStream($输入流);
@@ -120,7 +142,7 @@ public class 图片 {
     public static Bitmap 读取(BitmapDrawable $绘画) {
         return $绘画.getBitmap();
     }
-    
+
     public static byte[] 转换(Bitmap $图片) {
         ByteArrayOutputStream $输出流 = 流.输出.字节();
         $图片.compress(Bitmap.CompressFormat.PNG, 流.中, $输出流);
@@ -134,7 +156,7 @@ public class 图片 {
         $图片.compress(Bitmap.CompressFormat.PNG, 流.中, $输出流);
         流.关闭($输出流);
     }
-    
+
     public static Bitmap 合成(Bitmap $背景,Bitmap $前景) {
         Bitmap bmp;
         int width = $背景.getWidth() < $前景.getWidth() ? $背景.getWidth() : $前景
@@ -246,6 +268,22 @@ public class 图片 {
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
         return bitmap;
+    }
+
+
+    public static byte[] 压缩(byte[] $字节) {
+
+        Bitmap $图片 = 图片.读取($字节);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        $图片.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 233) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            baos.reset();// 重置baos即清空baos
+            $图片.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+            options -= 10;// 每次都减少10
+        }
+        return baos.toByteArray();// 把压缩后的数据baos存放到ByteArrayInputStream中
+
     }
 
 

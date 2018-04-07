@@ -272,26 +272,11 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
         跳转界面(null, $类 , $数据);
     }
 
-    public void 跳转界面(final Integer $请求码,final Class<?> $类,final Object... $数据) {
-
-        new 线程(new 方法() {
-                @Override
-                public Object 调用(Object[] $参数) {
-                    异步跳转界面($请求码,$类,$数据);
-                    return null;
-                }
-            }).启动();
-        
-    }
-
-    public void 异步跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
+    public void 跳转界面(Integer $请求码,Class<?> $类,Object... $数据) {
 
         if (反射.是子类(界面.class, $类)) {
-            返回值<Class<? extends 代理界面>> $返回 = 组件管理.分配(this,(Class<? extends 界面>)$类);
-            if (!$返回.成功()) {
-                throw new RuntimeException($返回.取错误());
-            }
-            Intent $意图 = new Intent(this, $返回.取内容());
+            
+            Intent $意图 = new Intent(this, 环境.取组件().分配界面($类));
             $意图.putExtra("类",$类);
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);

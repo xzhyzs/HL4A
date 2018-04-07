@@ -12,6 +12,10 @@ public class YAML {
     public static String 转换(Object $对象) {
         return 解析器.dumpAsMap($对象);
     }
+    
+    public static String 转换JSON(Object $对象) {
+        return JSON.转换(解析(转换($对象))).toString();
+    }
 
     public static void 保存(String $地址,Object $对象) {
         字符.保存($地址, 转换($对象));

@@ -7,6 +7,7 @@ import 间.接口.方法;
 import 间.接口.调用;
 import 间.收集.集合;
 import 间.工具.反射;
+import 间.安卓.组件.组件管理;
 
 public class 环境 {
 
@@ -24,6 +25,10 @@ public class 环境 {
         synchronized (环境表) {
             环境表.设置($键值, $内容);
         }
+    }
+    
+    public static 组件管理 取组件() {
+        return ((基本应用)取应用()).组件;
     }
 
     public static void 置应用(Application $上下文) {

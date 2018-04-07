@@ -13,7 +13,7 @@ public class 代理界面 extends 基本界面 {
 
     @Override
     public void 界面创建事件(Bundle $恢复) {
-        Class<? extends 界面> $类 = (Class<? extends 界面>)getIntent().getSerializableExtra("类");
+        Class $类 = (Class)getIntent().getSerializableExtra("类");
         if ($类 == null) {
             结束界面();
             return;
