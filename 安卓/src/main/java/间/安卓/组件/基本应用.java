@@ -12,7 +12,7 @@ public class 基本应用 extends Application {
 
     public final 集合<应用插件> 所有插件 = new 集合<>();
     public final 组件管理 组件 = new 组件管理();
-    
+
     static {
 
         检查.禁用Xposed();
@@ -38,7 +38,7 @@ public class 基本应用 extends Application {
         }
 
     }
-   
+
     @Override
     public void onConfigurationChanged(Configuration $新设置) {
         super.onConfigurationChanged($新设置);
@@ -51,7 +51,7 @@ public class 基本应用 extends Application {
         应用销毁事件();
     }
 
-    
+
 
     public void 应用创建事件() {}
     public void 应用销毁事件() {}
