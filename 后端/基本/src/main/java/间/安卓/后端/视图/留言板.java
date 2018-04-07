@@ -11,6 +11,7 @@ import 间.安卓.视图.适配器.基本适配器;
 import 间.接口.回调方法;
 import 间.接口.返回值;
 import 间.收集.哈希表;
+import 间.安卓.视图.文本视图;
 
 public class 留言板 extends 线性布局 {
     
@@ -53,16 +54,28 @@ public class 留言板 extends 线性布局 {
     
     public class 布局_适配器_留言 extends 线性布局 {
 
-        public 线性布局 用户栏;
+        public 线性布局 头像布局;
         public 圆形图 头像;
-
+        public 线性布局 信息布局;
+        public 文本视图 用户名;
+        
+        
         public 布局_适配器_留言() {
             super(留言板.this.getContext());
+            置方向("水平");
             置高度("自动");
-            用户栏 = new 线性布局(this);
-            用户栏.置高度("自动");
-            用户栏.置填充("8dp");
-            头像 = new 圆形图();
+            置填充("16dp");
+            头像布局 = new 线性布局(this);
+            头像布局.置宽度("自动");
+            头像布局.置填充("8dp");
+            头像 = new 圆形图(头像布局);
+            头像.置宽度("45dp");
+            头像.置高度("45dp");
+            信息布局 = new 线性布局(this);
+            信息布局.置重力("中间垂直");
+            
+            
+            
         }
 
     }

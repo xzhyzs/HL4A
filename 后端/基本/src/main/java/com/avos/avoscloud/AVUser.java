@@ -1,20 +1,18 @@
 package com.avos.avoscloud;
 
-import android.os.Parcel;
 import android.text.TextUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.annotation.JSONType;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.avos.avoscloud.utils.StringUtils;
-
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import 间.安卓.后端.数据;
-import 间.安卓.工具.提示;
-import 间.安卓.工具.设置;
-import org.json.JSONObject;
+import 间.数据.YAML;
 
 @JSONType(ignores = {"query", "password"}, asm = false)
 public class AVUser extends 数据 {
@@ -149,13 +147,9 @@ public class AVUser extends 数据 {
         if (newUser != null && save) {
             try {
                 // Serialize the whole user
-                String jsonString =
-                    JSON.toJSONString(newUser, ObjectValueFilter.instance,
-                                      SerializerFeature.WriteClassName);
-                if (AVOSCloud.showInternalDebugLog()) {
-                    LogUtil.log.d(jsonString);
-                }
-                AVPersistenceUtils.saveContentToFile(jsonString, currentUserArchivePath);
+                String yamlString = YAML.转换(newUser);
+                //JSON.toJSONString(newUser, ObjectValueFilter.instance,SerializerFeature.WriteClassName);
+                AVPersistenceUtils.saveContentToFile(yamlString, currentUserArchivePath);
 
             } catch (Exception e) {
                 LogUtil.log.e(LOG_TAG, "", e);
@@ -193,40 +187,13 @@ public class AVUser extends 数据 {
             }
         } else if (AVUser.userArchiveExist()) {
             synchronized (AVUser.class) {
-                String jsonString = AVPersistenceUtils.readContentFromFile(currentUserArchivePath());
-                if (jsonString != null) {
-                    if (jsonString.indexOf("@type") > 0) {
-                        try {
-                            // Wrap it in deserializing to avoid adding extra
-                            // pending
-                            // keys.
-                            AVUser savedUser = (AVUser) JSON.parse(jsonString);
-                            
-                            JSONObject $信息 = new JSONObject(jsonString);
-                            
-                            savedUser.setSessionToken($信息.getString(SESSION_TOKEN_KEY));
-                            
-                            // 由于垃圾 fastjson的bug 手动设置一遍
-                            
-                            if (!userClass.isAssignableFrom(savedUser.getClass())) {
-                                user = AVUser.cast(savedUser, userClass);
-                            } else {
-                                user = (T) savedUser;
-                            }
-                            
-                            // 这里要回写到PaasClient里面去
-                            PaasClient.storageInstance().setCurrentUser(user);
-                        } catch (Exception e) {
-                            LogUtil.log.e(LOG_TAG, jsonString, e);
-                        }
-                    } else {
-                        // oldest format
-                        T userObject = newAVUser(userClass, null);
-                        AVUtils.copyPropertiesFromJsonStringToAVObject(jsonString, userObject);
-                        // update it to new format
-                        changeCurrentUser(userObject, true);
-                        user = userObject;
-                    }
+                String yamlString = AVPersistenceUtils.readContentFromFile(currentUserArchivePath());
+                
+                AVUser savedUser = YAML.解析(yamlString,AVUser.class);
+                if (!userClass.isAssignableFrom(savedUser.getClass())) {
+                    user = AVUser.cast(savedUser, userClass);
+                } else {
+                    user = (T) savedUser;
                 }
             }
         }

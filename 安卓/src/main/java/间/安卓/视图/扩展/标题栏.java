@@ -26,6 +26,7 @@ import android.app.ActionBar.OnNavigationListener;
 import android.app.ActionBar.Tab;
 import 间.工具.反射;
 import 间.安卓.工具.视图;
+import 间.安卓.工具.字体;
 
 public class 标题栏 extends 线性布局 {
 
@@ -54,6 +55,7 @@ public class 标题栏 extends 线性布局 {
         左按钮栏.置宽度("自动");
 
         标题对象 = new 文本视图(this);
+        标题对象.置文本字体(字体.有衬线体.普通);
         标题对象.置文本(应用.取信息().应用名);
         标题对象.置文本大小(主题.取大文本大小());
         标题对象.置文本颜色(颜色.白色);
