@@ -1,15 +1,14 @@
 package 间.安卓.组件;
 
 import java.util.Iterator;
-import 间.收集.无序表;
-import 间.收集.集合;
+import 间.收集.哈希表;
+import 间.收集.有序列表;
 import hl4a.runtime.StubActivity;
 
 public class 组件管理 {
     
-    private 集合<Class<?>> 剩余 = new 集合<>();
-    private 无序表 分配 = new 无序表<>();
-    private 无序表 反向 = new 无序表<>();
+    private 有序列表<Class<?>> 剩余 = new 有序列表<>();
+    private 哈希表<Class<?>,Class<?>> 分配 = new 哈希表<>();
     private Iterator<Class<?>> 遍历;
 
     public 组件管理() {
@@ -22,7 +21,6 @@ public class 组件管理 {
         if (!遍历.hasNext()) return null;
         Class<?> $代理 = 遍历.next();
         分配.设置($类,$代理);
-        反向.设置($代理,$类);
         return $代理;
     }
     

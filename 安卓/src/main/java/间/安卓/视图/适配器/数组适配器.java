@@ -18,7 +18,7 @@ public class 数组适配器 extends 基本适配器 {
     }
 
     public void 添加(String $项目) {
-        哈希表 $参数 = new 哈希表();
+        对象哈希表 $参数 = new 对象哈希表();
         $参数.设置("内容", $项目);
         添加($参数);
         发送更新事件();
@@ -26,7 +26,7 @@ public class 数组适配器 extends 基本适配器 {
 
     public void 添加(String... $项目) {
         for (String $单个 : $项目) {
-            哈希表 $参数 = new 哈希表<>();
+            对象哈希表 $参数 = new 对象哈希表<>();
             $参数.设置("内容", $单个);
             添加($参数);
         }
@@ -85,7 +85,7 @@ public class 数组适配器 extends 基本适配器 {
     }
 
     @Override
-    public View 处理(View $视图,哈希表 $参数) {
+    public View 处理(View $视图,对象哈希表 $参数) {
         文本视图 $内容 = ((布局_适配器_数组)$视图).文本;
         $内容.置文本((String)$参数.读取("内容"));
         return $视图;

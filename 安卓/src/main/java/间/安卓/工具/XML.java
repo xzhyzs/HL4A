@@ -23,7 +23,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 import 间.工具.反射;
 import 间.工具.流;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import 间.工具.字符;
 
 public class XML {
@@ -36,13 +36,13 @@ public class XML {
         return new String($输出.toByteArray());
     }
     
-    public 哈希表 读取(String $地址) {
+    public 有序哈希表 读取(String $地址) {
         return 解析(字符.读取($地址));
     }
     
-    public 哈希表 解析(String $内容) {
+    public 有序哈希表 解析(String $内容) {
         try {
-            return new 哈希表(readMapXml(流.输入.字节($内容.getBytes())));
+            return new 有序哈希表(readMapXml(流.输入.字节($内容.getBytes())));
         } catch (Exception $错误) {}
         return null;
     }

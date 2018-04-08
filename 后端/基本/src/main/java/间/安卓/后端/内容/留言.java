@@ -5,7 +5,7 @@ import 间.安卓.后端.用户;
 import 间.安卓.后端.权限;
 import java.util.Date;
 import 间.工具.时间;
-import 间.收集.集合;
+import 间.收集.有序列表;
 
 public class 留言 extends 数据 {
     

@@ -1,7 +1,7 @@
 package 间.工具;
 
 import java.lang.reflect.InvocationTargetException;
-import 间.收集.集合;
+import 间.收集.有序列表;
 
 public class 错误 {
 
@@ -113,7 +113,7 @@ public class 错误 {
     }
     
     public static boolean 是否经过(Throwable $错误,String $方法) {
-        集合<StackTraceElement> $所有 = new 集合<StackTraceElement>($错误.getStackTrace());
+        有序列表<StackTraceElement> $所有 = new 有序列表<StackTraceElement>($错误.getStackTrace());
         for (StackTraceElement $单个 : $所有) {
             if (($单个.getClassName() + "." + $单个.getMethodName()).equals($方法)) return true;
         }

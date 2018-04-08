@@ -24,14 +24,14 @@ import 间.工具.反射;
 import 间.工具.错误;
 import 间.接口.方法;
 import 间.接口.返回值;
+import 间.收集.有序哈希表;
 import 间.收集.哈希表;
-import 间.收集.无序表;
 
 public class 基本界面 extends Activity implements 基本滑动返回界面 {
 
     public Object[] 传入参数;
 
-    public 无序表 所有插件 = new 无序表<>();
+    public 哈希表 所有插件 = new 哈希表<>();
 
     public void 注册插件(界面插件 $插件) {
         注册插件("插件-" + 所有插件.长度(), $插件);
@@ -256,7 +256,7 @@ public class 基本界面 extends Activity implements 基本滑动返回界面 {
         return 打开布局(布局.读取(this, $地址));
     }
 
-    public <视图 extends View> 视图 打开布局(哈希表 $内容) {
+    public <视图 extends View> 视图 打开布局(有序哈希表 $内容) {
         return 打开布局(布局.解析(this, $内容));
     }
 

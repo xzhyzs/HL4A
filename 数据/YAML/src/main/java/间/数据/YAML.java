@@ -3,7 +3,7 @@ package 间.数据;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 import 间.工具.字符;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 
 public class YAML {
 
@@ -32,15 +32,15 @@ public class YAML {
         return 解析(字符.读取($地址), $类);
     }
     
-    public static 哈希表 解析(String $内容) {
+    public static 有序哈希表 解析(String $内容) {
         try {
-            return new 哈希表((Map)解析器.load($内容));
+            return new 有序哈希表((Map)解析器.load($内容));
         } catch (Exception $错误) {
         }
         return null;
     }
     
-    public static 哈希表 读取(String $地址) {
+    public static 有序哈希表 读取(String $地址) {
         return 解析(字符.读取($地址));
     }
 

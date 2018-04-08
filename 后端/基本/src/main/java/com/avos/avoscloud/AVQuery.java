@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import 间.数据.YAML;
 
 /**
  * <p>
@@ -1552,7 +1553,7 @@ public class AVQuery<T extends AVObject> {
               @Override
               public void onSuccess(String content, 后端错误 e) {
                 try {
-                  AVResponse resp = JSON.parseObject(content, AVResponse.class);
+                  AVResponse resp = YAML.解析(content, AVResponse.class);
                   if (internalCallback != null) {
                     internalCallback.internalDone(resp.count, null);
                   }

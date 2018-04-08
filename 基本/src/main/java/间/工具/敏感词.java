@@ -1,6 +1,6 @@
 package 间.工具;
 
-import 间.收集.集合;
+import 间.收集.有序列表;
 
 public class 敏感词 {
     
@@ -19,7 +19,7 @@ public class 敏感词 {
     }
     
     public static String[] 出现(String $内容) {
-        集合<String> $返回 = new 集合<>();
+        有序列表<String> $返回 = new 有序列表<>();
         for(String $单个 : 敏感词) {
             if (字符.是否出现($内容,$单个)) {
                 $返回.添加($单个);

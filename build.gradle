@@ -10,7 +10,10 @@ buildscript {
 
 allprojects {
     repositories {
+        // 码云 和 阿里云 和 LeanCloud 的镜像仓库
         maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
+        maven { url "http://maven.oschina.net/content/groups/public" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
         jcenter()
         maven { url "https://jitpack.io" }
     }

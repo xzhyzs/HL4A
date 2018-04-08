@@ -7,12 +7,12 @@ import 间.安卓.工具.线程;
 import 间.接口.方法;
 import 间.接口.调用;
 import 间.接口.返回值;
-import 间.收集.无序表;
-import 间.收集.集合;
+import 间.收集.哈希表;
+import 间.收集.有序列表;
 
 public class 权限组 {
 
-    private static 无序表 所有权限组 = new 无序表<>();
+    private static 哈希表<String,权限组> 所有权限组 = new 哈希表<>();
     private static volatile Boolean 已准备 = false;
     private static void 准备() {
         synchronized (已准备) {
@@ -20,7 +20,7 @@ public class 权限组 {
             查询<AVRole> $所有 = 查询.新建("_Role",AVRole.class);
             返回值 $返回 = $所有.查询();
             if ($返回.成功()) {
-                集合<AVRole> $集合 = $所有.查询().取内容();
+                有序列表<AVRole> $集合 = $所有.查询().取内容();
                 for (AVRole $单个 : $集合) {
                     所有权限组.设置($单个.getName(), new 权限组($单个));
                 }
@@ -61,7 +61,7 @@ public class 权限组 {
         return this;
     }
 
-    private 无序表 存在缓存 = new 无序表<>();
+    private 哈希表 存在缓存 = new 哈希表<>();
 
     public boolean 存在(String $用户) {
         try {

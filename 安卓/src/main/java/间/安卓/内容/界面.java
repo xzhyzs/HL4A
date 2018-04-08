@@ -12,7 +12,7 @@ import 间.安卓.视图.弹出菜单;
 import 间.安卓.视图.扩展.标题栏;
 import 间.安卓.视图.线性布局;
 import 间.工具.反射;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 
 public class 界面 {
 
@@ -71,7 +71,7 @@ public class 界面 {
         return (视图)$视图;
     }
 
-    public <视图 extends View> 视图 打开布局(哈希表 $内容) {
+    public <视图 extends View> 视图 打开布局(有序哈希表 $内容) {
         return 打开布局(布局.解析(此,$内容));
     }
     

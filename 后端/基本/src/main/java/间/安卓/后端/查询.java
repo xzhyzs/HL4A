@@ -10,8 +10,8 @@ import java.util.List;
 import 间.接口.方法;
 import 间.接口.调用;
 import 间.接口.返回值;
-import 间.收集.无序集合;
-import 间.收集.集合;
+import 间.收集.列表;
+import 间.收集.有序列表;
 
 public class 查询<类型 extends AVObject> extends AVQuery<类型> {
 
@@ -133,9 +133,9 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         return this;
     }
 
-    public 返回值<集合<类型>> 查询() {
+    public 返回值<有序列表<类型>> 查询() {
         try {
-            return 返回值.创建(new 集合<类型>(find()));
+            return 返回值.创建(new 有序列表<类型>().添加所有(find()));
         } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
@@ -145,7 +145,7 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         findInBackground(new FindCallback<类型>() {
                 @Override
                 public void done(List<类型> $集合,后端错误 $错误) {
-                    调用.事件($回调, 返回值.创建(new 集合<类型>($集合), $错误));
+                    调用.事件($回调, 返回值.创建(new 有序列表<类型>().添加所有($集合), $错误));
                 }
             });
     }

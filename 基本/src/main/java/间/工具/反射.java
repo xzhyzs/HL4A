@@ -6,8 +6,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import 间.收集.哈希表;
-import 间.收集.集合;
+import 间.收集.有序哈希表;
+import 间.收集.有序列表;
 import android.app.Application;
 import java.lang.reflect.InvocationTargetException;
 import 间.接口.方法;
@@ -17,90 +17,90 @@ import java.lang.reflect.Modifier;
 import java.util.logging.Logger;
 
 public class 反射 {
-    
-    private static 哈希表 转换缓存 = new 哈希表<>();
-    
-    public static <类型> 集合<String> 取可缓存参数(Class $类) {
+
+    private static 有序哈希表 转换缓存 = new 有序哈希表<>();
+
+    public static <类型> 有序列表<String> 取可缓存参数(Class $类) {
         if ($类 == null) return null;
-        if (!转换缓存.检查($类)){
-            集合<String> $返回 = new 集合<>();
+        if (!转换缓存.检查($类)) {
+            有序列表<String> $返回 = new 有序列表<>();
             Field[] $变量 = $类.getDeclaredFields();
             for (Field $单个 : $变量) {
                 if (是公开($单个) && !是静态($单个) && !是不建议缓存($单个)) {
                     $返回.添加($单个.getName());
                 }
             }
-            转换缓存.设置($类,$返回);
+            转换缓存.设置($类, $返回);
             return $返回;
         }
         return 转换缓存.读取($类);
     }
-    
+
     public static boolean 是公开(Member $对象) {
         return Modifier.isPublic($对象.getModifiers());
     }
-    
+
     public static boolean 是静态(Member $对象) {
         return Modifier.isStatic($对象.getModifiers());
     }
-    
+
     public static boolean 是最终(Member $对象) {
         return Modifier.isFinal($对象.getModifiers());
     }
-    
+
     public static boolean 是抽象(Member $对象) {
         return Modifier.isAbstract($对象.getModifiers());
     }
-    
+
     public static boolean 是接口(Member $对象) {
         return Modifier.isInterface($对象.getModifiers());
     }
-    
+
     public static boolean 是原生(Member $对象) {
         return Modifier.isNative($对象.getModifiers());
     }
-    
+
     public static boolean 是私有(Member $对象) {
         return Modifier.isPrivate($对象.getModifiers());
     }
-    
+
     public static boolean 是保护(Member $对象) {
         return Modifier.isProtected($对象.getModifiers());
     }
-    
+
     public static boolean 是同步(Member $对象) {
         return Modifier.isSynchronized($对象.getModifiers());
     }
-    
+
     public static boolean 是不建议缓存(Member $对象) {
         return Modifier.isTransient($对象.getModifiers());
     }
-    
+
     public static boolean 是线程安全更新(Member $对象) {
         return Modifier.isVolatile($对象.getModifiers());
     }
-    
-    
+
+
     public static <类型 extends Enum> 类型 取枚举(Class<类型> $类,String $名称) {
         类型[] $所有 = 取所有枚举($类);
         for (类型 $单个 : $所有) {
-            if($单个.name().equals($名称)) {
+            if ($单个.name().equals($名称)) {
                 return $单个;
             }
         }
         return null;
     }
-    
+
     public static <类型 extends Enum> 类型[] 取所有枚举(Class<类型> $类) {
         return $类.getEnumConstants();
     }
-    
+
     public static <类型> Class<类型> 取类(String $类名) {
-        return 取类($类名,反射.class.getClassLoader());
+        return 取类($类名, 反射.class.getClassLoader());
     }
-    
+
     public static <类型> Class<类型> 取系统类(String $类名) {
-        return 取类($类名,ClassLoader.getSystemClassLoader());
+        return 取类($类名, ClassLoader.getSystemClassLoader());
     }
 
     public static <类型> Class<类型> 取类(String $类名,ClassLoader $类加载器) {
@@ -137,7 +137,7 @@ public class 反射 {
         }
         return null;
     }
-    
+
     public static boolean 有变量(Class<?> $类,String $变量名) {
         while ($类 != null) {
             try {
@@ -148,15 +148,17 @@ public class 反射 {
         }
         return false;
     }
-    
+
 
     public static <类型> 类型 取变量(Object $对象,String $名称) {
         Class<?> $作用类;
         if ($对象 instanceof Class) {
             $作用类 = (Class<?>)$对象;
-        } else if ($对象 instanceof String) {
+        }
+        else if ($对象 instanceof String) {
             $作用类 = 取类((String)$对象);
-        } else {
+        }
+        else {
             $作用类 = $对象.getClass();
         }
         return 取变量($对象, $作用类, $名称);
@@ -166,9 +168,11 @@ public class 反射 {
         Class<?> $作用类;
         if ($对象 instanceof Class) {
             $作用类 = (Class<?>)$对象;
-        } else if ($对象 instanceof String) {
+        }
+        else if ($对象 instanceof String) {
             $作用类 = 取类((String)$对象);
-        } else {
+        }
+        else {
             $作用类 = $对象.getClass();
         }
         置变量($对象, $作用类, $名称, $内容);
@@ -195,13 +199,13 @@ public class 反射 {
 
     private static Constructor[] 取所有初始化方法(Class<?> $类) {
         if ($类 == null) return new Constructor[0];
-        集合<Constructor> $所有 = new 集合<>();
+        有序列表<Constructor> $所有 = new 有序列表<>();
         $所有.添加所有($类.getDeclaredConstructors());
         return $所有.到数组(Constructor.class);
     }
-    
+
     public static <类型> 类型 实例化(Class<类型> $类) {
-        return 实例化($类,new Object[0]);
+        return 实例化($类, new Object[0]);
     }
 
     public static <类型> 类型 实例化(Class<类型> $类,Object... $参数) {
@@ -224,7 +228,8 @@ public class 反射 {
             String $同名 = "\n同名的初始化方法:" + $所有.length;
             if ($所有.length == 0) {
                 $同名 += "\n没有";
-            } else {
+            }
+            else {
                 for (Constructor $单个 : $所有) {
                     $同名 += "\n" + $单个.toGenericString();
                 }
@@ -244,7 +249,7 @@ public class 反射 {
         Method[] $所有 = null;
         if ($实例 == null) return new Method[0];
         else $所有 = $实例.getDeclaredMethods();
-        集合<Method> $方法 = new 集合<Method>();
+        有序列表<Method> $方法 = new 有序列表<Method>();
         for (Method $单个 : $所有) {
             if ($名称.equals($单个.getName())) {
                 $单个.setAccessible(true);
@@ -254,17 +259,18 @@ public class 反射 {
         $方法.添加所有(取所有方法($实例.getSuperclass(), $名称));
         return (Method[])$方法.到数组(Method.class);
     }
-    
+
     public static boolean 有方法(Object $对象,String $名称) {
         Class<?> $作用类;
         if ($对象 instanceof Class) {
             $作用类 = (Class<?>)$对象;
-        } else {
+        }
+        else {
             $作用类 = $对象.getClass();
         }
-        return 有方法($作用类,$名称);
+        return 有方法($作用类, $名称);
     }
-    
+
     private static boolean 有方法(Class<?> $实例,String $名称) {
         Method[] $所有 = null;
         if ($实例 == null) return false;
@@ -274,13 +280,13 @@ public class 反射 {
                 return true;
             }
         }
-        return 有方法($实例.getSuperclass(),$名称);
+        return 有方法($实例.getSuperclass(), $名称);
     }
-    
+
     public static Object[] 变参(Object... $参数) {
         return $参数;
     }
-    
+
     public static Object[] 取方法对象(Object $对象,String $名称,Object... $参数) {
         if ($参数 == null) $参数 = new Object[0];
         Method[] $所有 = 取所有方法($对象 instanceof Class ? (Class)$对象 : $对象.getClass(), $名称);
@@ -298,7 +304,8 @@ public class 反射 {
             String $同名 = "\n同名的方法:" + $所有.length;
             if ($所有.length == 0) {
                 $同名 += "\n没有";
-            } else {
+            }
+            else {
                 for (Method $单个 : $所有) {
                     $同名 += "\n" + $单个.toGenericString();
                 }
@@ -310,9 +317,9 @@ public class 反射 {
         }
         return new Object[] {$方法,$参数组};
     }
-    
+
     public static 方法 取方法方法(Object $对象,String $名称,Object... $参数) {
-        Object[] $返回 = 取方法对象($对象,$名称,$参数);
+        Object[] $返回 = 取方法对象($对象, $名称, $参数);
         final Method $方法对象 = (Method)$返回[0];
         final Object $实例对象 = $对象;
         final Object[] $传入参数 = (Object[])$返回[1];
@@ -328,20 +335,20 @@ public class 反射 {
             }
         };
     }
-    
+
     public static Object 调用(Object $对象,String $名称,Object... $参数) {
-        Object[] $返回 = 取方法对象($对象,$名称,$参数);
+        Object[] $返回 = 取方法对象($对象, $名称, $参数);
         Method $方法对象 = (Method)$返回[0];
         Object[] $传入参数 = (Object[])$返回[1];
         try {
-            System.out.print("调用方法 : " + $对象.getClass() + "\n方法名 : " + $名称 + "\n参数 :"+字符.分解($参数,","));
+            System.out.print("调用方法 : " + $对象.getClass() + "\n方法名 : " + $名称 + "\n参数 :" + 字符.分解($参数, ","));
             return $方法对象.invoke($对象, $传入参数);
         } catch (Exception $错误) {
             错误.抛出($错误);
         }
         return null;
     }
-    
+
     private static Object[] 适配参数(Method $单个,Object[] $参数) {
         Class[] $类组 = $单个.getParameterTypes();
         if ($类组.length == 0) {
@@ -353,21 +360,23 @@ public class 反射 {
         if ($类组.length != $参数.length && !是数组($类组[$类组.length - 1])) {
             return null;
         }
-        集合 $返回集合 = new 集合();
+        有序列表 $返回集合 = new 有序列表();
         for (int $键值 = 0;$键值 < $类组.length;$键值 ++) {
             Class $类 = $类组[$键值];
             if ($键值 + 1 == $类组.length && 是数组($类)) {
                 Object[] $剩余参数 = 数组.截取($参数, $键值, null);
                 Class<?> $数组类型 = $类.getComponentType();
                 for (Object $单个参数 : $剩余参数) {
-                    if ($单个参数 != null && !是子类($数组类型,$单个参数.getClass())) {
+                    if ($单个参数 != null && !是子类($数组类型, $单个参数.getClass())) {
                         return null;
                     }
                 }
-                $返回集合.添加(数组.转换($数组类型,$剩余参数));
-            } else if ($参数[$键值] != null && !是子类($类,$参数[$键值].getClass())) {
+                $返回集合.添加(数组.转换($数组类型, $剩余参数));
+            }
+            else if ($参数[$键值] != null && !是子类($类, $参数[$键值].getClass())) {
                 return null;
-            } else {
+            }
+            else {
                 $返回集合.添加($参数[$键值]);
             }
         }
@@ -385,7 +394,7 @@ public class 反射 {
         if ($类组.length != $参数.length && !是数组($类组[$类组.length - 1])) {
             return null;
         }
-        集合 $返回集合 = new 集合();
+        有序列表 $返回集合 = new 有序列表();
         for (int $键值 = 0;$键值 < $类组.length;$键值 ++) {
             Class $类 = $类组[$键值];
             if ($键值 + 1 == $类组.length && 是数组($类)) {
@@ -393,14 +402,16 @@ public class 反射 {
                 Object[] $剩余参数 = 数组.截取($参数, $键值, null);
                 Class<?> $数组类型 = $类.getComponentType();
                 for (Object $单个参数 : $剩余参数) {
-                    if ($单个参数 != null && !是子类($数组类型,$单个参数.getClass())) {
+                    if ($单个参数 != null && !是子类($数组类型, $单个参数.getClass())) {
                         return null;
                     }
                 }
-                $返回集合.添加(数组.转换($数组类型,$剩余参数));
-            } else if ($参数[$键值] != null && !是子类($类,$参数[$键值].getClass())) {
+                $返回集合.添加(数组.转换($数组类型, $剩余参数));
+            }
+            else if ($参数[$键值] != null && !是子类($类, $参数[$键值].getClass())) {
                 return null;
-            } else {
+            }
+            else {
                 $返回集合.添加($参数[$键值]);
             }
         }
@@ -415,33 +426,35 @@ public class 反射 {
         }
         return $参数类组;
     }
-    
-    private static 哈希表 对应表 = new 哈希表<>();
-    
+
+    private static 有序哈希表 对应表 = new 有序哈希表<>();
+
     static {
-        对应表.设置(int.class,Integer.class);
-        对应表.设置(long.class,Long.class);
-        对应表.设置(boolean.class,Boolean.class);
-        对应表.设置(float.class,Float.class);
-        对应表.设置(char.class,Character.class);
-        对应表.设置(double.class,Double.class);
-        对应表.设置(short.class,Short.class);
-        对应表.设置(byte.class,Byte.class);
+        对应表.设置(int.class, Integer.class);
+        对应表.设置(long.class, Long.class);
+        对应表.设置(boolean.class, Boolean.class);
+        对应表.设置(float.class, Float.class);
+        对应表.设置(char.class, Character.class);
+        对应表.设置(double.class, Double.class);
+        对应表.设置(short.class, Short.class);
+        对应表.设置(byte.class, Byte.class);
     }
-    
+
     public static boolean 是子类(Class<?> $类,Class<?> $子类) {
         if ($类.isAssignableFrom($子类)) {  
             return true;
-        } else if(对应表.检查($类) && 对应表.检查内容($子类)) {
+        }
+        else if (对应表.检查($类) && 对应表.检查内容($子类)) {
             return true;
-        } else if(对应表.检查($子类) && 对应表.检查内容($类)) {
+        }
+        else if (对应表.检查($子类) && 对应表.检查内容($类)) {
             return true;
         }
         return false;
     }
-    
+
     public static boolean 是数组(Class<?> $类) {
         return $类.isArray();
     }
-   
+
 }

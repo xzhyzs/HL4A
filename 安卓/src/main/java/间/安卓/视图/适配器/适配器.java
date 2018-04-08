@@ -2,7 +2,7 @@ package 间.安卓.视图.适配器;
 
 import android.view.View;
 import 间.接口.方法;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import 间.接口.调用;
 import 间.工具.错误;
 
@@ -33,7 +33,7 @@ public class 适配器 extends 基本适配器 {
     }
 
     @Override
-    public View 处理(View $视图,哈希表 $参数) {
+    public View 处理(View $视图,有序哈希表 $参数) {
         return (View)调用.事件(处理, $视图, $参数);
     }
 

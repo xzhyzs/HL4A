@@ -1,11 +1,11 @@
 package 间.工具;
 
 import java.lang.reflect.Array;
-import 间.收集.集合;
+import 间.收集.有序列表;
 import java.util.Arrays;
 
 public class 数组 {
-
+    
     public static <类型> 类型[] 反转(类型[] $数组) {
         类型[] $返回 = 创建(取泛型数组类($数组), $数组.length);
         for (int $键值 = $数组.length - 1;$键值 >= 0;$键值 --)  {
@@ -38,7 +38,7 @@ public class 数组 {
     }
 
     public static <类型> 类型[] 删除(类型[] $数组,类型 $对象) {
-        集合<类型> $返回 = new 集合<类型>($数组);
+        有序列表<类型> $返回 = new 有序列表<类型>().添加所有($数组);
         $返回.remove($对象);
         return $返回.到数组(取泛型数组类($数组));
     }

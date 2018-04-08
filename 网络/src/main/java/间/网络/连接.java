@@ -32,8 +32,8 @@ import 间.工具.线程;
 import 间.工具.编码;
 import 间.工具.错误;
 import 间.接口.方法;
-import 间.收集.哈希表;
-import 间.收集.集合;
+import 间.收集.有序哈希表;
+import 间.收集.有序列表;
 import 间.网络.连接;
 import org.json.JSONObject;
 import android.util.Log;
@@ -44,9 +44,9 @@ public class 连接 {
     private Headers.Builder 请求头 = new Headers.Builder();
     private Request.Builder 请求 = new Request.Builder();
 
-    private 哈希表 Cookie表 = new 哈希表<>();
-    private 哈希表 参数表 = new 哈希表<>();
-    private 哈希表 文件表 = new 哈希表<>();
+    private 有序哈希表 Cookie表 = new 有序哈希表<>();
+    private 有序哈希表 参数表 = new 有序哈希表<>();
+    private 有序哈希表 文件表 = new 有序哈希表<>();
 
     private MediaType 类型;
 
@@ -60,7 +60,7 @@ public class 连接 {
         网络实例 = $构建.build();
     }
 
-    private static 集合<String> 所有模式 = new 集合<String>("OPTIONS", "GET", "HEAD", "POST", "PUT", "DELETE", "TRACE", "PATCH");
+    private static 有序列表<String> 所有模式 = new 有序列表<String>("OPTIONS", "GET", "HEAD", "POST", "PUT", "DELETE", "TRACE", "PATCH");
     private String 模式;
     private String 标识;
 
@@ -213,7 +213,7 @@ public class 连接 {
 
     }
 
-    private String 转换Cookie(哈希表 $内容) {
+    private String 转换Cookie(有序哈希表 $内容) {
         switch ($内容.长度()) {
             case 0:return "";
             case 1:

@@ -21,7 +21,7 @@ public class 流 {
     public static final int 小 = 1024 * 512; // 1k
     public static final int 中 = 1024 * 1024; // 1m
     public static final int 大 = 1024 * 10240; // 10m
-	
+
     public static void 关闭(Closeable $流) {
         if ($流 == null) return;
         try {
@@ -84,6 +84,10 @@ public class 流 {
         return IoUtil.read($流, $格式);
     }
 
+    public static void 保存(String $地址,byte[] $内容) {
+        保存(输出.文件($地址), $内容);
+    }
+
     public static void 保存(OutputStream $流,byte[] $内容) {
         if ($流 == null)return;
         try {
@@ -116,6 +120,35 @@ public class 流 {
         IoUtil.copyByNIO($内容, $流, $缓存, 创建进度($进度, $开始, $结束));
     }
 
+    public static void 非阻塞保存(String $流,InputStream $内容) {
+        非阻塞保存($流, $内容, null);
+    }
+
+    public static void 非阻塞保存(String $流,InputStream $内容,方法 $进度) {
+        非阻塞保存($流, $内容, $进度, null, null);
+    }
+
+    public static void 非阻塞保存(String $流,InputStream $内容,方法 $进度,方法 $开始,方法 $结束) {
+        非阻塞保存($流, $内容, 流.中, $进度, $开始, $结束);
+    }
+
+    public static void 非阻塞保存(String $流,InputStream $内容,int $缓存) {
+        非阻塞保存($流, $内容, $缓存, null);
+    }
+
+    public static void 非阻塞保存(String $流,InputStream $内容,int $缓存,方法 $进度) {
+        非阻塞保存($流, $内容, $缓存, $进度, null, null);
+    }
+
+    public static void 非阻塞保存(String $流,InputStream $内容,int $缓存,方法 $进度,方法 $开始,方法 $结束) {
+        if ($流 == null || $内容 == null) return;
+        IoUtil.copyByNIO($内容, 输出.文件($流), $缓存, 创建进度($进度, $开始, $结束));
+    }
+    
+    public static void 保存(String $地址,InputStream $内容) {
+        保存(输出.文件($地址), $内容);
+    }
+    
     public static void 保存(OutputStream $流,InputStream $内容) {
         if ($流 == null || $内容 == null) return;
         if ($流 instanceof FileOutputStream && $内容 instanceof FileInputStream) {
@@ -123,6 +156,10 @@ public class 流 {
         } else {
             IoUtil.copy($内容, $流);
         }
+    }
+    
+    public static void 保存(String $地址,InputStream $内容,int $缓存) {
+        保存(输出.文件($地址), $内容, $缓存);
     }
 
     public static void 保存(OutputStream $流,InputStream $内容,int $缓存) {

@@ -22,7 +22,7 @@ import 间.接口.方法;
 import 间.接口.调用;
 import 间.安卓.插件.界面插件;
 import android.webkit.DownloadListener;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import 间.安卓.工具.文件;
 import 间.安卓.工具.转换;
 import 间.安卓.工具.设备;
@@ -71,7 +71,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             $弹窗.显示();
         }
 
-        private 哈希表 禁止表 = new 哈希表<>();
+        private 有序哈希表 禁止表 = new 有序哈希表<>();
 
         public void 下载(弹窗 $弹窗,String $地址) {
             链接.打开($地址);
@@ -223,7 +223,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             return true;
         }
 
-        private 哈希表 不再显示表 = new 哈希表<>();
+        private 有序哈希表 不再显示表 = new 有序哈希表<>();
 
         public void 不再显示(弹窗 $弹窗,String $链接) {
             不再显示表.设置($链接, true);

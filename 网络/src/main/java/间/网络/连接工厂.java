@@ -3,7 +3,7 @@ package 间.网络;
 import java.io.File;
 import 间.工具.文件;
 import 间.工具.错误;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import java.util.Map;
 import android.util.Log;
 import org.json.JSONObject;
@@ -13,10 +13,10 @@ public class 连接工厂 {
     private String 地址;
     private String 后缀;
     private String 模式;
-    private 哈希表 请求头表 = new 哈希表<>();
-    private 哈希表 Cookie表 = new 哈希表<>();
-    private 哈希表 参数表 = new 哈希表<>();
-    private 哈希表 文件表 = new 哈希表<>();
+    private 有序哈希表 请求头表 = new 有序哈希表<>();
+    private 有序哈希表 Cookie表 = new 有序哈希表<>();
+    private 有序哈希表 参数表 = new 有序哈希表<>();
+    private 有序哈希表 文件表 = new 有序哈希表<>();
     private String JSON;
     private boolean JSON输出 = false;
     

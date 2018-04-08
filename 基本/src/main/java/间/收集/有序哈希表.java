@@ -1,16 +1,14 @@
 package 间.收集;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
-public class 哈希表<键值,内容> extends HashMap<键值,内容> {
+public class 有序哈希表<键值,内容> extends LinkedHashMap<键值,内容> {
 
-    public 哈希表() {
+    public 有序哈希表() {
         super();
     }
-    
-    public 哈希表(Map<键值,内容> $表) {
+
+    public 有序哈希表(Map<键值,内容> $表) {
         super($表);
     }
 
@@ -26,7 +24,7 @@ public class 哈希表<键值,内容> extends HashMap<键值,内容> {
         return containsValue($内容);
     }
 
-    public 哈希表<键值,内容> 设置(键值 $键值,内容 $内容) {
+    public 有序哈希表<键值,内容> 设置(键值 $键值,内容 $内容) {
         put($键值, $内容);
         return this;
     }
@@ -42,15 +40,15 @@ public class 哈希表<键值,内容> extends HashMap<键值,内容> {
     public void 清空() {
         clear();
     }
-    
+
     public boolean 为空() {
         return isEmpty();
     }
-    
+
     public 列表<Entry<键值,内容>> 列表() {
         return new 列表<Entry<键值,内容>>().添加所有(entrySet());
     }
-    
+
     public 列表<内容> 内容列表() {
         return new 列表<内容>().添加所有(values());
     }

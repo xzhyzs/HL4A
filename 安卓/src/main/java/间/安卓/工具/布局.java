@@ -12,8 +12,8 @@ import 间.安卓.视图.线性布局;
 import 间.工具.反射;
 import 间.工具.字符;
 import 间.工具.错误;
-import 间.收集.哈希表;
-import 间.收集.集合;
+import 间.收集.有序哈希表;
+import 间.收集.有序列表;
 import 间.数据.YAML;
 
 public class 布局 {
@@ -38,11 +38,11 @@ public class 布局 {
     }
 
     public static <视图 extends View> 视图 解析(Context $上下文,String $数据) {
-        哈希表 $表 = YAML.解析($数据, 哈希表.class);
+        有序哈希表 $表 = YAML.解析($数据, 有序哈希表.class);
         return 解析($上下文, $表);
     }
 
-    public static <视图 extends View> 视图 解析(Context $上下文,哈希表 $表) {
+    public static <视图 extends View> 视图 解析(Context $上下文,有序哈希表 $表) {
         if ($表 == null || $表.长度() == 0) {
             return (视图)new 线性布局($上下文);
         } else if ($表.长度() > 1) {
@@ -50,19 +50,19 @@ public class 布局 {
             解析($上下文, $表, $底层);
             return (视图)$底层;
         } else {
-            String $类名 = new 集合<String>($表.keySet()).读取(0);
+            String $类名 = new 有序列表<String>($表.keySet()).读取(0);
             Class<?> $类 = 取视图($类名);
             if ($类 == null) {
                 错误.内容("没有那样的将要作为底层的视图 : " + $类);
             }
             View $视图 = (View)反射.实例化($类, $上下文);
-            解析($上下文, new 哈希表((Map)$表.读取($类名)), $视图);
+            解析($上下文, new 有序哈希表((Map)$表.读取($类名)), $视图);
             return (视图)$视图;
         }
     }
 
-    public static void 解析(Context $上下文,哈希表 $表,View $上视图) {
-        集合<String> $列表 = new 集合<>($表.keySet());
+    public static void 解析(Context $上下文,有序哈希表 $表,View $上视图) {
+        有序列表<String> $列表 = new 有序列表<>($表.keySet());
         for (String $单个 : $列表) {
             Object $内容 = $表.读取($单个);
             if (!($内容 instanceof Map)) {
@@ -77,7 +77,7 @@ public class 布局 {
                 View $视图 = (View)反射.实例化($类, $上下文);
                 ViewGroup $父视图 = (ViewGroup)$上视图;
                 $父视图.addView($视图);
-                解析($上下文, new 哈希表((Map)$内容), $视图);
+                解析($上下文, new 有序哈希表((Map)$内容), $视图);
             }
         }
 

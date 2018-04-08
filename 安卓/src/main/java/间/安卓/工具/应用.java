@@ -28,9 +28,9 @@ import 间.工具.时间;
 import 间.工具.线程;
 import 间.工具.错误;
 import 间.接口.调用;
-import 间.收集.集合;
+import 间.收集.有序列表;
 import android.content.pm.PackageManager.NameNotFoundException;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import org.json.JSONArray;
 import hl4a.runtime.R;
 import 间.安卓.组件.组件管理;
@@ -43,7 +43,7 @@ import 间.接口.错误处理;
 
 public class 应用 {
 
-    private static 集合<Activity> 所有界面 = new 集合<Activity>();
+    private static 有序列表<Activity> 所有界面 = new 有序列表<Activity>();
     public static PackageManager 包管理;
     public static 信息 当前;
     private static boolean 调试 = true;//反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
@@ -160,7 +160,7 @@ public class 应用 {
         return new String[0];
     }
 
-    private static 哈希表 信息缓存 = new 哈希表<>();
+    private static 有序哈希表<String,信息> 信息缓存 = new 有序哈希表<>();
 
     public static 信息 取信息() {
         return 取信息(环境.取应用().getPackageName());

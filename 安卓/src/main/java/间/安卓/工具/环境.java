@@ -2,16 +2,16 @@ package 间.安卓.工具;
 
 import android.app.Application;
 import 间.安卓.组件.基本应用;
-import 间.收集.哈希表;
+import 间.收集.有序哈希表;
 import 间.接口.方法;
 import 间.接口.调用;
-import 间.收集.集合;
+import 间.收集.有序列表;
 import 间.工具.反射;
 import 间.安卓.组件.组件管理;
 
 public class 环境 {
 
-    private volatile static 哈希表 环境表 = new 哈希表();
+    private volatile static 有序哈希表 环境表 = new 有序哈希表();
 
     public static <类型> 类型 读取(String $键值) {
         if ($键值 == null)return null;

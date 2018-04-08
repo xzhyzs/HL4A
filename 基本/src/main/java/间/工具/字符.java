@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import 间.收集.集合;
+import 间.收集.有序列表;
 import java.util.Set;
 
 public class 字符 {
@@ -226,7 +226,7 @@ public class 字符 {
     }
     
     public static String[] 替换(String[] $文本,String $旧文本,String $新文本) {
-        集合<String> $返回 = new 集合<>();
+        有序列表<String> $返回 = new 有序列表<>();
         for (String $单个 : $文本) {
             $返回.添加(替换($单个,$旧文本,$新文本));
         }

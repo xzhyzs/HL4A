@@ -6,11 +6,11 @@ import android.content.res.Configuration;
 import 间.安卓.工具.应用;
 import 间.安卓.工具.检查;
 import 间.安卓.插件.应用插件;
-import 间.收集.集合;
+import 间.收集.有序列表;
 
 public class 基本应用 extends Application {
 
-    public final 集合<应用插件> 所有插件 = new 集合<>();
+    public final 有序列表<应用插件> 所有插件 = new 有序列表<>();
     public final 组件管理 组件 = new 组件管理();
 
     static {

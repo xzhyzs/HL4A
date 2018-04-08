@@ -10,10 +10,10 @@ import 间.工具.错误;
 
 public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
 
-    private 集合<哈希表> 数据;
+    private 有序列表<对象哈希表> 数据;
 
     public 基本适配器() {
-        数据 = new 集合<>();
+        数据 = new 有序列表<>();
     }
 
     @Override
@@ -53,7 +53,7 @@ public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
     }
 
     public void 清空() {
-        数据 = new 集合<>();
+        数据 = new 有序列表<>();
     }
 
     public void 发送更新事件() {
@@ -64,17 +64,17 @@ public abstract class 基本适配器<视图 extends View> extends BaseAdapter {
         notifyDataSetInvalidated();
     }
 
-    public void 添加(哈希表 $参数) {
+    public void 添加(对象哈希表 $参数) {
         数据.添加($参数);
     }
 
-    public void 添加(哈希表[] $参数) {
+    public void 添加(对象哈希表[] $参数) {
         数据.添加所有($参数);
     }
 
     public abstract 视图 创建();
 
-    public abstract 视图 处理(视图 $视图,哈希表 $参数);
+    public abstract 视图 处理(视图 $视图,对象哈希表 $参数);
 
 
 

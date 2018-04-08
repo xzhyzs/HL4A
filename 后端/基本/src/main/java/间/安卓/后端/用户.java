@@ -24,10 +24,13 @@ import 间.安卓.工具.处理;
 import 间.安卓.工具.设置;
 import 间.安卓.工具.提示;
 import com.avos.avoscloud.AVFile;
-import 间.收集.集合;
+import 间.收集.有序列表;
 import 间.安卓.后端.内容.留言;
 import 间.安卓.后端.内容.关注;
 import 间.接口.回调方法;
+import 间.工具.引用;
+import 间.工具.流;
+import 间.收集.哈希表;
 
 public class 用户 extends AVUser {
 
@@ -45,14 +48,14 @@ public class 用户 extends AVUser {
             }).启动();
     }
 
-    public 返回值<集合<用户>> 同步取粉丝() {
+    public 返回值<有序列表<用户>> 同步取粉丝() {
 
         查询<关注> $查询 = 查询.新建("Star", 关注.class);
         $查询.等于("target", this);
-        返回值<集合<关注>> $结果 = $查询.查询();
+        返回值<有序列表<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
-            集合<关注> $关注 = $结果.取内容();
-            集合<用户> $粉丝 = new 集合<>();
+            有序列表<关注> $关注 = $结果.取内容();
+            有序列表<用户> $粉丝 = new 有序列表<>();
             for (关注 $单个 : $关注) {
                 $粉丝.添加($单个.取关注用户());
             }
@@ -74,14 +77,14 @@ public class 用户 extends AVUser {
     }
 
 
-    public 返回值<集合<用户>> 同步取关注() {
+    public 返回值<有序列表<用户>> 同步取关注() {
 
         查询<关注> $查询 = 查询.新建("Star", 关注.class);
         $查询.等于("user", this);
-        返回值<集合<关注>> $结果 = $查询.查询();
+        返回值<有序列表<关注>> $结果 = $查询.查询();
         if ($结果.成功()) {
-            集合<关注> $关注 = $结果.取内容();
-            集合<用户> $粉丝 = new 集合<>();
+            有序列表<关注> $关注 = $结果.取内容();
+            有序列表<用户> $粉丝 = new 有序列表<>();
             for (关注 $单个 : $关注) {
                 $粉丝.添加($单个.取关注目标());
             }
@@ -103,7 +106,7 @@ public class 用户 extends AVUser {
             }).启动();
     }
 
-    public 返回值<集合<留言>> 同步取留言() {
+    public 返回值<有序列表<留言>> 同步取留言() {
 
         查询<留言> $查询 = 查询.新建("Msg", 留言.class);
         $查询.等于("target", this);
@@ -187,20 +190,35 @@ public class 用户 extends AVUser {
     }
 
     private static String 头像缓存 = "$头像缓存";
+    private static 哈希表<用户,引用<Bitmap>> 头像 = new 哈希表();
 
-    public Bitmap 取头像缓存() {
-        return 图片.读取(头像缓存 + "/" + getObjectId());
+    private Bitmap 取头像缓存() {
+        Bitmap $头像;
+        if (头像 == null || ($头像 = 头像.读取()) == null) {
+            头像 = new 引用<Bitmap>(图片.读取(头像缓存 + "/" + getObjectId()));
+            if (头像.读取() != null) {
+                return 头像.读取();
+            } else {
+                头像 = null;
+                return null;
+            }
+        } else return $头像;
     }
 
     public 返回值<Bitmap> 取头像() {
-        返回值<InputStream> $返回 = 取文件("icon");
-        if ($返回.成功()) {
-            byte[] $图片 = 字节.读取($返回.取内容());
-            字节.保存(头像缓存 + "/" + getObjectId(), $图片);
-            return 返回值.创建(图片.读取($图片));
+
+        if (头像 == null) {
+            返回值<InputStream> $返回 = 取文件("icon");
+            if ($返回.成功()) {
+                流.保存(头像缓存 + "/" + getObjectId(), $返回.取内容());
+                return 返回值.创建(取头像缓存());
+            } else {
+                return 返回值.创建(null, $返回.取错误());
+            }
         } else {
-            return 返回值.创建(null, $返回.取错误());
+            return 返回值.创建(取头像缓存());
         }
+
     }
 
     public 返回值<Void> 同步注册() {
