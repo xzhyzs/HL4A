@@ -15,15 +15,17 @@ import java.io.ObjectInput;
 import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 import java.util.logging.Logger;
+import 间.收集.哈希表;
+import 间.收集.列表;
 
 public class 反射 {
 
-    private static 有序哈希表 转换缓存 = new 有序哈希表<>();
+    private static 哈希表<Class,列表<String>> 转换缓存 = new 哈希表<>();
 
-    public static <类型> 有序列表<String> 取可缓存参数(Class $类) {
+    public static <类型> 列表<String> 取可缓存参数(Class $类) {
         if ($类 == null) return null;
         if (!转换缓存.检查($类)) {
-            有序列表<String> $返回 = new 有序列表<>();
+            列表<String> $返回 = new 列表<>();
             Field[] $变量 = $类.getDeclaredFields();
             for (Field $单个 : $变量) {
                 if (是公开($单个) && !是静态($单个) && !是不建议缓存($单个)) {

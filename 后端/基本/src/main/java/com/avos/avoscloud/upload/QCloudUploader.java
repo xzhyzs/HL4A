@@ -3,7 +3,7 @@ package com.avos.avoscloud.upload;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.后端错误;
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVExceptionHolder;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
@@ -61,7 +61,7 @@ class QCloudUploader extends HttpClientUploader {
   private static final int DEFAULT_SLICE_LEN = 512 * 1024;
 
   @Override
-  public 后端错误 doWork() {
+  public AVException doWork() {
     try {
 
       byte[] bytes = avFile.getData();
@@ -71,7 +71,7 @@ class QCloudUploader extends HttpClientUploader {
       if (sliceCount > 1) {
         JSONObject result = uploadControlSlice(token, uploadUrl, bytes);
         if (null == result) {
-          return new 后端错误(new RuntimeException("Exception during file upload"));
+          return new AVException(new RuntimeException("Exception during file upload"));
         }
         if (result.containsKey(PARAM_ACCESS_URL)) {
           return null;
@@ -119,13 +119,13 @@ class QCloudUploader extends HttpClientUploader {
         uploadFile();
       }
     } catch (Exception e) {
-      return new 后端错误(e);
+      return new AVException(e);
     }
 
     return null;
   }
 
-  private void uploadFile() throws 后端错误 {
+  private void uploadFile() throws AVException {
 
     try {
       if (AVOSCloud.showInternalDebugLog()) {
@@ -160,7 +160,7 @@ class QCloudUploader extends HttpClientUploader {
       Request request = requestBuilder.build();
       Response response = executeWithRetry(request, RETRY_TIMES);
       if (response.code() != 200) {
-        throw AVErrorUtils.createException(后端错误.OTHER_CAUSE,
+        throw AVErrorUtils.createException(AVException.OTHER_CAUSE,
             AVUtils.stringFromBytes(response.body().bytes()));
       }
     } catch (Exception e) {
@@ -190,7 +190,7 @@ class QCloudUploader extends HttpClientUploader {
   }
 
   private JSONObject uploadControlSlice(String token, String url, byte[] wholeFile)
-      throws 后端错误 {
+      throws AVException {
     MultipartBody.Builder builder = new MultipartBody.Builder();
     try {
       String fileSha = AVUtils.SHA1(wholeFile);
@@ -218,7 +218,7 @@ class QCloudUploader extends HttpClientUploader {
       }
     } catch (Exception e) {
       e.printStackTrace();
-      throw new 后端错误(后端错误.OTHER_CAUSE, "Upload file failure");
+      throw new AVException(AVException.OTHER_CAUSE, "Upload file failure");
     }
     return null;
   }
@@ -285,7 +285,7 @@ class QCloudUploader extends HttpClientUploader {
           return AVUtils.stringFromBytes(responseBody);
         }
       } catch (Exception e) {
-        AVExceptionHolder.add(new 后端错误(e));
+        AVExceptionHolder.add(new AVException(e));
         if (latch != null) {
           long count = latch.getCount();
           for (; count > 0; count--) {

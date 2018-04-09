@@ -1,7 +1,6 @@
 package 间.安卓.后端.界面;
 
 import android.os.Bundle;
-import com.avos.avoscloud.后端错误;
 import 间.安卓.内容.界面;
 import 间.安卓.后端.布局.布局_注册界面;
 import 间.安卓.后端.用户;
@@ -61,8 +60,7 @@ public class 注册界面 extends 界面 {
             置返回值(返回码_成功);
             结束界面();
         } else {
-            后端错误 $错误 = $结果.取错误();
-            提示.警告($错误.取错误信息());
+            提示.警告($结果.取错误信息());
             进度.隐藏();
         }
     }

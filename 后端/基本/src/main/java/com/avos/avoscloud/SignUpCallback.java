@@ -34,9 +34,9 @@ public abstract class SignUpCallback extends AVCallback<Void> {
    * 
    * @param e The exception raised by the signUp, or null if it succeeded.
    */
-  public abstract void done(后端错误 e);
+  public abstract void done(AVException e);
 
-  protected final void internalDone0(Void t, 后端错误 avException) {
+  protected final void internalDone0(Void t, AVException avException) {
     this.done(avException);
   }
 

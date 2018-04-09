@@ -12,7 +12,7 @@ package com.avos.avoscloud;
  * ACL.
  * </p>
  */
-public class AVRole extends AVObject {
+public final class AVRole extends AVObject {
   private String name;
   public static final String className = "_Role";
 

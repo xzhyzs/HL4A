@@ -5,6 +5,7 @@ import 间.接口.方法;
 import 间.收集.有序哈希表;
 import 间.接口.调用;
 import 间.工具.错误;
+import 间.收集.对象哈希表;
 
 public class 适配器 extends 基本适配器 {
 
@@ -33,7 +34,7 @@ public class 适配器 extends 基本适配器 {
     }
 
     @Override
-    public View 处理(View $视图,有序哈希表 $参数) {
+    public View 处理(View $视图,对象哈希表 $参数) {
         return (View)调用.事件(处理, $视图, $参数);
     }
 

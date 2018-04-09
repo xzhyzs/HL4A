@@ -19,7 +19,7 @@ public class 有序列表<类型> extends LinkedList<类型> {
         添加所有($列表);
     }
     
-    public 有序列表(类型[] $列表) {
+    public 有序列表(类型... $列表) {
         this();
         添加所有($列表);
     }

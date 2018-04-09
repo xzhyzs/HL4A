@@ -52,9 +52,9 @@ public class 提示 {
     }
 
     public static void 日志(Object $日志,String $名称) {
-        if (应用.是调试()) {
+        //if (应用.是调试()) {
             Log.e($名称, 日志处理 == null ? 日志处理($日志) : ($日志 = 调用.事件(日志处理,$日志)) == null ? "null" : $日志.toString());
-        }
+        //}
     }
 
     public static void 指定(final Object $内容,final Object $颜色) {

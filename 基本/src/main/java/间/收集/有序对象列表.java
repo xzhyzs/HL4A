@@ -17,7 +17,7 @@ public class 有序对象列表 extends LinkedList {
         添加所有($列表);
     }
 
-    public 有序对象列表(Object[] $列表) {
+    public 有序对象列表(Object... $列表) {
         this();
         添加所有($列表);
     }

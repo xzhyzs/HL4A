@@ -1,12 +1,12 @@
 package com.avos.avoscloud.upload;
 
-import com.avos.avoscloud.后端错误;
+import com.avos.avoscloud.AVException;
 
 /**
  * Created by lbt05 on 6/12/16.
  */
 public interface Uploader {
-  后端错误 doWork();
+  AVException doWork();
 
   String getFinalUrl();
   String getFinalObjectId();

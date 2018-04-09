@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import 间.数据.YAML;
 
 /**
  * <p>
@@ -1024,7 +1023,7 @@ public class AVQuery<T extends AVObject> {
     doCloudQueryInBackground(cql, new CloudQueryCallback<AVCloudQueryResult>() {
 
       @Override
-      public void done(AVCloudQueryResult result, 后端错误 avException) {
+      public void done(AVCloudQueryResult result, AVException avException) {
         if (avException != null) {
           AVExceptionHolder.add(AVErrorUtils.createException(avException, null));
         } else {
@@ -1055,7 +1054,7 @@ public class AVQuery<T extends AVObject> {
     doCloudQueryInBackground(cql, new CloudQueryCallback<AVCloudQueryResult>() {
 
       @Override
-      public void done(AVCloudQueryResult result, 后端错误 avException) {
+      public void done(AVCloudQueryResult result, AVException avException) {
         if (avException != null) {
           AVExceptionHolder.add(AVErrorUtils.createException(avException, null));
         } else {
@@ -1128,7 +1127,7 @@ public class AVQuery<T extends AVObject> {
     doCloudQueryInBackground(cql, new CloudQueryCallback<AVCloudQueryResult>() {
 
       @Override
-      public void done(AVCloudQueryResult result, 后端错误 avException) {
+      public void done(AVCloudQueryResult result, AVException avException) {
         if (avException != null) {
           AVExceptionHolder.add(AVErrorUtils.createException(avException, null));
         } else {
@@ -1196,7 +1195,7 @@ public class AVQuery<T extends AVObject> {
           }
 
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             try {
               AVCloudQueryResult result = processCloudResults(content, clazz);
               if (callback != null) {
@@ -1290,7 +1289,7 @@ public class AVQuery<T extends AVObject> {
         PaasClient.storageInstance().getObject(path, new AVRequestParams(getParameters()), false,
             null, new GenericObjectCallback() {
               @Override
-              public void onSuccess(String content, 后端错误 e) {
+              public void onSuccess(String content, AVException e) {
                 try {
                   List<T> result = AVQuery.this.processResults(content);
                   processAdditionalInfo(content, internalCallback);
@@ -1320,11 +1319,11 @@ public class AVQuery<T extends AVObject> {
    * @param theObjectId Object id of the AVObject to fetch.
    */
   @SuppressWarnings("unchecked")
-  public T get(String theObjectId) throws 后端错误 {
+  public T get(String theObjectId) throws AVException {
     final Object[] result = {null};
     this.getInBackground(theObjectId, true, new GetCallback<T>() {
       @Override
-      public void done(T object, 后端错误 e) {
+      public void done(T object, AVException e) {
         if (e == null) {
           result[0] = object;
         } else {
@@ -1350,11 +1349,11 @@ public class AVQuery<T extends AVObject> {
    * @return A AVObject obeying the conditions set in this query, or null if none found.
    */
   @SuppressWarnings("unchecked")
-  public T getFirst() throws 后端错误 {
+  public T getFirst() throws AVException {
     final Object[] result = {null};
     getFirstInBackground(true, new GetCallback<T>() {
       @Override
-      public void done(AVObject object, 后端错误 e) {
+      public void done(AVObject object, AVException e) {
         if (e == null) {
           result[0] = object;
         } else {
@@ -1393,12 +1392,12 @@ public class AVQuery<T extends AVObject> {
     PaasClient.storageInstance().getObject(queryPath(), new AVRequestParams(getParameters()), sync,
         null, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             try {
               List<T> result = AVQuery.this.processResults(content);
               if (internalCallback != null) {
                 T first = null;
-                后端错误 error = null;
+                AVException error = null;
                 if (result.size() > 0) {
                   first = result.get(0);
                 } else {
@@ -1435,7 +1434,7 @@ public class AVQuery<T extends AVObject> {
     final GetCallback<T> internalCallback = callback;
     this.getInBackground(objectId, false, new GetCallback<T>() {
       @Override
-      public void done(T object, 后端错误 e) {
+      public void done(T object, AVException e) {
         if (internalCallback != null) {
           internalCallback.internalDone(object, e);
         }
@@ -1451,12 +1450,12 @@ public class AVQuery<T extends AVObject> {
     PaasClient.storageInstance().getObject(path, new AVRequestParams(getParameters()), sync, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             T object = null;
-            后端错误 error = e;
+            AVException error = e;
             if (AVUtils.isBlankContent(content)) {
               object = null;
-              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "Object is not found.");
+              error = new AVException(AVException.OBJECT_NOT_FOUND, "Object is not found.");
             } else {
               try {
                 if (AVQuery.this.clazz != null) {
@@ -1474,7 +1473,7 @@ public class AVQuery<T extends AVObject> {
                 object.rebuildInstanceData();
               } catch (Exception exception) {
                 if (internalCallback != null) {
-                  internalCallback.internalDone(object, new 后端错误(exception));
+                  internalCallback.internalDone(object, new AVException(exception));
                 }
               }
             }
@@ -1496,11 +1495,11 @@ public class AVQuery<T extends AVObject> {
   /**
    * Counts the number of objects that match this query. This does not use caching.
    */
-  public int count() throws 后端错误 {
+  public int count() throws AVException {
     final int[] value = {0};
     countInBackground(true, new CountCallback() {
       @Override
-      public void done(int count, 后端错误 e) {
+      public void done(int count, AVException e) {
         if (e == null) {
           value[0] = count;
         } else {
@@ -1523,7 +1522,7 @@ public class AVQuery<T extends AVObject> {
     final int[] value = {0};
     countInBackground(true, new CountCallback() {
       @Override
-      public void done(int count, 后端错误 e) {
+      public void done(int count, AVException e) {
         value[0] = count;
       }
     });
@@ -1551,9 +1550,9 @@ public class AVQuery<T extends AVObject> {
         PaasClient.storageInstance().getObject(path, new AVRequestParams(getParameters()), sync,
             null, new GenericObjectCallback() {
               @Override
-              public void onSuccess(String content, 后端错误 e) {
+              public void onSuccess(String content, AVException e) {
                 try {
-                  AVResponse resp = YAML.解析(content, AVResponse.class);
+                  AVResponse resp = JSON.parseObject(content, AVResponse.class);
                   if (internalCallback != null) {
                     internalCallback.internalDone(resp.count, null);
                   }
@@ -1578,7 +1577,7 @@ public class AVQuery<T extends AVObject> {
    *
    * @return A list of all AVObjects obeying the conditions set in this query.
    */
-  public List<T> find() throws 后端错误 {
+  public List<T> find() throws AVException {
     String path = queryPath();
     this.assembleParameters();
     final List<T> result = new ArrayList<T>();
@@ -1586,7 +1585,7 @@ public class AVQuery<T extends AVObject> {
         PaasClient.storageInstance().getObject(path, new AVRequestParams(getParameters()), true,
             null, new GenericObjectCallback() {
               @Override
-              public void onSuccess(String content, 后端错误 e) {
+              public void onSuccess(String content, AVException e) {
                 try {
                   result.addAll(AVQuery.this.processResults(content));
                 } catch (Exception ex) {
@@ -1612,7 +1611,7 @@ public class AVQuery<T extends AVObject> {
    * @since 1.4.0
    * @throws AVException
    */
-  public void deleteAll() throws 后端错误 {
+  public void deleteAll() throws AVException {
     AVObject.deleteAll(this.find());
   }
 
@@ -1626,7 +1625,7 @@ public class AVQuery<T extends AVObject> {
     this.findInBackground(new FindCallback<T>() {
 
       @Override
-      public void done(List<T> avObjects, 后端错误 avException) {
+      public void done(List<T> avObjects, AVException avException) {
         if (avException != null) {
           cb.internalDone(null, avException);
         } else {

@@ -2,7 +2,6 @@ package 间.安卓.后端.界面;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.avos.avoscloud.后端错误;
 import 间.安卓.内容.界面;
 import 间.安卓.后端.布局.布局_登录界面;
 import 间.安卓.后端.用户;
@@ -68,7 +67,7 @@ public class 登录界面 extends 界面 {
             提示.普通("登录成功 ~");
         } else {
             进度.隐藏();
-            提示.警告(((后端错误)$返回值.取错误()).取错误信息());
+            提示.警告($返回值.取错误信息());
         }
     }
 

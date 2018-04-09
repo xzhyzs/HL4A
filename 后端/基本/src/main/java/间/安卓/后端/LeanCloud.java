@@ -2,19 +2,12 @@ package 间.安卓.后端;
 
 import com.avos.avoscloud.AVOSCloud;
 import 间.安卓.工具.环境;
-import com.avos.avoscloud.AVCloud;
-import com.avos.avoscloud.后端错误;
 
 public class LeanCloud {
 
     public static void 初始化(String $ID,String $KEY) {
         AVOSCloud.initialize(环境.取应用(),$ID,$KEY);
     }
-    
-    public static Object 转换错误(后端错误 $错误) {
-        return 转换错误($错误.取错误码());
-    }
-    
     
     public static String 转换错误(int $错误码) {
         switch ($错误码) {

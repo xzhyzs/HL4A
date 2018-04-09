@@ -8,10 +8,10 @@ package com.avos.avoscloud;
 
 public abstract class CloudQueryCallback<T extends AVCloudQueryResult>
     extends AVCallback<AVCloudQueryResult> {
-  public abstract void done(AVCloudQueryResult result, 后端错误 avException);
+  public abstract void done(AVCloudQueryResult result, AVException avException);
 
   @Override
-  protected final void internalDone0(AVCloudQueryResult returnValue, 后端错误 e) {
+  protected final void internalDone0(AVCloudQueryResult returnValue, AVException e) {
     done(returnValue, e);
   }
 }

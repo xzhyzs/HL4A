@@ -18,7 +18,7 @@ public class 对象列表 extends ArrayList {
         添加所有($列表);
     }
 
-    public 对象列表(Object[] $列表) {
+    public 对象列表(Object... $列表) {
         this();
         添加所有($列表);
     }

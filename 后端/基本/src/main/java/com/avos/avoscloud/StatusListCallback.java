@@ -13,9 +13,9 @@ public abstract class StatusListCallback extends AVCallback<java.util.List<AVSta
    * @param statusObjects The objects matching the query, or null if it failed.
    * @param avException The exception raised by the find, or null if it succeeded.
    */
-  public abstract void done(List<AVStatus> statusObjects, 后端错误 avException);
+  public abstract void done(List<AVStatus> statusObjects, AVException avException);
 
-  protected final void internalDone0(List<AVStatus> returnValue, 后端错误 e) {
+  protected final void internalDone0(List<AVStatus> returnValue, AVException e) {
     done(returnValue, e);
   }
 }

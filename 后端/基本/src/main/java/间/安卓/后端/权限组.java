@@ -2,13 +2,13 @@ package 间.安卓.后端;
 
 import com.avos.avoscloud.AVRole;
 import com.avos.avoscloud.SaveCallback;
-import com.avos.avoscloud.后端错误;
 import 间.安卓.工具.线程;
 import 间.接口.方法;
 import 间.接口.调用;
 import 间.接口.返回值;
 import 间.收集.哈希表;
 import 间.收集.有序列表;
+import com.avos.avoscloud.AVException;
 
 public class 权限组 {
 
@@ -68,7 +68,7 @@ public class 权限组 {
             if (!存在缓存.检查($用户))
                 存在缓存.设置($用户, !权限组.getUsers().getQuery().whereEqualTo("username", $用户).find().isEmpty());
             return (Boolean)存在缓存.读取($用户);
-        } catch (后端错误 $错误) {}
+        } catch (AVException $错误) {}
         return false;
     }
 
@@ -79,7 +79,7 @@ public class 权限组 {
     public 返回值<Void> 同步保存() {
         try {
             权限组.save();
-        } catch (后端错误 $错误) {
+        } catch (AVException $错误) {
             return 返回值.创建(null, $错误);
         }
         return null;
@@ -92,7 +92,7 @@ public class 权限组 {
     public void 保存(final 方法 $回调) {
         权限组.saveInBackground(new SaveCallback() {
                 @Override
-                public void done(后端错误 $错误) {
+                public void done(AVException $错误) {
                     调用.事件($回调, 返回值.创建(null, $错误));
                 }
             });

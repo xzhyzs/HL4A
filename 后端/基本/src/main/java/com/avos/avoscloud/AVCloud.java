@@ -54,12 +54,12 @@ public class AVCloud {
    *         List<?>, or any type that can be set as a field in a AVObject.
    * @throws AVException
    */
-  public static <T> T callFunction(String name, Map<String, ?> params) throws 后端错误 {
+  public static <T> T callFunction(String name, Map<String, ?> params) throws AVException {
     final AtomicReference<T> reference = new AtomicReference<T>();
     PaasClient.cloudInstance().postObject("functions/" + name, AVUtils.restfulServerData(params),
       getProductionHeader(), true, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             reference.set((T) convertCloudResponse(content));
           }
 
@@ -87,7 +87,7 @@ public class AVCloud {
     PaasClient.cloudInstance().postObject("functions/" + name, AVUtils.restfulServerData(params),
       getProductionHeader(), false, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             if (callback != null) {
               callback.internalDone((T) convertCloudResponse(content), e);
             }
@@ -143,11 +143,11 @@ public class AVCloud {
     rpcFunctionInBackground(name, params, false, callback);
   }
 
-  public static <T> T rpcFunction(String name, Object params) throws 后端错误 {
+  public static <T> T rpcFunction(String name, Object params) throws AVException {
     final AtomicReference<T> reference = new AtomicReference<T>();
     rpcFunctionInBackground(name, params, true, new FunctionCallback<T>() {
       @Override
-      public void done(T object, 后端错误 e) {
+      public void done(T object, AVException e) {
         if (e == null) {
           reference.set(object);
         } else {
@@ -176,7 +176,7 @@ public class AVCloud {
     PaasClient.cloudInstance().postObject("call/" + name, paramString, getProductionHeader(),
         sync, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, 后端错误 e) {
+          public void onSuccess(String content, AVException e) {
             callback.internalDone((T) convertCloudResponse(content), e);
           }
 

@@ -477,7 +477,7 @@ public class AVUtils {
   public static void copyPropertiesFromJsonStringToAVObject(String content, AVObject object) {
     if (isBlankString(content)) return;
     try {
-      Map<String, Object> map = JSON.parseObject(content);
+      Map<String, Object> map = JSONHelper.mapFromString(content);
       copyPropertiesFromMapToAVObject(map, object);
     } catch (Exception exception) {
       exception.printStackTrace();
@@ -1068,7 +1068,7 @@ public class AVUtils {
       if (callback != null) {
         callback
             .onFailure(
-                statusCode, new 后端错误(后端错误.INVALID_JSON,
+                statusCode, new AVException(AVException.INVALID_JSON,
                     "Wrong response content type:"
                         + contentType),
                 content);
