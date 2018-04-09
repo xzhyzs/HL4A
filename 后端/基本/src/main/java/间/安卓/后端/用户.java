@@ -23,6 +23,7 @@ import 间.接口.返回值;
 import 间.收集.哈希表;
 import 间.收集.有序列表;
 import com.avos.avoscloud.AVException;
+import 间.安卓.后端.内容.缓存;
 
 public class 用户 extends AVUser {
 
@@ -135,7 +136,7 @@ public class 用户 extends AVUser {
     }
 
     public void 置头像(byte[] $头像) {
-        置文件("icon", $头像);
+        置文件("icon","icon.png",$头像);
         头像.删除(this);
     }
 

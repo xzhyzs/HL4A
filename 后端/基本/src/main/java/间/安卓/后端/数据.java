@@ -13,13 +13,15 @@ import 间.接口.方法;
 import 间.接口.调用;
 import 间.接口.返回值;
 import com.avos.avoscloud.AVException;
+import 间.安卓.工具.线程;
+import 间.安卓.工具.处理;
 
 public class 数据 extends AVObject {
 
     public 数据() {
         super();
     }
-    
+
     public 数据(String $表名) {
         super($表名);
     }
@@ -27,12 +29,12 @@ public class 数据 extends AVObject {
     public Date 取创建时间() {
         return getCreatedAt();
     }
-    
+
     public Date 取更新时间() {
         return getUpdatedAt();
     }
-    
-    public void 设置(String $键值,Object $内容) {
+
+    public void 设置(String $键值, Object $内容) {
         put($键值, $内容);
     }
 
@@ -44,18 +46,18 @@ public class 数据 extends AVObject {
         setACL($权限);
     }
 
-    public AVFile 置文件(String $键值,String $地址) {
+    public AVFile 置文件(String $键值, String $地址) {
         AVFile $文件 = null;
         put($键值, ($文件 = new AVFile(文件.取名称($地址), 字节.读取($地址))));
         return $文件;
     }
 
-    public AVFile 置文件(String $键值,byte[] $内容) {
+    public AVFile 置文件(String $键值, String $名称, byte[] $内容) {
         AVFile $文件 = null;
-        put($键值, ($文件 = new AVFile($内容)));
+        put($键值, ($文件 = new AVFile($名称, $内容)));
         return $文件;
     }
-    
+
     public Date 取时间(String $键值) {
         return getDate($键值);
     }
@@ -71,7 +73,7 @@ public class 数据 extends AVObject {
     public 返回值<InputStream> 取文件(String $键值) {
         AVFile $文件 = 取文件对象($键值);
         if ($文件 == null) {
-            return 返回值.创建(null, new AVException(105,""));
+            return 返回值.创建(null, new AVException(105, ""));
         }
         try {
             return 返回值.创建($文件.getDataStream());
@@ -80,19 +82,41 @@ public class 数据 extends AVObject {
         }
     }
 
-    public void 取文件(final String $键值,final 方法 $回调) {
+    public void 取文件(final String $键值, final 方法 $回调) {
         AVFile $文件 = 取文件对象($键值);
         if ($文件 == null) {
-            调用.事件($回调, 返回值.创建(null, new AVException(105,"")));
+            调用.事件($回调, 返回值.创建(null, new AVException(105, "")));
             return;
         }
         $文件.getDataStreamInBackground(new GetDataStreamCallback() {
                 @Override
-                public void done(InputStream $流,AVException $错误) {
+                public void done(InputStream $流, AVException $错误) {
                     调用.事件($回调, 返回值.创建($流, $错误));
                 }
             });
 
+    }
+    
+    public void 刷新() {
+        刷新(null);
+    }
+    
+    public void 刷新(final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    处理.主线程($回调,同步刷新());
+                    return null;
+                }
+            }).启动();
+    }
+
+    public <内容 extends 数据> 返回值<内容> 同步刷新() {
+        try {
+            return (返回值<内容>)返回值.创建(fetch());
+        } catch (AVException $错误) {
+            return 返回值.创建(null,$错误);
+        }
     }
 
     public 返回值<Void> 同步保存() {
@@ -122,10 +146,10 @@ public class 数据 extends AVObject {
             delete();
             return 返回值.成功;
         } catch (AVException $错误) {
-            return 返回值.创建(null,$错误);
+            return 返回值.创建(null, $错误);
         }
     }
-    
+
     public void 删除(final 方法 $回调) {
         deleteInBackground(new DeleteCallback() {
                 @Override

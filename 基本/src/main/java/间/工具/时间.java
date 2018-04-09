@@ -34,6 +34,10 @@ public class 时间 {
     public static long 时间戳() {
         return System.currentTimeMillis();
     }
+    
+    public static long 时间戳(Date $时间) {
+        return $时间.getTime();
+    }
 
     public static Integer 年份() {
         return 年份(new Date());
@@ -118,26 +122,30 @@ public class 时间 {
     public static Integer 秒钟(Date $时间) {
         return $时间.getSeconds();
     }
-
+    
     public static String 比较(Date $时间) {
+        return 比较(时间戳($时间));
+    }
+
+    public static String 比较(long $时间) {
 
         String $比较 = "";
 
-        Date $当前 = new Date();
+        long $当前 = 时间戳();
 
-        Integer $年份 = 年份($当前);
-        Integer $月份 = 月份($当前);
-        Integer $天数 = 天数($当前);
-        Integer $小时 = 小时($当前);
-        Integer $分钟 = 分钟($当前);
+        int $年份 = 年份($当前);
+        int $月份 = 月份($当前);
+        int $天数 = 天数($当前);
+        int $小时 = 小时($当前);
+        int $分钟 = 分钟($当前);
 
-        Integer $旧年 = 年份($时间);
-        Integer $旧月 = 月份($时间);
-        Integer $旧天 = 天数($时间);
-        Integer $旧时 = 小时($时间);
-        Integer $旧分 = 分钟($时间);
+        int $旧年 = 年份($时间);
+        int $旧月 = 月份($时间);
+        int $旧天 = 天数($时间);
+        int $旧时 = 小时($时间);
+        int $旧分 = 分钟($时间);
 
-        Integer $权重 = 1;
+        int $权重 = 1;
 
         if ($年份 != $旧年)
             $比较 += (($年份 - $旧年) + "年");
@@ -156,9 +164,9 @@ public class 时间 {
         else
             $权重++;
         if ($分钟 != $旧分)
-            $比较 += (($分钟 - $旧分) + "分");
+            $比较 += (($分钟 - $旧分) + "分钟");
 
-        if ($当前.before($时间))
+        if ($当前 < $时间)
             $比较 += "后";
         else
             $比较 += "前";
@@ -169,15 +177,17 @@ public class 时间 {
         return $比较;
 
     }
+    
+    public static String 相对(Date $时间) {
+        return 相对(时间戳($时间));
+    }
 
     public static String 相对(long $时间戳) {
-
-        String $相对 = "";
 
         long $当前 = 时间戳();
 
         if ($当前 < $时间戳)
-            return "未来 或 本地时间错误";
+            return "未来";
 
         Integer $年份 = 年份($当前);
         Integer $月份 = 月份($当前);

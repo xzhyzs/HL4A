@@ -229,7 +229,7 @@ public class AVUser extends 数据 {
     }
     if (enableAutomatic && user == null) {
       user = newAVUser(userClass, null);
-      AVUser.changeCurrentUser(user, false);;
+      AVUser.changeCurrentUser(user, false);
     }
     return user;
   }
