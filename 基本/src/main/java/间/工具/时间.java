@@ -22,19 +22,19 @@ public class 时间 {
         if ($格式 == null)
             $格式 = "默认";
         switch ($格式) {
-        case "默认":
-            return 格式($时间, "yyyy-MM-dd HH:mm:ss");
-        case "中文":
-            return 格式($时间, "yyyy年-MM月-dd日 HH时:mm分:ss秒");
-        default:
-            return new SimpleDateFormat($格式, Locale.getDefault()).format(new Date());
+            case "默认":
+                return 格式($时间, "yyyy-MM-dd HH:mm:ss");
+            case "中文":
+                return 格式($时间, "yyyy年-MM月-dd日 HH时:mm分:ss秒");
+            default:
+                return new SimpleDateFormat($格式, Locale.getDefault()).format(new Date());
         }
     }
 
     public static long 时间戳() {
         return System.currentTimeMillis();
     }
-    
+
     public static long 时间戳(Date $时间) {
         return $时间.getTime();
     }
@@ -122,7 +122,7 @@ public class 时间 {
     public static Integer 秒钟(Date $时间) {
         return $时间.getSeconds();
     }
-    
+
     public static String 比较(Date $时间) {
         return 比较(时间戳($时间));
     }
@@ -147,25 +147,29 @@ public class 时间 {
 
         int $权重 = 1;
 
-        if ($年份 != $旧年)
-            $比较 += (($年份 - $旧年) + "年");
-        else
-            $权重++;
-        if ($月份 != $旧月)
-            $比较 += (($月份 - $旧月) + "月");
-        else
-            $权重++;
-        if ($天数 != $旧天)
-            $比较 += (($天数 - $旧天) + "日");
-        else
-            $权重++;
-        if ($小时 != $旧时)
-            $比较 += (($小时 - $旧时) + "时");
-        else
-            $权重++;
         if ($分钟 != $旧分)
-            $比较 += (($分钟 - $旧分) + "分钟");
+            $比较 = (($分钟 - $旧分) + "分钟");
 
+        if ($小时 != $旧时)
+            $比较 = (($小时 - $旧时) + "小时");
+        else
+            $权重++;
+            
+        if ($天数 != $旧天)
+            $比较 = (($天数 - $旧天) + "天");
+        else
+            $权重++;
+            
+        if ($月份 != $旧月)
+            $比较 = (($月份 - $旧月) + "月");
+        else
+            $权重++;
+            
+        if ($年份 != $旧年)
+            $比较 = (($年份 - $旧年) + "年");
+        else
+            $权重++;
+            
         if ($当前 < $时间)
             $比较 += "后";
         else
@@ -175,43 +179,6 @@ public class 时间 {
             $比较 = "刚刚";
 
         return $比较;
-
-    }
-    
-    public static String 相对(Date $时间) {
-        return 相对(时间戳($时间));
-    }
-
-    public static String 相对(long $时间戳) {
-
-        long $当前 = 时间戳();
-
-        if ($当前 < $时间戳)
-            return "未来";
-
-        Integer $年份 = 年份($当前);
-        Integer $月份 = 月份($当前);
-        Integer $天数 = 天数($当前);
-        Integer $小时 = 小时($当前);
-        Integer $分钟 = 分钟($当前);
-
-        Integer $旧年 = 年份($时间戳);
-        Integer $旧月 = 月份($时间戳);
-        Integer $旧天 = 天数($时间戳);
-        Integer $旧时 = 小时($时间戳);
-        Integer $旧分 = 分钟($时间戳);
-
-        if ($年份 > $旧年)
-            return 格式($时间戳, "yyyy年-MM月-dd日");
-        if ($月份 > $旧月)
-            return 格式($时间戳, "MM月-dd日");
-        if ($天数 > $旧天)
-            return 格式($时间戳, "dd日 HH时");
-        if ($小时 > $旧时)
-            return 格式($时间戳, "HH时:mm分");
-        if ($分钟 > $旧分 && ($分钟 - $旧分) > 2)
-            return ($分钟 - $旧分) + "前";
-        return "刚刚";
 
     }
 

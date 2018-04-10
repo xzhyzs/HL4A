@@ -110,9 +110,9 @@ public class 图片 {
         try {
             BitmapFactory.Options $设置 = new BitmapFactory.Options();
             $设置.inSampleSize = getImageScale($地址);
-            return BitmapFactory.decodeFile($地址, $设置);
+            return BitmapFactory.decodeFile($地址);
         } catch (OutOfMemoryError $错误) {
-            Runtime.getRuntime().gc();
+            //Runtime.getRuntime().gc();
         }
         return null;
     }

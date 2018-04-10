@@ -24,13 +24,26 @@ import 间.收集.哈希表;
 import 间.收集.有序列表;
 import com.avos.avoscloud.AVException;
 import 间.安卓.后端.内容.缓存;
+import com.avos.avoscloud.AVRole;
 
 public class 用户 extends AVUser {
 
     public 用户() {
         super();
     }
-
+    
+    public Integer 取权限组() {
+       return 读取("permission");
+    }
+    
+    public void 置权限组(int $权限组) {
+        设置("permission",$权限组);
+    }
+    
+    public boolean 是管理员() {
+        return 取权限组() == null ? false : 取权限组() > 0;
+    }
+    
     public void 取粉丝(final 方法 $回调) {
         new 线程(new 方法() {
                 @Override
@@ -308,6 +321,5 @@ public class 用户 extends AVUser {
     public static 用户 取当前用户() {
         return getCurrentUser(用户.class);
     }
-
 
 }
