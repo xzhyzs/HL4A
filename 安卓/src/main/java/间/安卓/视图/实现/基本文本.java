@@ -6,6 +6,8 @@ import 间.接口.*;
 
 public interface 基本文本 extends 基本视图 {
     
+    public void 插入文本(String $文本,Bitmap $图片);
+    
     public void 置文本(String $文本);
     public void 置HTML文本(String $HTML);
     public String 取文本();

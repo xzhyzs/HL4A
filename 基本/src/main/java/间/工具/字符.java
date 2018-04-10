@@ -240,20 +240,6 @@ public class 字符 {
         return 字符.分解(替换($内容,$旧文本,$新文本),$分隔);
     }
 
-    public static String 正则匹配(String $文本,String $正则表达式) {
-        Matcher $结果 = Pattern.compile($正则表达式).matcher($文本);
-        if ($结果.find())
-            return $结果.group();
-        return null;
-    }
-
-    public static String 正则匹配(String $文本,String $正则表达式,Integer $次数) {
-        Matcher $结果 = Pattern.compile($正则表达式).matcher($文本);
-        if ($结果.find($次数))
-            return $结果.group($次数);
-        return null;
-    }
-
     public static String 正则替换(String $文本,String $表达式,String $新文本) {
         return $文本.replaceAll($表达式, $新文本);
     }
