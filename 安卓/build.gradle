@@ -10,8 +10,7 @@ android {
 }
 
 dependencies {
-	compile 'com.android.support:support-v4:24.1.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':基本')
-    compile project(':数据/YAML')
+    compile project(':安卓/基本')
+    compile project(':安卓/组件')
+    compile project(':安卓/视图')
 }

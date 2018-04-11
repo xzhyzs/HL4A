@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="hl4a.runtime">
+
+	<uses-sdk
+		android:minSdkVersion="14"
+		android:targetSdkVersion="25"/>
+
+	<uses-permission
+		android:name="android.permission.INTERNET"/>
+
+	<uses-permission
+		android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+	<uses-permission
+		android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+	<uses-permission
+		android:name="android.permission.READ_PHONE_STATE"/>
+
+	<uses-permission
+		android:name="android.permission.SET_WALLPAPER_HINTS"/>
+
+	<uses-permission
+		android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+	<uses-permission
+		android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+	<uses-permission
+		android:name="android.permission.CHANGE_NETWORK_STATE"/>
+
+	<uses-permission
+		android:name="android.permission.VIBRATE"/>
+
+	<uses-permission
+		android:name="android.permission.WAKE_LOCK"/>
+
+	<uses-permission
+		android:name="android.permission.FLASHLIGHT"/>
+
+	<uses-permission
+		android:name="android.permission.CAMERA"/>
+
+	<uses-permission
+		android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+	<uses-permission
+		android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+
+	<application
+		android:theme="@style/HL4A.Indigo">
+
+		<provider
+			android:name="android.supportx.v4.content.FileProvider"
+			android:authorities="hl4a.test.fpv"
+			android:exported="false"
+			android:grantUriPermissions="true">
+
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/paths"/>
+
+		</provider>
+
+		<activity
+			android:name=".StubActivity$C0"/>
+
+		<activity
+			android:name=".StubActivity$C1"/>
+
+		<activity
+			android:name=".StubActivity$C2"/>
+
+		<activity
+			android:name=".StubActivity$C3"/>
+
+		<activity
+			android:name=".StubActivity$C4"/>
+
+		<activity
+			android:name=".StubActivity$C5"/>
+
+		<activity
+			android:name=".StubActivity$C6"/>
+
+		<activity
+			android:name=".StubActivity$C7"/>
+
+		<activity
+			android:name=".StubActivity$C8"/>
+
+		<activity
+			android:name=".StubActivity$C9"/>
+
+		<activity
+			android:name=".StubActivity$C10"/>
+
+		<activity
+			android:name=".StubActivity$C11"/>
+
+		<activity
+			android:name=".StubActivity$C12"/>
+
+		<activity
+			android:name=".StubActivity$C13"/>
+
+		<activity
+			android:name=".StubActivity$C14"/>
+
+		<activity
+			android:name=".StubActivity$C15"/>
+
+		<activity
+			android:name=".StubActivity$C16"/>
+
+		<activity
+			android:name=".StubActivity$C17"/>
+
+		<activity
+			android:name=".StubActivity$C18"/>
+
+		<activity
+			android:name=".StubActivity$C19"/>
+
+		<activity
+			android:name=".StubActivity$C20"/>
+
+		<activity
+			android:name=".StubActivity$C21"/>
+
+		<activity
+			android:name=".StubActivity$C22"/>
+
+		<activity
+			android:name=".StubActivity$C23"/>
+
+		<activity
+			android:name=".StubActivity$C24"/>
+
+		<activity
+			android:name=".StubActivity$C25"/>
+
+		<activity
+			android:name=".StubActivity$C26"/>
+
+		<activity
+			android:name=".StubActivity$C27"/>
+
+		<activity
+			android:name=".StubActivity$C28"/>
+
+		<activity
+			android:name=".StubActivity$C29"/>
+
+		<activity
+			android:name=".StubActivity$C30"/>
+
+		<activity
+			android:name=".StubActivity$C31"/>
+
+		<activity
+			android:name=".StubActivity$C32"/>
+
+		<activity
+			android:name=".StubActivity$C33"/>
+
+		<activity
+			android:name=".StubActivity$C34"/>
+
+		<activity
+			android:name=".StubActivity$C35"/>
+
+		<activity
+			android:name=".StubActivity$C36"/>
+
+		<activity
+			android:name=".StubActivity$C37"/>
+
+		<activity
+			android:name=".StubActivity$C38"/>
+
+		<activity
+			android:name=".StubActivity$C39"/>
+
+		<activity
+			android:name=".StubActivity$C40"/>
+
+		<activity
+			android:name=".StubActivity$C41"/>
+
+		<activity
+			android:name=".StubActivity$C42"/>
+
+		<activity
+			android:name=".StubActivity$C43"/>
+
+		<activity
+			android:name=".StubActivity$C44"/>
+
+		<activity
+			android:name=".StubActivity$C45"/>
+
+		<activity
+			android:name=".StubActivity$C46"/>
+
+		<activity
+			android:name=".StubActivity$C47"/>
+
+		<activity
+			android:name=".StubActivity$C48"/>
+
+		<activity
+			android:name=".StubActivity$C49"/>
+
+		<activity
+			android:name=".StubActivity$C50"/>
+
+		<activity
+			android:name=".StubActivity$C51"/>
+
+		<activity
+			android:name=".StubActivity$C52"/>
+
+		<activity
+			android:name=".StubActivity$C53"/>
+
+		<activity
+			android:name=".StubActivity$C54"/>
+
+		<activity
+			android:name=".StubActivity$C55"/>
+
+		<activity
+			android:name=".StubActivity$C56"/>
+
+		<activity
+			android:name=".StubActivity$C57"/>
+
+		<activity
+			android:name=".StubActivity$C58"/>
+
+		<activity
+			android:name=".StubActivity$C59"/>
+
+		<activity
+			android:name=".StubActivity$C60"/>
+
+		<activity
+			android:name=".StubActivity$C61"/>
+
+		<activity
+			android:name=".StubActivity$C62"/>
+
+		<activity
+			android:name=".StubActivity$C63"/>
+
+		<activity
+			android:name=".StubActivity$C64"/>
+
+		<activity
+			android:name=".StubActivity$C65"/>
+
+		<activity
+			android:name=".StubActivity$C66"/>
+
+		<activity
+			android:name=".StubActivity$C67"/>
+
+		<activity
+			android:name=".StubActivity$C68"/>
+
+		<activity
+			android:name=".StubActivity$C69"/>
+
+		<activity
+			android:name=".StubActivity$C70"/>
+
+		<activity
+			android:name=".StubActivity$C71"/>
+
+		<activity
+			android:name=".StubActivity$C72"/>
+
+		<activity
+			android:name=".StubActivity$C73"/>
+
+		<activity
+			android:name=".StubActivity$C74"/>
+
+		<activity
+			android:name=".StubActivity$C75"/>
+
+		<activity
+			android:name=".StubActivity$C76"/>
+
+		<activity
+			android:name=".StubActivity$C77"/>
+
+		<activity
+			android:name=".StubActivity$C78"/>
+
+		<activity
+			android:name=".StubActivity$C79"/>
+
+		<activity
+			android:name=".StubActivity$C80"/>
+
+		<activity
+			android:name=".StubActivity$C81"/>
+
+		<activity
+			android:name=".StubActivity$C82"/>
+
+		<activity
+			android:name=".StubActivity$C83"/>
+
+		<activity
+			android:name=".StubActivity$C84"/>
+
+		<activity
+			android:name=".StubActivity$C85"/>
+
+		<activity
+			android:name=".StubActivity$C86"/>
+
+		<activity
+			android:name=".StubActivity$C87"/>
+
+		<activity
+			android:name=".StubActivity$C88"/>
+
+		<activity
+			android:name=".StubActivity$C89"/>
+
+		<activity
+			android:name=".StubActivity$C90"/>
+
+		<activity
+			android:name=".StubActivity$C91"/>
+
+		<activity
+			android:name=".StubActivity$C92"/>
+
+		<activity
+			android:name=".StubActivity$C93"/>
+
+		<activity
+			android:name=".StubActivity$C94"/>
+
+		<activity
+			android:name=".StubActivity$C95"/>
+
+		<activity
+			android:name=".StubActivity$C96"/>
+
+		<activity
+			android:name=".StubActivity$C97"/>
+
+		<activity
+			android:name=".StubActivity$C98"/>
+
+		<activity
+			android:name=".StubActivity$C99"/>
+
+	</application>
+
+</manifest>
+

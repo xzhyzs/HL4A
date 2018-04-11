@@ -1,6 +1,0 @@
-apply plugin: 'java'
-
-dependencies {
-    compile 'com.squareup.okhttp3:okhttp:+'
-    compile project (':基本')
-}

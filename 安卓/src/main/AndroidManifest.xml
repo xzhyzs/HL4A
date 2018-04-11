@@ -15,10 +15,16 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
-    <application 
-        android:theme="@style/HL4A.Indigo" >
-        <activity android:name=".ErrorActivity"
-            android:process=":error"/>
+    <application
+        android:theme="@style/HL4A.Indigo">
+        <provider android:name="android.supportx.v4.content.FileProvider"
+            android:authorities="${applicationId}.fpv"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" /> 
+        </provider>
         <activity android:name=".StubActivity$C0"/>
         <activity android:name=".StubActivity$C1"/>
         <activity android:name=".StubActivity$C2"/>
@@ -118,14 +124,6 @@
         <activity android:name=".StubActivity$C96"/>
         <activity android:name=".StubActivity$C97"/>
         <activity android:name=".StubActivity$C98"/>
-        <activity android:name=".StubActivity$C99"/>
-        <provider android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fpv"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths" /> 
-        </provider>
-    </application>
+        <activity android:name=".StubActivity$C99"/>    
+            </application>
 </manifest>

@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.github.program_in_chinese:junit4_in_chinese:0.0.1'
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+repositories {
+        maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
+        maven { url "http://maven.oschina.net/content/groups/public" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        jcenter()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+}
