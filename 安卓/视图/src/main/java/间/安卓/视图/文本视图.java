@@ -30,20 +30,7 @@ public class 文本视图<V extends TextView> extends 基本视图<V> {
     
     @Override
     public View 创建(Context $上下文) {
-        return new TextView($上下文) {
-            
-            @Override
-            public Object getTag() {
-                return 文本视图.this;
-            }
-            
-            @Override
-            public Object getTag(int key) {
-                return super.getTag();
-            }
-            
-            
-        };
+        return new TextView($上下文);
     }
     
     /*
