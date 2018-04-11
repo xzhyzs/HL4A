@@ -1,4 +1,4 @@
-package 间.安卓.视图;
+package 间.安卓.视图.实现;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +35,8 @@ public abstract class 基本布局<V extends ViewGroup> extends 基本视图<V> 
 
     // addView
 
-    public void 加入子视图(View $子元素) {
-        取视图().addView($子元素);
+    public void 加入子视图(基本视图 $子元素) {
+        取视图().addView($子元素.取视图());
     }
 
     public <类型 extends View> 类型 找子视图(Object $标签) {

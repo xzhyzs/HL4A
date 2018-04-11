@@ -1,4 +1,4 @@
-package 间.安卓.视图;
+package 间.安卓.视图.实现;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -26,6 +26,7 @@ public abstract class 基本视图 <V extends View> {
 
     public 基本视图(Context $上下文) {
         此 = (V)创建($上下文);
+        取视图().setTag(0,this);
     }
     
     public 基本视图(基本布局 $布局) {
@@ -64,7 +65,7 @@ public abstract class 基本视图 <V extends View> {
     // AddView
 
     public void 加入到(基本布局 $布局) {
-        $布局.加入子视图(取视图());
+        $布局.加入子视图(this);
     }
 
     //setContentView

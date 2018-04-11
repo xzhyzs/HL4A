@@ -1,21 +1,19 @@
 package 间.安卓.视图;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.Html;
-import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.TextView;
 import 间.安卓.工具.字体;
 import 间.安卓.工具.绘画;
 import 间.安卓.工具.视图;
-import 间.工具.字符;
+import 间.安卓.视图.实现.基本布局;
+import 间.安卓.视图.实现.基本视图;
 import 间.接口.方法;
 import 间.接口.调用;
 
@@ -32,7 +30,20 @@ public class 文本视图<V extends TextView> extends 基本视图<V> {
     
     @Override
     public View 创建(Context $上下文) {
-        return new TextView($上下文);
+        return new TextView($上下文) {
+            
+            @Override
+            public Object getTag() {
+                return 文本视图.this;
+            }
+            
+            @Override
+            public Object getTag(int key) {
+                return super.getTag();
+            }
+            
+            
+        };
     }
     
     /*
